@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
-import { catchError, Observable, switchMap } from 'rxjs';
+import { switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -12,9 +12,7 @@ export class AuthService {
   login(credentials: Object) {
     return this.http.get<any>(`${environment.BASE_URL}/sanctum/csrf-cookie`).pipe(
       switchMap(() => {
-        return this.http.post<any>(`${environment.BASE_URL}/api/login`, credentials, {
-          withCredentials : true
-        })
+        return this.http.post<any>(`${environment.BASE_URL}/api/login`, credentials)
       })
     )
   }
