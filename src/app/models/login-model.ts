@@ -1,11 +1,11 @@
 import { signal } from "@angular/core"
 
 interface LoginData {
-  name : string,
+  email : string,
   password : string
 }
 
 export const loginModel = signal<LoginData>({
-  name : '',
+  email : '',
   password: ''
 });
