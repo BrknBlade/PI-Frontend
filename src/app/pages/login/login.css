@@ -1,0 +1,151 @@
+@font-face {
+  font-family: Inter;
+  src: 
+    url('../../../../public/fonts/Inter_18pt-Regular.ttf') format('truetype');
+  font-weight: normal;
+}
+@font-face {
+  font-family: Inter Medium;
+  src: 
+    url('../../../../public/fonts/Inter_28pt-Medium.ttf') format('truetype');
+  font-weight: bold;
+}
+@font-face {
+  font-family: Inter Bold;
+  src: 
+    url('../../../../public/fonts/Inter_18pt-SemiBold.ttf') format('truetype');
+  font-weight: bolder;
+}
+.login-acciones{
+    display: flex;
+    justify-content: space-evenly;
+    background-color: #d4a5a533;
+    padding: 4px;
+    border-radius: 17px;
+    margin-top: 50px;
+    margin-bottom: 10px;
+}
+.login-acciones a{
+    width: 100%;
+    text-decoration: none;
+    padding: 7px 5px;
+    border-radius: 13px;
+    color: #2f2f2f;
+    font-family: Inter Medium, sans-serif;
+}
+.activo{
+    background-color: white;
+}
+.login h1{
+    font-family: Inter Bold, sans-serif;
+    color: #2f2f2f;
+    font-size: 45px;
+    margin-bottom: 0;
+}
+.login h1 + p{
+    font-family: Inter, sans-serif;
+    color: #585857;
+    font-size: 20px;
+    margin-top: 5px;
+}
+.login form + p{
+    font-family: Inter, sans-serif;
+    color: #585857;
+    margin-top: 30px;
+}
+.login{
+    font-family: Inter, sans-serif;
+}
+.login-form{
+    background-color: #fdfcfb;
+    border-radius: 15px;
+    border: #e8e8e8 1px solid;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 400px;
+    text-align: start;
+    box-shadow: 0px 1px 8px -5px #00000075;
+}
+
+.login-form label{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    color: #2f2f2f;
+    font-family: Inter Medium, sans-serif;
+    
+}
+.login-form label input:focus-visible{
+    background-color: #fdfcfb;
+    border: none;
+    padding: 12px;
+    border: #e8e8e8 1px solid;
+    border-radius: 10px;
+    box-shadow: 0px 1px 8px -5px #00000075;
+    font-size: 18px;
+    outline: 3px #9767676e solid;
+    border: #976767 1px solid;
+}
+.login-form label input{
+    background-color: #fdfcfb;
+    border: none;
+    border: #e8e8e8 1px solid;
+    border-radius: 10px;
+    box-shadow: 0px 1px 8px -5px #00000075;
+    font-size: 18px;
+    transition: all .1s ease-in;
+    padding: 12px 12px 12px 15px;
+}
+.login-form label input::placeholder{
+    color: #696969;
+}
+.login-form input[type="submit"]{
+    background-color: #976767;
+    border: none;
+    border-radius: 15px;
+    padding: 10px;
+    color: white;
+    height: 40px;
+    font-family: Inter Bold, sans-serif;
+    font-size: 16px;
+    margin: 10px 0
+}
+.login-form a, .login p + a{
+    text-decoration: none;
+    color: #976767;
+    margin-top: 10px;
+    font-family: Inter Medium;
+}
+.flecha{
+    position: absolute;
+}
+.login p + a svg{
+    transition: all .3s ease-in-out;
+}
+.login p + a:hover svg{
+    transform: translateX(6px);
+}
+.login p + a{
+    position: relative;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+    transition-timing-function: cubic-bezier(.4, 0, .2, 1);
+    transition-duration: .15s;
+}
+.login p + a::after{
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 1.5px;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .3s ease;
+}
+.login p + a:hover::after{
+    transform: scaleX(1);
+    transform-origin: left;
+}

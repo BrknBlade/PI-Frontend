@@ -1,1 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+html{
+  box-sizing: border-box;
+}
+body{
+    background-color: #fdfcfb;
+    font-family: Inter Bold, sans-serif;
+}
+app-login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}

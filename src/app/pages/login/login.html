@@ -1,12 +1,22 @@
-<h2>Login</h2>
-<form (submit)="login($event)">
-  <label>
-    Email:
-    <input type="text" [formField]="loginForm.email" />
-  </label>
-  <label>
-    Password:
-    <input type="password" [formField]="loginForm.password" />
-  </label>
-  <input type="submit" value="login">
-</form>
+<section class="login">
+  <h1>Portal del Cliente</h1>
+  <p>Inicia sesión para controlar tus citas y tu perfil</p>
+  <div class="login-acciones">
+    <a href="#" class="activo">Iniciar Sesión</a>
+    <a href="#">Registrarse</a>
+  </div>
+  <form class="login-form" (submit)="login($event)">
+    <label>
+      Correo electrónico:
+      <input type="text" placeholder="micorreo@email.com" [formField]="loginForm.email" />
+    </label>
+    <label>
+      Contraseña:
+      <input type="password" placeholder="●●●●●●" [formField]="loginForm.password" />
+    </label>
+      <a href="#">¿Olvidaste tu contraseña?</a>
+      <input type="submit" value="Iniciar sesión">
+  </form>
+  <p>¿Quieres pedir una cita?</p>
+  <a href="#">Pide tu cita ya <svg class="flecha" xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#976767"><path d="m700-300-57-56 84-84H120v-80h607l-83-84 57-56 179 180-180 180Z"/></svg></a>
+</section>
