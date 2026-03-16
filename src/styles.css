@@ -1,12 +1,41 @@
 /* You can add global styles to this file, and also import other style files */
-html{
-  box-sizing: border-box;
+:root{
+  --fondo-principal: #fdfcfb;
+  --fondo-secundario: #f0e8f0;
+
+  --texto-principal: #2f2f2f;
+  --texto-secundario: #585857;
+
+  --borde: #e8e8e8;
+
+  --primario: #7d5f78;
+  --primario-hover: #4d2947;
+
+  --secundario-hover: #e1cde1;
+
+  --blanco: #ffffff;
+
+  --placeholder: #696969;
+  --input-focus: #7d5f7863;
+  --sombra-panel: 0px 1px 8px -5px #00000075;
 }
+
+* {
+    box-sizing: border-box;
+}
+
 body{
-    background-color: #fdfcfb;
+    background-color: var(--fondo-principal);
     font-family: Inter Bold, sans-serif;
 }
 app-login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+app-citas{
     display: flex;
     justify-content: center;
     align-items: center;

@@ -1,0 +1,164 @@
+@font-face {
+  font-family: Inter;
+  src: url('../../../../public/fonts/Inter_18pt-Regular.ttf') format('truetype');
+  font-weight: normal;
+}
+@font-face {
+  font-family: Inter Medium;
+  src: url('../../../../public/fonts/Inter_28pt-Medium.ttf') format('truetype');
+  font-weight: bold;
+}
+@font-face {
+  font-family: Inter Bold;
+  src: url('../../../../public/fonts/Inter_18pt-SemiBold.ttf') format('truetype');
+  font-weight: bolder;
+}
+
+.citas-acciones {
+    display: flex;
+    justify-content: space-evenly;
+    background-color: var(--fondo-secundario);
+    padding: 4px;
+    border-radius: 17px;
+    margin: 40px 0px;
+    width: 400px;
+    text-align: center;
+}
+.citas-acciones a {
+    width: 100%;
+    text-decoration: none;
+    padding: 7px 5px;
+    border-radius: 13px;
+    color: var(--texto-principal);
+    font-family: Inter Medium, sans-serif;
+}
+.activo {
+    background-color: var(--blanco);
+}
+.citas h1 {
+    font-family: Inter Bold, sans-serif;
+    color: var(--texto-principal);
+    font-size: 45px;
+    margin-bottom: 0;
+}
+.citas h2 {
+    color: var(--texto-principal);
+}
+.citas h1 + p {
+    font-family: Inter, sans-serif;
+    color: var(--texto-secundario);
+    font-size: 20px;
+}
+.citas {
+    font-family: Inter, sans-serif;
+    text-align: start;
+    max-width: 1200px;
+    width: 75%;
+}
+.citas-panel {
+    background-color: var(--fondo-principal);
+    border-radius: 15px;
+    border: var(--borde) 1px solid;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    text-align: center;
+    box-shadow: var(--sombra-panel);
+}
+.cita-reservada {
+    background-color: var(--fondo-principal);
+    border-radius: 15px;
+    border: var(--borde) 1px solid;
+    padding: 24px;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    width: 100%;
+    box-shadow: var(--sombra-panel);
+    margin-bottom: 20px;
+}
+.cita-reservada > svg {
+    box-sizing: content-box;
+    padding: 13px;
+    background-color: var(--fondo-secundario);
+    border-radius: 15px;
+    min-height: 28px;
+    min-width: 28px;
+}
+.cita-info {
+    width: 100%;
+}
+.cita-info p {
+    position: relative;
+    left: 25px;
+    margin: 10px 0;
+    color: var(--texto-secundario);
+}
+.cita-info svg {
+    position: absolute;
+    top: -2px;
+    left: -30px;
+}
+
+.cita-info h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+.cita-acciones .modificar, .cita-acciones .cancelar {
+    border-radius: 15px;
+    padding: 12px;
+    max-width: 120px;
+    width: 100%;
+    font-family: Inter Bold, sans-serif;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    transition: all .2s ease-in-out;
+}
+.cita-acciones .modificar {
+    background-color: var(--primario);
+    color: var(--blanco);
+    &:hover {
+        cursor: pointer;
+        background-color: var(--primario-hover);
+    }
+}
+.cita-acciones .cancelar {
+    background-color: var(--fondo-secundario);
+    color: var(--primario);
+    transition: all .2s ease-in-out;
+    &:hover {
+        cursor: pointer;
+        color: var(--primario-hover);
+        background-color: var(--secundario-hover);
+    }
+}
+.cita-acciones {
+    margin-top: 20px;
+    display: flex;
+    justify-content: left;
+    gap: 20px;
+}
+.citas-panel p {
+    color: var(--texto-secundario);
+    margin-top: 0;
+    font-size: 20px;
+}
+.citas-panel a {
+    background-color: var(--primario);
+    border-radius: 15px;
+    padding: 15px;
+    color: var(--blanco);
+    width: 100%;
+    font-family: Inter Bold, sans-serif;
+    font-size: 16px;
+    text-decoration: none;
+    transition: all .2s ease-in-out;
+    &:hover {
+        cursor: pointer;
+        background-color: var(--primario-hover);
+    }
+}
