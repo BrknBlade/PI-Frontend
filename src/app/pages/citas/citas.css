@@ -41,19 +41,21 @@
     font-size: 45px;
     margin-bottom: 0;
 }
-.citas h2 {
+h2 {
     color: var(--texto-principal);
+}
+p{
+    color: var(--texto-secundario);
 }
 .citas h1 + p {
     font-family: Inter, sans-serif;
-    color: var(--texto-secundario);
     font-size: 20px;
 }
 .citas {
     font-family: Inter, sans-serif;
     text-align: start;
     max-width: 1200px;
-    width: 75%;
+    width: 85%;
 }
 .citas-panel {
     background-color: var(--fondo-principal);
@@ -109,6 +111,7 @@
 }
 .cita-acciones .modificar, .cita-acciones .cancelar {
     border-radius: 15px;
+    border: none;
     padding: 12px;
     max-width: 120px;
     width: 100%;
@@ -161,4 +164,61 @@
         cursor: pointer;
         background-color: var(--primario-hover);
     }
+}
+.modal{
+    position: fixed;
+    inset: 0;
+    width: 70dvw;
+    height: 90dvh;
+    background-color: white;
+    z-index: 2;
+    border: none;
+    border-radius: 25px;
+    padding: 0px;
+}
+.modal header{
+    display: flex;
+    justify-content: space-between;
+    text-align: start;
+    border-bottom: 1px solid var(--borde);
+    width: 100%;
+    padding: 25px 25px 0 25px;
+}
+.modal header button{
+    background-color: white;
+    border: none;
+    width: 50px;
+    border-radius: 50%;
+    height: 50px;
+    transition: background-color .1s ease-in-out;
+    &:hover{
+        background-color: #e8e8e8ba;
+        cursor: pointer;
+    }
+}
+.modal h2{
+    margin: 0;
+}
+.modal p{
+    margin-top: 5px;
+    font-family: Inter, sans-serif;
+}
+.blur{
+    filter: blur(7px);
+}
+.backdrop{
+    position: fixed;
+    inset: 0;
+    width: 100vw; /* 100% del ancho del viewport */
+    height: 100vh; /* 100% del alto del viewport */
+    background-color: #1712128a;
+    z-index: 1;
+}
+.calendario{
+    display: grid;
+    gap: 15px;
+    grid-template-columns: repeat(7, 1fr);
+}
+.item-0{
+    grid-column: 7 / 8;
 }
