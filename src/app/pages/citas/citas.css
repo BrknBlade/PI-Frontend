@@ -165,6 +165,8 @@ p{
         background-color: var(--primario-hover);
     }
 }
+
+/* MODAL */
 .modal{
     position: fixed;
     inset: 0;
@@ -175,6 +177,15 @@ p{
     border: none;
     border-radius: 25px;
     padding: 0px;
+}
+.articulo-calendario{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 10px 30px 30px 30px;
+}
+.articulo-calendario section{
+    width: 100%;
 }
 .modal header{
     display: flex;
@@ -221,4 +232,70 @@ p{
 }
 .item-0{
     grid-column: 7 / 8;
+}
+.acciones-calendario{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.modal footer{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    text-align: start;
+    border-top: 1px solid var(--borde);
+    width: 100%;
+    padding: 0px 25px 25px 25px;
+}
+.confirmar-calendario, .cancelar-calendario {
+    margin-top: 30px;
+    border-radius: 15px;
+    border: none;
+    padding: 12px;
+    width: 100%;
+    font-family: Inter Bold, sans-serif;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    transition: all .2s ease-in-out;
+}
+.confirmar-calendario {
+    background-color: var(--primario);
+    color: var(--blanco);
+    &:hover {
+        cursor: pointer;
+        background-color: var(--primario-hover);
+    }
+}
+.cancelar-calendario {
+    background-color: var(--calendario);
+    color: var(--texto-principal);
+
+    transition: all .2s ease-in-out;
+    &:hover {
+        cursor: pointer;
+        background-color: var(--calendario-hover);
+    }
+}
+.horas{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+.hora input{
+    display: none;
+}
+input:checked .hora{
+    background-color: var(--primario);
+}
+.hora{
+    padding: 15px;
+    background-color: var(--calendario);
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+    &:hover{
+        background-color: var(--calendario-hover);
+    }
 }

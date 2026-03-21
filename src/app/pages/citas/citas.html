@@ -50,27 +50,43 @@
       <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x w-5 h-5 md:w-6 md:h-6" style="color: rgb(102, 102, 102);"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
     </button>
   </header>
-  <h3>{{getMes()}}</h3>
-  <div class="calendario">
-    
-    <p>Lun</p>
-    <p>Mar</p>
-    <p>Mié</p>
-    <p>Jue</p>
-    <p>Vie</p>
-    <p>Sáb</p>
-    <p>Dom</p>
-
-    @for(item of contenidoCalendario; track $index){
-      @if(item['dia'] == 1){
-        <button [style]="{'grid-column': `${inicioColumna} / ${finColumna}`}">{{item['dia']}}</button>
-      }@else{
-        <button>{{item['dia']}}</button>
-      }
-    }
-    
-
-  </div>
+  <article class="articulo-calendario">
+    <section>
+      <div class="acciones-calendario">
+        <button (click)="restarMes()"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left w-5 h-5" style="color: rgb(102, 102, 102);"><path d="m15 18-6-6 6-6"></path></svg></button>
+        <h3>{{getMes()}} {{year}}</h3>
+        <button (click)="sumarMes()"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-5 h-5" style="color: rgb(102, 102, 102);"><path d="m9 18 6-6-6-6"></path></svg></button>
+      </div>
+      <div class="calendario">
+        <p>Lun</p>
+        <p>Mar</p>
+        <p>Mié</p>
+        <p>Jue</p>
+        <p>Vie</p>
+        <p>Sáb</p>
+        <p>Dom</p>
+        @for(item of contenidoCalendario; track $index){
+          @if(item['dia'] == 1){
+            <button [style]="{'grid-column': `${inicioColumna} / ${finColumna}`}">{{item['dia']}}</button>
+          }@else{
+            <button>{{item['dia']}}</button>
+          }
+        } 
+      </div>
+    </section>
+    <section>
+      <h3>Selecciona una hora:</h3>
+      <div class="horas">
+        @for (hora of horas; track $index) {
+          <label class="hora"><input  type="radio" name="horas" value="{{hora}}">{{hora.hora}}</label>
+        }
+      </div>
+    </section>
+  </article>
+  <footer>
+    <button class="cancelar-calendario" (click)="showModal()">Cancelar</button>
+    <button class="confirmar-calendario" (click)="guardarCambios()">Confirmar cambios</button>
+  </footer>
 </dialog>
 @if(modal){
   <div class="backdrop"></div>

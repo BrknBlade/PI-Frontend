@@ -15,6 +15,9 @@
 
   --blanco: #ffffff;
 
+  --calendario: #f1f1f1;
+  --calendario-hover: #dddddd;
+
   --placeholder: #696969;
   --input-focus: #7d5f7863;
   --sombra-panel: 0px 1px 8px -5px #00000075;
