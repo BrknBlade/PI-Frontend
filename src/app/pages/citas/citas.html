@@ -75,10 +75,10 @@
       </div>
     </section>
     <section>
-      <h3>Selecciona una hora:</h3>
+      <h3 class="calendario-txt">Selecciona una hora:</h3>
       <div class="horas">
         @for (hora of horas; track $index) {
-          <label class="hora"><input  type="radio" name="horas" value="{{hora}}">{{hora.hora}}</label>
+          <button (click)="seleccionarHora($event)" class="hora" value="{{hora.hora}}">{{hora.hora}}</button>
         }
       </div>
     </section>

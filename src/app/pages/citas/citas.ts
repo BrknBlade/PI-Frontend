@@ -25,6 +25,9 @@ export class Citas implements DoCheck{
   mesElegido = '';
   contador = signal(1);
 
+  cambioHora = false;
+  horaGuardada = 0;
+
   horas = [
       { hora: '09:00', disponible: true },
       { hora: '10:00', disponible: false },
@@ -45,11 +48,12 @@ export class Citas implements DoCheck{
   }
 
   getCalendarContent(){
+    //elimianr cualqueir clase eleccion apra q no este selccioando 
     this.contenidoCalendario = [];
     let fecha = new Date();
-    console.log('Fecha ACTUAL: ' +  new Date(fecha.getFullYear(), fecha.getMonth(), fecha.getDate()))
-    console.log('Mes ACTUAL: ' +  new Date(fecha.getFullYear(), fecha.getMonth(), fecha.getDate()).getMonth())
-    console.log('Mes: ' +this.mes)
+    //console.log('Fecha ACTUAL: ' +  new Date(fecha.getFullYear(), fecha.getMonth(), fecha.getDate()))
+    //console.log('Mes ACTUAL: ' +  new Date(fecha.getFullYear(), fecha.getMonth(), fecha.getDate()).getMonth())
+    //console.log('Mes: ' +this.mes)
     const ultimoDia = new Date(this.year, this.mes+1, 0).getDate();
     for (let dia = 1; dia <= ultimoDia; dia++) {
       let diaSemana = new Date(this.year, this.mes, dia).getDay();
@@ -65,7 +69,7 @@ export class Citas implements DoCheck{
       }
       this.contenidoCalendario.push(dias);
       }
-    console.log(this.contenidoCalendario)
+    //console.log(this.contenidoCalendario)
   }
 
   getMes(){
@@ -113,26 +117,44 @@ export class Citas implements DoCheck{
   restarMes(){
     if(this.mes <= 0){
       this.year = this.year-1;
-      return this.mes = 11;
+      this.mes = 11;
+    }else{
+      this.mes--;
     }
-    return this.mes--;
+    this.getCalendarContent();
   }
 
   sumarMes(){
     if(this.mes >= 11){
       this.year = this.year+1;
-      return this.mes = 0;
+      this.mes = 0;
+    }else{
+      this.mes++;
     }
-    return this.mes++;
+    this.getCalendarContent();
   }
 
   ngDoCheck(): void {
-    this.getCalendarContent();
-    return console.log('Mes: ' + this.mes)
+    
+    //return //console.log('Mes: ' + this.mes)
+  }
+
+  seleccionarHora(event: Event){
+    console.log(event.target)
+    let eleccion = event.target as HTMLElement;
+    let botones = document.querySelectorAll('.hora.eleccion');
+
+    for (const boton of botones) {
+      if(boton.className.includes('eleccion')){
+        this.cambioHora = true;
+        boton.classList.remove('eleccion');
+      }
+    }
+    eleccion.classList.add('eleccion')
   }
 
   guardarCambios(){
-    
+    //guardar el valor de la hora seleccioanda con la clase eleccion
   }
   deleteCita(){
 

@@ -33,7 +33,7 @@
     font-family: Inter Medium, sans-serif;
 }
 .activo {
-    background-color: var(--blanco);
+    background-color: var(--fondo-paneles);
 }
 .citas h1 {
     font-family: Inter Bold, sans-serif;
@@ -58,7 +58,7 @@ p{
     width: 85%;
 }
 .citas-panel {
-    background-color: var(--fondo-principal);
+    background-color: var(--fondo-paneles);
     border-radius: 15px;
     border: var(--borde) 1px solid;
     padding: 50px;
@@ -71,7 +71,7 @@ p{
     box-shadow: var(--sombra-panel);
 }
 .cita-reservada {
-    background-color: var(--fondo-principal);
+    background-color: var(--fondo-paneles);
     border-radius: 15px;
     border: var(--borde) 1px solid;
     padding: 24px;
@@ -123,7 +123,7 @@ p{
 }
 .cita-acciones .modificar {
     background-color: var(--primario);
-    color: var(--blanco);
+    color: var(--fondo-paneles);
     &:hover {
         cursor: pointer;
         background-color: var(--primario-hover);
@@ -154,7 +154,7 @@ p{
     background-color: var(--primario);
     border-radius: 15px;
     padding: 15px;
-    color: var(--blanco);
+    color: var(--fondo-paneles);
     width: 100%;
     font-family: Inter Bold, sans-serif;
     font-size: 16px;
@@ -171,8 +171,7 @@ p{
     position: fixed;
     inset: 0;
     width: 70dvw;
-    height: 90dvh;
-    background-color: white;
+    background-color: var(--fondo-paneles);
     z-index: 2;
     border: none;
     border-radius: 25px;
@@ -181,7 +180,7 @@ p{
 .articulo-calendario{
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 40px;
     padding: 10px 30px 30px 30px;
 }
 .articulo-calendario section{
@@ -196,7 +195,7 @@ p{
     padding: 25px 25px 0 25px;
 }
 .modal header button{
-    background-color: white;
+    background-color: var(--fondo-paneles);
     border: none;
     width: 50px;
     border-radius: 50%;
@@ -262,7 +261,7 @@ p{
 }
 .confirmar-calendario {
     background-color: var(--primario);
-    color: var(--blanco);
+    color: var(--fondo-paneles);
     &:hover {
         cursor: pointer;
         background-color: var(--primario-hover);
@@ -283,13 +282,10 @@ p{
     grid-template-columns: repeat(2, 1fr);
     gap: 15px;
 }
-.hora input{
-    display: none;
-}
-input:checked .hora{
-    background-color: var(--primario);
-}
 .hora{
+    border: none;
+    font-family: Inter Medium;
+    font-size: 16px;
     padding: 15px;
     background-color: var(--calendario);
     border-radius: 15px;
@@ -298,4 +294,15 @@ input:checked .hora{
     &:hover{
         background-color: var(--calendario-hover);
     }
+}
+.eleccion{
+    background-color: var(--primario);
+    color: var(--fondo-paneles);
+    &:hover{
+    background-color: var(--primario-hover);
+
+    }
+}
+.calendario-txt{
+    text-align: start;
 }

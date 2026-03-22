@@ -37,7 +37,7 @@
     font-family: Inter Medium, sans-serif;
 }
 .activo{
-    background-color: var(--blanco);
+    background-color: var(--fondo-paneles);
 }
 .login h1{
     font-family: Inter Bold, sans-serif;
@@ -60,7 +60,7 @@
     font-family: Inter, sans-serif;
 }
 .login-form{
-    background-color: var(--fondo-principal);
+    background-color: var(--fondo-paneles);
     border-radius: 15px;
     border: var(--borde) 1px solid;
     padding: 20px;
@@ -81,7 +81,7 @@
     
 }
 .login-form label input:focus-visible{
-    background-color: var(--fondo-principal);
+    background-color: var(--fondo-paneles);
     border: none;
     padding: 12px;
     border: var(--borde) 1px solid;
@@ -92,7 +92,7 @@
     border: var(--primario) 1px solid;
 }
 .login-form label input{
-    background-color: var(--fondo-principal);
+    background-color: var(--fondo-paneles);
     border: none;
     border: var(--borde) 1px solid;
     border-radius: 10px;
@@ -109,7 +109,7 @@
     border: none;
     border-radius: 15px;
     padding: 10px;
-    color: var(--blanco);
+    color: var(--fondo-paneles);
     height: 40px;
     font-family: Inter Bold, sans-serif;
     font-size: 16px;

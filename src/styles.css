@@ -1,6 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 :root{
-  --fondo-principal: #fdfcfb;
+  --fondo-principal: #f5f5f7 ;
+  --fondo-paneles: #fdfcfb;
+  
   --fondo-secundario: #f0e8f0;
 
   --texto-principal: #2f2f2f;
@@ -9,11 +11,9 @@
   --borde: #e8e8e8;
 
   --primario: #7d5f78;
-  --primario-hover: #4d2947;
+  --primario-hover: #5b3154;
 
   --secundario-hover: #e1cde1;
-
-  --blanco: #ffffff;
 
   --calendario: #f1f1f1;
   --calendario-hover: #dddddd;
