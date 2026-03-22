@@ -186,6 +186,13 @@ p{
 .articulo-calendario section{
     width: 100%;
 }
+.container-calendario{
+    background-color: var(--calendario);
+    border-radius: 15px;
+    padding: 25px;
+    max-height: fit-content;
+}
+
 .modal header{
     display: flex;
     justify-content: space-between;
@@ -226,8 +233,49 @@ p{
 }
 .calendario{
     display: grid;
-    gap: 15px;
+    gap: 5px;
     grid-template-columns: repeat(7, 1fr);
+}
+.calendario button{
+    border: none;
+    padding: 10px;
+    font-family: Inter Bold, sans-serif;
+    width: 45px;
+    height: 45px;
+}
+.anterior{
+    color: var(--calendario-disabled);
+    cursor: not-allowed;
+}
+.actual, .posterior{
+    cursor: pointer;
+}
+.calendario .actual{
+    background-color: var(--fondo-paneles);
+    color: var(--primario);
+    border: 2px solid var(--primario);
+    border-radius: 10px;
+}
+
+.calendario .posterior{
+    border-radius: 10px;
+    transition: all .2s ease-in-out;
+
+    &:hover{
+        background-color: var(--fondo-paneles);
+    }
+}
+.calendario .dia{
+    background-color: var(--primario);
+    color: var(--fondo-paneles);
+    border: 2px solid var(--primario);
+    border-radius: 10px;
+    transition: all .2s ease-in-out;
+
+    &:hover{
+        border: 2px solid var(--primario-hover);
+        background-color: var(--primario-hover);
+    }
 }
 .item-0{
     grid-column: 7 / 8;
@@ -236,6 +284,12 @@ p{
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+.acciones-calendario button{
+    background-color: var(--calendario);
+    border: none;
+    cursor: pointer;
 }
 
 .modal footer{
@@ -247,6 +301,11 @@ p{
     width: 100%;
     padding: 0px 25px 25px 25px;
 }
+.modal h3{
+    color: var(--texto-principal);
+    margin-top: 0;
+}
+
 .confirmar-calendario, .cancelar-calendario {
     margin-top: 30px;
     border-radius: 15px;

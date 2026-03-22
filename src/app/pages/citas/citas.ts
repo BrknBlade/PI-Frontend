@@ -25,8 +25,9 @@ export class Citas implements DoCheck{
   mesElegido = '';
   contador = signal(1);
 
-  cambioHora = false;
   horaGuardada = 0;
+
+  diaActual = new Date().getDate();
 
   horas = [
       { hora: '09:00', disponible: true },
@@ -48,10 +49,10 @@ export class Citas implements DoCheck{
   }
 
   getCalendarContent(){
-    //elimianr cualqueir clase eleccion apra q no este selccioando 
+    //TODO eliminar cualquier clase eleccion apra q no este selccioando 
     this.contenidoCalendario = [];
     let fecha = new Date();
-    //console.log('Fecha ACTUAL: ' +  new Date(fecha.getFullYear(), fecha.getMonth(), fecha.getDate()))
+    console.log('Dia ACTUAL: ' +  this.diaActual);
     //console.log('Mes ACTUAL: ' +  new Date(fecha.getFullYear(), fecha.getMonth(), fecha.getDate()).getMonth())
     //console.log('Mes: ' +this.mes)
     const ultimoDia = new Date(this.year, this.mes+1, 0).getDate();
@@ -142,19 +143,30 @@ export class Citas implements DoCheck{
   seleccionarHora(event: Event){
     console.log(event.target)
     let eleccion = event.target as HTMLElement;
-    let botones = document.querySelectorAll('.hora.eleccion');
+    let boton = document.querySelector('.hora.eleccion');
 
-    for (const boton of botones) {
-      if(boton.className.includes('eleccion')){
-        this.cambioHora = true;
-        boton.classList.remove('eleccion');
-      }
+    if(boton?.className.includes('eleccion')){
+      boton.classList.remove('eleccion');
     }
     eleccion.classList.add('eleccion')
   }
 
+  seleccionarDia(event: Event){
+    console.log(event.target)
+    let eleccion = event.target as HTMLElement;
+    let botonAntiguo = document.querySelector('.calendario button.dia');
+    console.log(botonAntiguo)
+
+    if(botonAntiguo?.className.includes('dia')){
+      botonAntiguo.classList.remove('dia');
+    }
+    eleccion.classList.add('dia')
+  }
+
   guardarCambios(){
-    //guardar el valor de la hora seleccioanda con la clase eleccion
+    //guardar el valor de la hora y la fecha nueva seleccionada con la clase eleccion
+    let eleccion = document.querySelector<HTMLButtonElement>('.eleccion');// tambien sirve document.querySelector('.eleccion') as HTMLButtonElement
+    console.log('Hora: ' +  eleccion?.value);//hora y en caso de ser null devuelve undefined
   }
   deleteCita(){
 
