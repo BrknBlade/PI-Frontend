@@ -1,4 +1,4 @@
-import { Component, DoCheck, signal} from '@angular/core';
+import { Component, signal} from '@angular/core';
 
 interface NumberDictionary{
   [key: string]: number;
@@ -12,7 +12,7 @@ interface NumberDictionary{
 })
 
 
-export class Citas implements DoCheck{
+export class Citas {
   numCitas = signal(2);
   iterableCitas = Array.from({length : this.numCitas()}, (_,i) => i);
   modal = false;
@@ -29,6 +29,7 @@ export class Citas implements DoCheck{
 
   diaActual = new Date().getDate();
   mesActual = new Date().getMonth();
+  yearActual = new Date().getFullYear();
 
   horas = [
       { hora: '09:00', disponible: true },
@@ -49,14 +50,12 @@ export class Citas implements DoCheck{
     this.getCalendarContent();
     return this.modal = !this.modal;
   }
+  closeModal(){
+    return this.modal = !this.modal;
+  }
 
   getCalendarContent(){
-    //TODO eliminar cualquier clase eleccion apra q no este selccioando 
     this.contenidoCalendario = [];
-    let fecha = new Date();
-    console.log('Dia ACTUAL: ' +  this.diaActual);
-    //console.log('Mes ACTUAL: ' +  new Date(fecha.getFullYear(), fecha.getMonth(), fecha.getDate()).getMonth())
-    //console.log('Mes: ' +this.mes)
     const ultimoDia = new Date(this.year, this.mes+1, 0).getDate();
     for (let dia = 1; dia <= ultimoDia; dia++) {
       let diaSemana = new Date(this.year, this.mes, dia).getDay();
@@ -72,7 +71,7 @@ export class Citas implements DoCheck{
       }
       this.contenidoCalendario.push(dias);
       }
-    //console.log(this.contenidoCalendario)
+    this.ajustarcalendario();
   }
 
   getMes(){
@@ -137,61 +136,61 @@ export class Citas implements DoCheck{
     this.getCalendarContent();
   }
 
-  ngDoCheck(): void {
-    console.log(`Mes actual: ${this.mesActual}. Mes: ${this.mes}`)
-    this.ajustarcalendario()
-    //return //console.log('Mes: ' + this.mes)
-  }
-
   seleccionarHora(event: Event){
-    console.log(event.target)
     let eleccion = event.target as HTMLElement;
     let boton = document.querySelector('.hora.eleccion');
 
     if(boton?.className.includes('eleccion')){
       boton.classList.remove('eleccion');
+      if(eleccion == boton){
+        return;
+      }
     }
     eleccion.classList.add('eleccion')
   }
 
   seleccionarDia(event: Event){
-    console.log(event.target)
     let eleccion = event.target as HTMLElement;
     let botonAntiguo = document.querySelector('.calendario button.dia');
-    console.log(botonAntiguo)
 
     if(botonAntiguo?.className.includes('dia')){
       botonAntiguo.classList.remove('dia');
+      if(eleccion == botonAntiguo){
+        return;
+      }
     }
     eleccion.classList.add('dia')
   }
 
-  async ajustarcalendario(){
-    const diaUno = await this.waitForElement('.calendario button');
-    console.log(diaUno)
+  ajustarcalendario(){
+    setTimeout(() => {
+      const primerDia = document.querySelector('.calendario button') as HTMLButtonElement;
+      primerDia.style.gridColumn = `${this.inicioColumna} / ${this.finColumna}`;
+    }, 0);
+
   } 
-  waitForElement(selector: string): Promise<Element> {
-    return new Promise((resolve) => {
-      const el = document.querySelector(selector);
-      if (el) return resolve(el);
-
-      const observer = new MutationObserver(() => {
-        const el = document.querySelector(selector);
-        if (el) {
-          observer.disconnect();
-          resolve(el);
-        }
-      });
-
-      observer.observe(document.body, { childList: true, subtree: true });
-    });
-  }
-
 
   guardarCambios(){
+    let datosNuevos: any = {
+      'dia': '',
+      'hora': '',
+    };
     //guardar el valor de la hora y la fecha nueva seleccionada con la clase eleccion
-    let eleccion = document.querySelector<HTMLButtonElement>('.eleccion');// tambien sirve document.querySelector('.eleccion') as HTMLButtonElement
-    console.log('Hora: ' +  eleccion?.value);//hora y en caso de ser null devuelve undefined
+    let hora = document.querySelector<HTMLButtonElement>('.eleccion');// tambien sirve document.querySelector('.eleccion') as HTMLButtonElement
+    let dia = document.querySelector('.dia') as HTMLButtonElement;// tambien sirve document.querySelector('.eleccion') as HTMLButtonElement
+    if(hora){
+      datosNuevos['hora'] = hora.value.slice(0, 2);
+    }else{
+      datosNuevos['hora'] = null;
+    }
+    if(dia){
+      datosNuevos['dia'] = dia.textContent;
+    }else{
+      datosNuevos['dia'] = null;
+    }
+    console.log(datosNuevos)
+    this.modal = !this.modal;
+    return datosNuevos;
   }
   deleteCita(){
 
