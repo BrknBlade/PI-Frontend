@@ -67,6 +67,9 @@
         <p>Dom</p>
         @for(item of contenidoCalendario; track $index){
           @if(item['dia'] == 1){
+            @if(mes == mesActual || mes < mesActual){
+              
+            }
             @if(item['dia'] < diaActual){
               <button (click)="seleccionarDia($event)" disabled class="anterior" [style]="{'grid-column': `${inicioColumna} / ${finColumna}`}">{{item['dia']}}</button>
             }@else if (item['dia'] > diaActual) {
@@ -75,7 +78,7 @@
               <button (click)="seleccionarDia($event)" class="actual" [style]="{'grid-column': `${inicioColumna} / ${finColumna}`}">{{item['dia']}}</button>
             }
           }@else{
-            @if(item['dia'] < diaActual){
+            @if(item['dia'] < diaActual && (mes == mesActual || mes < mesActual)){
               <button (click)="seleccionarDia($event)" disabled class="anterior">{{item['dia']}}</button>
             }@else if (item['dia'] > diaActual) {
               <button (click)="seleccionarDia($event)" class="posterior">{{item['dia']}}</button>

@@ -28,6 +28,7 @@ export class Citas implements DoCheck{
   horaGuardada = 0;
 
   diaActual = new Date().getDate();
+  mesActual = new Date().getMonth();
 
   horas = [
       { hora: '09:00', disponible: true },
@@ -44,6 +45,7 @@ export class Citas implements DoCheck{
   ];
 
   showModal(){
+
     this.getCalendarContent();
     return this.modal = !this.modal;
   }
@@ -136,7 +138,8 @@ export class Citas implements DoCheck{
   }
 
   ngDoCheck(): void {
-    
+    console.log(`Mes actual: ${this.mesActual}. Mes: ${this.mes}`)
+    this.ajustarcalendario()
     //return //console.log('Mes: ' + this.mes)
   }
 
@@ -162,6 +165,28 @@ export class Citas implements DoCheck{
     }
     eleccion.classList.add('dia')
   }
+
+  async ajustarcalendario(){
+    const diaUno = await this.waitForElement('.calendario button');
+    console.log(diaUno)
+  } 
+  waitForElement(selector: string): Promise<Element> {
+    return new Promise((resolve) => {
+      const el = document.querySelector(selector);
+      if (el) return resolve(el);
+
+      const observer = new MutationObserver(() => {
+        const el = document.querySelector(selector);
+        if (el) {
+          observer.disconnect();
+          resolve(el);
+        }
+      });
+
+      observer.observe(document.body, { childList: true, subtree: true });
+    });
+  }
+
 
   guardarCambios(){
     //guardar el valor de la hora y la fecha nueva seleccionada con la clase eleccion
