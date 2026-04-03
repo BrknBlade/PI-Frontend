@@ -177,14 +177,18 @@ p{
     border: none;
     border-radius: 25px;
     padding: 0px;
+    display: flex;          
+    flex-direction: column;
+    overflow: hidden;
 }
 .articulo-calendario{
     display: flex;
     justify-content: center;
     gap: 40px;
     padding: 25px;
-    overflow: auto;
-    max-height: 510px;
+    overflow-y: auto;
+    flex: 1;
+    min-height: 0;
 }
 .nueva-cita{
     padding: 20px;
@@ -211,6 +215,7 @@ p{
     border-radius: 15px;
     padding: 25px;
     max-height: fit-content;
+    min-height: fit-content;
 }
 
 .modal header{
@@ -326,7 +331,6 @@ p{
     transition: all .1s ease-in;
 }
 .acciones-calendario button:hover svg{
-    
     transform: scale(1.3);
 }
 
@@ -337,7 +341,7 @@ p{
     text-align: start;
     border-top: 1px solid var(--borde);
     width: 100%;
-    padding: 0px 25px 25px 25px;
+    padding: 25px;
 }
 .modal h3{
     color: var(--texto-principal);
@@ -345,7 +349,6 @@ p{
 }
 
 .confirmar-calendario, .cancelar-calendario {
-    margin-top: 30px;
     border-radius: 15px;
     border: none;
     padding: 12px;
@@ -354,6 +357,7 @@ p{
     font-size: 16px;
     text-align: center;
     text-decoration: none;
+    max-height: 45px;
     transition: all .2s ease-in-out;
 }
 .confirmar-calendario {
@@ -402,4 +406,9 @@ p{
 }
 .calendario-txt{
     text-align: start;
+}
+
+/* MEDIA QUERIES */
+@media (max-width: 768px) {
+    
 }

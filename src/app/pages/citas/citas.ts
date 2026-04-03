@@ -1,4 +1,4 @@
-import { Component, signal} from '@angular/core';
+import { Component, DoCheck, OnInit, signal} from '@angular/core';
 
 interface NumberDictionary{
   [key: string]: number;
@@ -12,7 +12,7 @@ interface NumberDictionary{
 })
 
 
-export class Citas {
+export class Citas implements  DoCheck{
   numCitas = signal(2);
   iterableCitas = Array.from({length : this.numCitas()}, (_,i) => i);
   modal = false;
@@ -45,13 +45,17 @@ export class Citas {
       { hora: '19:00', disponible: true },
   ];
 
+  ngDoCheck(): void {
+      console.log(this.modal)
+      
+  }
   showModal(){
-
+    console.log(this.modal);
     this.getCalendarContent();
-    return this.modal = !this.modal;
+    return this.modal = true;
   }
   closeModal(){
-    return this.modal = !this.modal;
+    return this.modal = false;
   }
 
   getCalendarContent(){
@@ -177,7 +181,7 @@ export class Citas {
     };
     //guardar el valor de la hora y la fecha nueva seleccionada con la clase eleccion
     let hora = document.querySelector<HTMLButtonElement>('.eleccion');// tambien sirve document.querySelector('.eleccion') as HTMLButtonElement
-    let dia = document.querySelector('.dia') as HTMLButtonElement;// tambien sirve document.querySelector('.eleccion') as HTMLButtonElement
+    let dia = document.querySelector('.dia') as HTMLButtonElement;
     if(hora){
       datosNuevos['hora'] = hora.value.slice(0, 2);
     }else{

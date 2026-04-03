@@ -23,7 +23,7 @@
     padding: 4px;
     border-radius: 17px;
     width: 95%;
-    margin-top: 50px;
+    margin-top: 30px;
     margin-bottom: 10px;
     margin-left: auto;
     margin-right: auto;
@@ -137,9 +137,12 @@
 }
 .login p + a{
     position: relative;
+    display: inline-block;
     transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
     transition-timing-function: cubic-bezier(.4, 0, .2, 1);
     transition-duration: .15s;
+    margin-bottom: 20px;
+    margin-top: 0;
 }
 .login p + a::after{
     content: "";
@@ -156,4 +159,30 @@
 .login p + a:hover::after{
     transform: scaleX(1);
     transform-origin: left;
+}
+
+/* MEDIA QUERIES */
+@media (max-width: 768px) {
+    .login-form{
+        width: 90%;
+        margin: 0 auto;
+    }
+    .login-acciones{
+        display: flex;
+        justify-content: space-evenly;
+        background-color: var(--fondo-secundario);
+        padding: 4px;
+        border-radius: 17px;
+        width: 95%;
+        margin-top: 30px;
+        margin-bottom: 20px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .login h1{
+        font-size: 35px;
+    }
+    .login p{
+        font-size: 18px;
+    }
 }

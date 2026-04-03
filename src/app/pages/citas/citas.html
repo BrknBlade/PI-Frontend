@@ -40,13 +40,14 @@
       }
     }
 </section>
-<dialog class="modal" [open]="modal">
+@if (modal) {
+  <dialog class="modal">
   <header>
     <div>
       <h2>Modificar Cita</h2>
       <p>Corte y peinado</p>
     </div>
-    <button (click)="showModal()">
+    <button (click)="closeModal()">
       <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x w-5 h-5 md:w-6 md:h-6" style="color: rgb(102, 102, 102);"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
     </button>
   </header>
@@ -102,11 +103,9 @@
   </section>
   </article>
   <footer>
-    <button class="cancelar-calendario" (click)="showModal()">Cancelar</button>
+    <button class="cancelar-calendario" (click)="closeModal()">Cancelar</button>
     <button class="confirmar-calendario" (click)="guardarCambios()">Confirmar cambios</button>
   </footer>
   
 </dialog>
-@if(modal){
-  <div class="backdrop"></div>
 }
