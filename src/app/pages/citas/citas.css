@@ -21,9 +21,10 @@
     padding: 4px;
     border-radius: 17px;
     margin: 40px 0px;
-    width: 400px;
+    max-width: 400px;
     text-align: center;
 }
+
 .citas-acciones a {
     width: 100%;
     text-decoration: none;
@@ -170,7 +171,7 @@ p{
 .modal{
     position: fixed;
     inset: 0;
-    width: 70dvw;
+    width: 80dvw;
     height: 90vh;
     background-color: var(--fondo-paneles);
     z-index: 2;
@@ -246,7 +247,7 @@ p{
     font-family: Inter, sans-serif;
 }
 .blur{
-    filter: blur(7px);
+    filter: blur(5px);
 }
 .backdrop{
     position: fixed;
@@ -410,5 +411,33 @@ p{
 
 /* MEDIA QUERIES */
 @media (max-width: 768px) {
-    
+    .citas-acciones {
+        flex-direction: column;
+        max-width: unset;
+    }
+    .cita-acciones {
+        flex-direction: column;
+    }
+    .cita-acciones .modificar, .cita-acciones .cancelar {
+        max-width: unset;
+    }
+    .calendario{
+        grid-template-columns: repeat(7, 35px);
+    }
+    .container-calendario{
+        padding: 15px;
+    }
+    .articulo-calendario{
+        justify-content: flex-start;
+        flex-direction: column;
+        padding: 20px;
+    }
+    .nueva-cita{
+        margin-bottom: 0;
+    }
+    .modal{
+        width: 100vw;
+        height: 100vh;
+        border-radius: 0;
+    }
 }
