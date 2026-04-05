@@ -2,6 +2,8 @@ import { Component, inject } from '@angular/core';
 import { form, FormField } from '@angular/forms/signals';
 import { loginModel } from '../../models/login-model';
 import { AuthService } from '../../services/auth/auth-service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-login',
@@ -10,9 +12,11 @@ import { AuthService } from '../../services/auth/auth-service';
   styleUrl: './login.css',
 })
 export class Login {
-  // constructor(private authService: AuthService){}
   loginForm = form(loginModel);
   private authService = inject(AuthService);
+
+  constructor(private router: Router){}
+
 
   login(e:Event) {
     e.preventDefault();
@@ -24,6 +28,9 @@ export class Login {
 
     this.authService.login(credentials).subscribe((data:any) => {
       console.log(data);
+      if(data){
+        this.router.navigate(['/citas']);
+      }
     });
   }
 }

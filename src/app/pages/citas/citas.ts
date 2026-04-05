@@ -170,7 +170,8 @@ export class Citas implements  DoCheck{
     setTimeout(() => {
       const primerDia = document.querySelector('.calendario button') as HTMLButtonElement;
       primerDia.style.gridColumn = `${this.inicioColumna} / ${this.finColumna}`;
-    }, 0);
+    }, 0);//hago q se espere un poco para encontrar el boton ya qu eal generarlo no se crea en tiempo de ejecucion y daría null com oresultado
+
 
   } 
 

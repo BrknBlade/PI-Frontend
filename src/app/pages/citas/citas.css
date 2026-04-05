@@ -441,3 +441,8 @@ p{
         border-radius: 0;
     }
 }
+@media (min-width: 1024px) {
+    .modal{
+        width: 60vw;
+    }
+}
