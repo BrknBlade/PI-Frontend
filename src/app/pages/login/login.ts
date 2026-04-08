@@ -17,7 +17,6 @@ export class Login {
 
   constructor(private router: Router){}
 
-
   login(e:Event) {
     e.preventDefault();
 

@@ -1,4 +1,6 @@
-import { Component, DoCheck, OnInit, signal} from '@angular/core';
+import { Component, OnInit, inject, signal} from '@angular/core';
+import { UserData } from '../../services/userData/user-data';
+import { AuthService } from '../../services/auth/auth-service';
 
 interface NumberDictionary{
   [key: string]: number;
@@ -12,10 +14,15 @@ interface NumberDictionary{
 })
 
 
-export class Citas implements  DoCheck{
+export class Citas implements OnInit{
   numCitas = signal(2);
   iterableCitas = Array.from({length : this.numCitas()}, (_,i) => i);
   modal = false;
+
+  userDataService = inject(UserData);
+  authService = inject(AuthService);
+
+  userData:any = {};
 
   contenidoCalendario:any = [];
   inicioColumna = 0;
@@ -45,9 +52,16 @@ export class Citas implements  DoCheck{
       { hora: '19:00', disponible: true },
   ];
 
-  ngDoCheck(): void {
-      console.log(this.modal)
-      
+  ngOnInit(): void {
+    this.datosUser();
+  }
+  
+  datosUser(){
+    console.log(this.authService.userId());
+    this.userDataService.getData().subscribe((data:any) => {
+      this.userData = data;
+    });
+
   }
   showModal(){
     console.log(this.modal);
