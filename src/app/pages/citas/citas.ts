@@ -19,10 +19,10 @@ export class Citas implements OnInit{
   iterableCitas = Array.from({length : this.numCitas()}, (_,i) => i);
   modal = false;
 
-  userDataService = inject(UserData);
   authService = inject(AuthService);
 
-  userData:any = {};
+  userData = this.authService.currentUser;
+
 
   contenidoCalendario:any = [];
   inicioColumna = 0;
@@ -53,16 +53,9 @@ export class Citas implements OnInit{
   ];
 
   ngOnInit(): void {
-    this.datosUser();
+    console.log(this.userData())
   }
   
-  datosUser(){
-    console.log(this.authService.userId());
-    this.userDataService.getData().subscribe((data:any) => {
-      this.userData = data;
-    });
-
-  }
   showModal(){
     console.log(this.modal);
     this.getCalendarContent();
