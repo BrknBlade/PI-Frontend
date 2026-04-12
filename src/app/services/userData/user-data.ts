@@ -12,7 +12,7 @@ export class UserData {
 
 
   getData(){
-    //return this.http.get<any>(`${environment.BASE_URL}/api/users/1}`);
+    return this.http.get<any>(`${environment.BASE_URL}/api/users/${this.authService.currentUser().id}`);
   }
 
 }
