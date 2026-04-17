@@ -3,7 +3,7 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { authInterceptor } from './interceptors/auth-interceptor';
-import { AuthService } from './services/auth/auth-service';
+import { UserData } from './services/userData/user-data';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -15,8 +15,8 @@ export const appConfig: ApplicationConfig = {
       withInterceptors([ authInterceptor ])
     ),
     provideAppInitializer(() => {
-      const authService = inject(AuthService);
-      return authService.loadUser();
+      const userService = inject(UserData);
+      return userService.loadUser();
     })
   ]
 };

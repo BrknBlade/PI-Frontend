@@ -1,5 +1,5 @@
 import { Component, OnInit, computed, inject, signal} from '@angular/core';
-import { AuthService } from '../../services/auth/auth-service';
+import { UserData } from '../../services/userData/user-data';
 
 interface NumberDictionary{
   [key: string]: number;
@@ -18,9 +18,10 @@ export class Citas implements OnInit{
   iterableCitas = Array.from({length : this.numCitas()}, (_,i) => i);
   modal = false;
 
-  authService = inject(AuthService);
+  userService = inject(UserData);
 
-  userData = computed(() => this.authService.currentUser());
+  userData = computed(() => this.userService.currentUser());
+  userCitas = computed(() => this.userService.citas());
 
 
   contenidoCalendario:any = [];
@@ -53,6 +54,7 @@ export class Citas implements OnInit{
 
   ngOnInit(): void {
     console.log(this.userData())
+    console.log(this.userService.citas())
   }
   
   showModal(){

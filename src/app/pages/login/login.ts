@@ -3,6 +3,7 @@ import { form, FormField } from '@angular/forms/signals';
 import { loginModel } from '../../models/login-model';
 import { AuthService } from '../../services/auth/auth-service';
 import { Router } from '@angular/router';
+import { UserData } from '../../services/userData/user-data';
 
 
 @Component({
@@ -14,6 +15,7 @@ import { Router } from '@angular/router';
 export class Login {
   loginForm = form(loginModel);
   private authService = inject(AuthService);
+  private userService = inject(UserData);
 
   constructor(private router: Router){}
 
@@ -27,7 +29,8 @@ export class Login {
 
     this.authService.login(credentials).subscribe((data:any) => {
       console.log(data);
-      if(data){
+      if(data.message != 'failed to login'){
+        this.userService.loadUser();
         this.router.navigate(['/citas']);
       }
     });

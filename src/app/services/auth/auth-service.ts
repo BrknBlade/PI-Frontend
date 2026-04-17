@@ -19,16 +19,4 @@ export class AuthService {
       })
     )
   }
-  loadUser(): Observable<any> {
-    return this.http.get<any>(`${environment.BASE_URL}/api/user`).pipe(
-      tap((user) => {
-        this.currentUser.set(user);
-      }),
-    catchError(() => {
-      this.currentUser.set(null);
-      return of(null);
-    })
-    )
-  ;
-  }
 }
