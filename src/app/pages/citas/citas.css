@@ -42,6 +42,9 @@
     font-size: 45px;
     margin-bottom: 0;
 }
+.citas h1 span{
+    text-transform: capitalize;
+}
 h2 {
     color: var(--texto-principal);
 }

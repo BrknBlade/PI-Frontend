@@ -15,7 +15,6 @@ import { UserData } from '../../services/userData/user-data';
 export class Login {
   loginForm = form(loginModel);
   private authService = inject(AuthService);
-  private userService = inject(UserData);
 
   constructor(private router: Router){}
 
@@ -27,12 +26,9 @@ export class Login {
       password : this.loginForm.password().value()
     }
 
-    this.authService.login(credentials).subscribe((data:any) => {
-      console.log(data);
-      if(data.message != 'failed to login'){
-        this.userService.loadUser();
-        this.router.navigate(['/citas']);
-      }
+    this.authService.login(credentials).subscribe({
+      next: () => this.router.navigate(['/citas']),
+      error: (err) => console.error('Login fallido', err)
     });
   }
 }

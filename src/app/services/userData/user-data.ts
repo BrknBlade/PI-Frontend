@@ -10,32 +10,18 @@ import { Observable, tap, catchError, of } from 'rxjs';
 export class UserData {
   constructor(private http: HttpClient){}
   authService = inject(AuthService)
-  currentUser = signal<any>(null);
 
-  userId = signal<any>(null);
+  userId = this.authService.userID;
   citas = signal<any>(null);
 
-  loadUser(): Observable<any> {
-    return this.http.get<any>(`${environment.BASE_URL}/api/user`).pipe(
-      tap((user) => {
-        this.currentUser.set(user);
-        this.userId.set(user.id);
-      }),
-      catchError(() => {
-        this.currentUser.set(null);
-        return of(null);
-      })
-    );
-  }
-
   getCitas(): Observable<any>{
-    return this.http.get<any>(`${environment.BASE_URL}/users/1/bookings`).pipe(
+    return this.http.get<any>(`${environment.BASE_URL}/api/users/${this.userId()}/bookings`).pipe(
       tap((data) => {
-        console.log(data)
-        this.citas.set(data);
+        console.log(data.data)
+        this.citas.set(data.data ?? []);
       }),
       catchError(() => {
-        this.citas.set(null);
+        this.citas.set([]);
         return of(null);
       })
     );;

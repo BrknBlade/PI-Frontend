@@ -1,5 +1,10 @@
-import { Component, OnInit, computed, inject, signal} from '@angular/core';
+import { Component, Input, OnInit, inject, signal} from '@angular/core';
 import { UserData } from '../../services/userData/user-data';
+import { AuthService } from '../../services/auth/auth-service';
+import { CutData } from '../../services/cutData/cut-data';
+import { firstValueFrom, forkJoin, map, Observable } from 'rxjs';
+import { DatePipe } from '@angular/common';
+import { CitaService } from '../../services/citas/cita-service';
 
 interface NumberDictionary{
   [key: string]: number;
@@ -7,22 +12,28 @@ interface NumberDictionary{
 
 @Component({
   selector: 'app-citas',
-  imports: [],
+  imports: [DatePipe],
   templateUrl: './citas.html',
   styleUrl: './citas.css',
 })
 
 
 export class Citas implements OnInit{
-  numCitas = signal(0);
-  iterableCitas = Array.from({length : this.numCitas()}, (_,i) => i);
   modal = false;
 
-  userService = inject(UserData);
+  private authService = inject(AuthService);
+  private userDataService = inject(UserData);
+  private cutDataService = inject(CutData);
+  private citaService = inject(CitaService);
 
-  userData = computed(() => this.userService.currentUser());
-  userCitas = computed(() => this.userService.citas());
+  cargando = signal(true);
 
+  user = this.authService.user;
+  citas = this.userDataService.citas;
+  cutData = this.cutDataService.cutData;
+
+  citaVars = signal<Record<number, any>>({});
+  diaCita: any;
 
   contenidoCalendario:any = [];
   inicioColumna = 0;
@@ -30,9 +41,6 @@ export class Citas implements OnInit{
   mes = new Date().getMonth();
   year = new Date().getFullYear();
   mesElegido = '';
-  contador = signal(1);
-
-  horaGuardada = 0;
 
   diaActual = new Date().getDate();
   mesActual = new Date().getMonth();
@@ -52,13 +60,41 @@ export class Citas implements OnInit{
       { hora: '19:00', disponible: true },
   ];
 
+  idCita: any;
+
   ngOnInit(): void {
-    console.log(this.userData())
-    console.log(this.userService.citas())
+    this.pintarCitas()
+
+    console.log('Datos: ', this.user())
+  }
+
+  pintarCitas(){
+    this.userDataService.getCitas().subscribe(() => {
+      const requests = this.citas().map((cita: any) => {
+        this.diaCita = cita.date;
+        this.diaCita = this.diaCita.slice(8, 10);
+        return this.cutDataService.getCut(cita.id);
+      }
+      )  as Observable<any>[];
+
+      forkJoin(requests).subscribe((resultados: any[]) => {//investigar esto
+        resultados.forEach(data => {
+          if (!data) return;
+          this.citaVars.update(current => ({
+            ...current,
+            [data.data.id]: data.data.name
+          }));
+        });
+        this.cargando.set(false); 
+      });
+    });
   }
   
-  showModal(){
-    console.log(this.modal);
+  showModal(event: Event){
+    let boton = event.target as HTMLButtonElement;
+    let inputID = boton.parentElement?.firstElementChild as HTMLElement;
+    this.idCita = inputID.getAttribute('value');
+
     this.getCalendarContent();
     return this.modal = true;
   }
@@ -178,31 +214,34 @@ export class Citas implements OnInit{
     setTimeout(() => {
       const primerDia = document.querySelector('.calendario button') as HTMLButtonElement;
       primerDia.style.gridColumn = `${this.inicioColumna} / ${this.finColumna}`;
-    }, 0);//hago q se espere un poco para encontrar el boton ya qu eal generarlo no se crea en tiempo de ejecucion y daría null com oresultado
-
-
+    }, 0);//hago q se espere un poco para encontrar el boton ya que al generarlo no se crea en tiempo de ejecucion y daría null como resultado
   } 
 
-  guardarCambios(){
+  async guardarCambios(){
     let datosNuevos: any = {
-      'dia': '',
-      'hora': '',
+      'date': '',
+      'hour': '',
     };
     //guardar el valor de la hora y la fecha nueva seleccionada con la clase eleccion
     let hora = document.querySelector<HTMLButtonElement>('.eleccion');// tambien sirve document.querySelector('.eleccion') as HTMLButtonElement
     let dia = document.querySelector('.dia') as HTMLButtonElement;
     if(hora){
-      datosNuevos['hora'] = hora.value.slice(0, 2);
+      datosNuevos['hour'] = hora.value;
     }else{
-      datosNuevos['hora'] = null;
+      datosNuevos['hour'] = null;
     }
     if(dia){
-      datosNuevos['dia'] = dia.textContent;
+      datosNuevos['date'] = this.year + '-0' + (this.mes + 1)  + '-' + dia.textContent;
     }else{
-      datosNuevos['dia'] = null;
+      datosNuevos['date'] = null;
     }
     console.log(datosNuevos)
+
+    await firstValueFrom(this.citaService.updateCita(this.idCita, datosNuevos));
+    this.pintarCitas();
+
     this.modal = !this.modal;
+
     return datosNuevos;
   }
   deleteCita(){
