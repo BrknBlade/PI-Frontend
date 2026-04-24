@@ -301,13 +301,14 @@ p{
     color: var(--fondo-paneles);
     border: 2px solid var(--primario);
     border-radius: 10px;
-    transition: all .2s ease-in-out;
+    transition: background-color, border .2s ease-in-out;
 
     &:hover{
         border: 2px solid var(--primario-hover);
         background-color: var(--primario-hover);
     }
 }
+
 .item-0{
     grid-column: 7 / 8;
 }

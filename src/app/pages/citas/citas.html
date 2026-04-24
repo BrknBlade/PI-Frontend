@@ -77,33 +77,49 @@
         @if (year == yearActual) {
           @if(mes == mesActual && year == yearActual){
             @if(item['dia'] < diaActual){
-              @if (item['dia'] == diaCita) {
-                <button (click)="seleccionarDia($event)" class="anterior dia">{{item['dia']}}</button>
-              }@else {
-                <button (click)="seleccionarDia($event)" disabled class="anterior">{{item['dia']}}</button>
-              }
+                @if(item['dia'] == pruebaDia && yearCondicion == year && mesCondicion == mes){
+                  <button (click)="seleccionarDia($event)" disabled class="anterior dia">{{item['dia']}}</button>
+                }@else {
+                  <button (click)="seleccionarDia($event)" disabled class="anterior">{{item['dia']}}</button>
+                }
             }@else if (item['dia'] > diaActual) {
-              @if (item['dia'] == diaCita) {
-                <button (click)="seleccionarDia($event)" class="posterior dia">{{item['dia']}}</button>
-              }@else {
-                <button (click)="seleccionarDia($event)" class="posterior">{{item['dia']}}</button>
-              }
+                @if(item['dia'] == pruebaDia && yearCondicion == year && mesCondicion == mes){
+                  <button (click)="seleccionarDia($event)" class="posterior dia">{{item['dia']}}</button>
+                }@else {
+                  <button (click)="seleccionarDia($event)" class="posterior">{{item['dia']}}</button>
+                }
             }@else {
-              @if (item['dia'] == diaCita) {
-                <button (click)="seleccionarDia($event)" class="actual dia">{{item['dia']}}</button>
-              }@else {
-                <button (click)="seleccionarDia($event)" class="actual">{{item['dia']}}</button>
-              }
+                @if(item['dia'] == pruebaDia && yearCondicion == year && mesCondicion == mes){
+                  <button (click)="seleccionarDia($event)" class="actual dia">{{item['dia']}}</button>
+                }@else {
+                  <button (click)="seleccionarDia($event)" class="actual">{{item['dia']}}</button>
+                }
             }
           }@else if (mes > mesActual) {
-            <button (click)="seleccionarDia($event)" class="posterior">{{item['dia']}}</button>
+            @if(item['dia'] == pruebaDia && yearCondicion == year && mesCondicion == mes){
+              <button (click)="seleccionarDia($event)" class="posterior dia">{{item['dia']}}</button>
+            }@else {
+              <button (click)="seleccionarDia($event)" class="posterior">{{item['dia']}}</button>
+            }
           }@else if (mes < mesActual) {
-            <button (click)="seleccionarDia($event)" disabled class="anterior">{{item['dia']}}</button>
+            @if(item['dia'] == pruebaDia && yearCondicion == year && mesCondicion == mes){
+              <button (click)="seleccionarDia($event)" disabled class="anterior dia">{{item['dia']}}</button>
+            }@else {
+              <button (click)="seleccionarDia($event)" class="anterior">{{item['dia']}}</button>
+            }
           } 
         }@else if (year < yearActual) {
-            <button (click)="seleccionarDia($event)" disabled class="anterior">{{item['dia']}}</button>
+          @if(item['dia'] == pruebaDia && yearCondicion == year && mesCondicion == mes){
+            <button (click)="seleccionarDia($event)" disabled class="anterior dia">{{item['dia']}}</button>
+          }@else {
+            <button (click)="seleccionarDia($event)" class="anterior">{{item['dia']}}</button>
+          }
         }@else if (year > yearActual) {
-              <button (click)="seleccionarDia($event)" class="posterior">{{item['dia']}}</button>
+          @if(item['dia'] == pruebaDia && yearCondicion == year && mesCondicion == mes){
+            <button (click)="seleccionarDia($event)" class="posterior dia">{{item['dia']}}</button>
+          }@else {
+            <button (click)="seleccionarDia($event)" class="posterior">{{item['dia']}}</button>
+          }
         }
       } 
     </div>
@@ -114,10 +130,12 @@
       @for (hora of horas; track $index) {
         <button (click)="seleccionarHora($event)" class="hora" value="{{hora.hora}}">{{hora.hora}}</button>
       }
+
+        <input type="hidden" value="{{horaCitaCalendario}}">
     </div>
     <div class="nueva-cita">
       <h4>Nueva cita:</h4>
-      <p>martes, 31 de marzo a las 14:00</p>
+      <p>{{ pruebaFecha | date:'EEEE, d \'de\' MMMM \'de\' y' : '' : 'es' }}</p>
     </div>
   </section>
   </article>

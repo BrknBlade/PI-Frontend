@@ -34,6 +34,8 @@ export class Citas implements OnInit{
 
   citaVars = signal<Record<number, any>>({});
   diaCita: any;
+  diaCitaCalendario: any;
+  horaCitaCalendario: any;
 
   contenidoCalendario:any = [];
   inicioColumna = 0;
@@ -45,6 +47,16 @@ export class Citas implements OnInit{
   diaActual = new Date().getDate();
   mesActual = new Date().getMonth();
   yearActual = new Date().getFullYear();
+
+
+  pruebaHora: any;
+  pruebaFecha: any;
+  pruebaDia: any;
+  pruebaMes: any;
+  mesCondicion: any;
+  yearCondicion: any;
+  pruebaYear: any;
+
 
   horas = [
       { hora: '09:00', disponible: true },
@@ -95,12 +107,97 @@ export class Citas implements OnInit{
     let inputID = boton.parentElement?.firstElementChild as HTMLElement;
     this.idCita = inputID.getAttribute('value');
 
+    //this.getDiaCita(this.idCita);
+
+    this.recogerDatosCitasDOM(event);
+
+
+    
+
     this.getCalendarContent();
+
+      console.log(this.yearActual, this.yearCondicion, this.mesActual, this.mesCondicion, this.mes)
+      console.log(this.mesCondicion == this.mes)
+
+
     return this.modal = true;
   }
   closeModal(){
     return this.modal = false;
   }
+
+  recogerDatosCitasDOM(event: Event){
+    let e = event.target as HTMLButtonElement;
+    let div = e.parentElement?.parentElement;
+    let divHijos = div?.children;
+      console.log(divHijos)
+
+    if(divHijos){
+      let dia = divHijos[2];
+      let hora = divHijos[3];
+      console.log(dia.textContent.match(/,\s*(\d{1,2})/)?.[1]);
+      this.pruebaDia = dia.textContent.match(/,\s*(\d{1,2})/)?.[1];
+      
+      this.pruebaMes = this.getMesNumero((dia.textContent.match(/\d{1,2} de (\w+) de/)?.[1]));
+
+      this.mesCondicion = this.pruebaMes;
+
+      this.pruebaMes = (this.pruebaMes +1);
+
+      this.pruebaYear = dia.textContent?.match(/de (\d{4})/)?.[1];
+
+      this.yearCondicion = this.pruebaYear;
+
+
+      if(this.pruebaDia.length == 1){
+        this.pruebaDia = '0' + this.pruebaDia;
+      }
+
+      this.pruebaHora = hora.textContent;
+      
+      if(this.pruebaHora.length == 4){
+        this.pruebaHora = '0' + this.pruebaHora;
+      }
+      console.log(this.pruebaYear)
+
+
+      this.pruebaFecha = `${this.pruebaYear}-0${this.pruebaMes}-${this.pruebaDia}T${this.pruebaHora}`;
+      console.log(this.pruebaFecha)
+
+    } 
+
+  }
+  getMesNumero(mes: any) {
+    switch(mes){
+      case 'enero':
+        return 0;
+      case 'febrero':
+        return 1;
+      case 'marzo':
+        return 2;
+      case 'abril':
+        return 3;
+      case 'mayo':
+        return 4;
+      case 'junio':
+        return 5;
+      case 'julio':
+        return 6;
+      case 'agosto':
+        return 7;
+      case 'septiembre':
+        return 8;
+      case 'octubre':
+        return 9;
+      case 'noviembre':
+        return 10;
+      case 'diciembre':
+        return 11;
+      default:
+        return null;
+    }
+  }
+
 
   getCalendarContent(){
     this.contenidoCalendario = [];
@@ -168,20 +265,30 @@ export class Citas implements OnInit{
     if(this.mes <= 0){
       this.year = this.year-1;
       this.mes = 11;
+      this.pruebaMes = 11;
     }else{
       this.mes--;
+      this.pruebaMes--;
     }
+
     this.getCalendarContent();
+
+
   }
 
   sumarMes(){
     if(this.mes >= 11){
       this.year = this.year+1;
       this.mes = 0;
+      this.pruebaMes = 0;
     }else{
       this.mes++;
+      this.pruebaMes++;
     }
+    console.log(this.yearActual, this.yearCondicion, this.mesActual, this.mesCondicion, this.mes)
     this.getCalendarContent();
+
+
   }
 
   seleccionarHora(event: Event){
@@ -216,6 +323,28 @@ export class Citas implements OnInit{
       primerDia.style.gridColumn = `${this.inicioColumna} / ${this.finColumna}`;
     }, 0);//hago q se espere un poco para encontrar el boton ya que al generarlo no se crea en tiempo de ejecucion y daría null como resultado
   } 
+
+  getDiaCita(id: any): any{
+    this.citaService.getCita(id).subscribe((r)=>{
+      this.diaCitaCalendario =  r.data.date.slice(8, 10);
+
+      if(this.diaCitaCalendario.slice(0, 1) == 0){
+        this.diaCitaCalendario =  this.diaCitaCalendario.slice(1, 2);
+      }
+      this.horaCitaCalendario = r.data.hour.slice(0,5);
+
+      setTimeout(() => {
+        let diasCalendario = document.querySelectorAll('.calendario button')
+
+        for (const diaIndv of diasCalendario) {
+          //console.log(diaIndv.textContent)
+          if(this.diaCitaCalendario == diaIndv.textContent){
+            diaIndv.classList.add('dia')
+          }
+        }
+      }, 0);
+    });
+  }
 
   async guardarCambios(){
     let datosNuevos: any = {

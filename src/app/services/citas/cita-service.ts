@@ -14,4 +14,7 @@ export class CitaService {
   updateCita(citaId: any, body: any): Observable<any>{
     return this.http.patch<any>(`${environment.BASE_URL}/api/bookings/${citaId}`, body);
   }
+  getCita(citaId: any): Observable<any>{
+    return this.http.get<any>(`${environment.BASE_URL}/api/bookings/${citaId}`);
+  }
 }
