@@ -17,4 +17,7 @@ export class CitaService {
   getCita(citaId: any): Observable<any>{
     return this.http.get<any>(`${environment.BASE_URL}/api/bookings/${citaId}`);
   }
+  deleteCita(citaId: any): Observable<any>{
+    return this.http.delete<any>(`${environment.BASE_URL}/api/bookings/${citaId}`);
+  }
 }

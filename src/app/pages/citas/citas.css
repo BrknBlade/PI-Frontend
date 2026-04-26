@@ -85,6 +85,13 @@ p{
     width: 100%;
     box-shadow: var(--sombra-panel);
     margin-bottom: 20px;
+    transition: all .3s ease-in-out;
+
+}
+
+.cita-reservada:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px #4242424b;
 }
 .cita-reservada > svg {
     box-sizing: content-box;
@@ -115,7 +122,6 @@ p{
 }
 .cita-acciones .modificar, .cita-acciones .cancelar {
     border-radius: 15px;
-    border: none;
     padding: 12px;
     max-width: 120px;
     width: 100%;
@@ -126,21 +132,25 @@ p{
     transition: all .2s ease-in-out;
 }
 .cita-acciones .modificar {
+    border: 2px solid var(--primario);
     background-color: var(--primario);
     color: var(--fondo-paneles);
     &:hover {
         cursor: pointer;
         background-color: var(--primario-hover);
+        border: 2px solid var(--primario-hover);
     }
 }
 .cita-acciones .cancelar {
-    background-color: var(--fondo-secundario);
+    border: 2px solid #f4ebf4;
+    background-color: #f4ebf4;
     color: var(--primario);
     transition: all .2s ease-in-out;
     &:hover {
         cursor: pointer;
-        color: var(--primario-hover);
-        background-color: var(--secundario-hover);
+        border: 2px solid var(--secundario-hover);
+        background-color: var(--fondo-paneles);
+        color: var(--primario);
     }
 }
 .cita-acciones {
@@ -169,6 +179,8 @@ p{
         background-color: var(--primario-hover);
     }
 }
+
+
 
 /* MODAL */
 .modal{
@@ -405,12 +417,14 @@ p{
     background-color: var(--primario);
     color: var(--fondo-paneles);
     &:hover{
-    background-color: var(--primario-hover);
-
+        background-color: var(--primario-hover);
     }
 }
 .calendario-txt{
     text-align: start;
+}
+.container-fechas p{
+    font-family: Inter Bold, sans-serif ;
 }
 
 /* MEDIA QUERIES */
@@ -445,8 +459,22 @@ p{
         border-radius: 0;
     }
 }
+
 @media (min-width: 1024px) {
     .modal{
         width: 60vw;
+    }
+    .modal-peque{
+        width: 50vw;
+        height: 50vh;
+
+    }
+    .container-fechas{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: var(--calendario);
+        border-radius: 15px;
+        padding: 25px;
     }
 }

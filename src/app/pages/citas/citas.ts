@@ -1,8 +1,8 @@
-import { Component, Input, OnInit, inject, signal} from '@angular/core';
+import { Component, OnInit, inject, signal} from '@angular/core';
 import { UserData } from '../../services/userData/user-data';
 import { AuthService } from '../../services/auth/auth-service';
 import { CutData } from '../../services/cutData/cut-data';
-import { firstValueFrom, forkJoin, map, Observable } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 import { DatePipe } from '@angular/common';
 import { CitaService } from '../../services/citas/cita-service';
 
@@ -20,6 +20,13 @@ interface NumberDictionary{
 
 export class Citas implements OnInit{
   modal = false;
+  cambiarCita = false;
+
+  datosNuevos: any = {
+    'date': '',
+    'hour': '',
+  };
+
 
   private authService = inject(AuthService);
   private userDataService = inject(UserData);
@@ -32,6 +39,7 @@ export class Citas implements OnInit{
   citas = this.userDataService.citas;
   cutData = this.cutDataService.cutData;
 
+
   citaVars = signal<Record<number, any>>({});
   diaCita: any;
   diaCitaCalendario: any;
@@ -40,6 +48,8 @@ export class Citas implements OnInit{
   contenidoCalendario:any = [];
   inicioColumna = 0;
   finColumna = 0;
+  estiloGridPrimerDia = signal<string>('');
+
   mes = new Date().getMonth();
   year = new Date().getFullYear();
   mesElegido = '';
@@ -49,9 +59,9 @@ export class Citas implements OnInit{
   yearActual = new Date().getFullYear();
 
 
-  pruebaHora: any;
-  pruebaFecha: any;
-  pruebaDia: any;
+  pruebaHora = signal<any>('');
+  pruebaFecha = signal<any>('');
+  pruebaDia = signal<any>('');
   pruebaMes: any;
   mesCondicion: any;
   yearCondicion: any;
@@ -80,26 +90,57 @@ export class Citas implements OnInit{
     console.log('Datos: ', this.user())
   }
 
-  pintarCitas(){
-    this.userDataService.getCitas().subscribe(() => {
-      const requests = this.citas().map((cita: any) => {
-        this.diaCita = cita.date;
-        this.diaCita = this.diaCita.slice(8, 10);
-        return this.cutDataService.getCut(cita.id);
-      }
-      )  as Observable<any>[];
+  async pintarCitas() {
+    this.userDataService.getCitas().subscribe(async () => {
+      for (const cita of this.citas()) {
+        const data: any = await firstValueFrom(
+          this.cutDataService.getCut(cita.cut_type_id)
+        );
 
-      forkJoin(requests).subscribe((resultados: any[]) => {//investigar esto
-        resultados.forEach(data => {
-          if (!data) return;
-          this.citaVars.update(current => ({
-            ...current,
-            [data.data.id]: data.data.name
-          }));
-        });
-        this.cargando.set(false); 
-      });
+        if (!data) continue;
+
+        this.citaVars.update(current => ({
+          ...current,
+          [cita.cut_type_id]: data.data.name
+        }));
+      }
+
+      this.cargando.set(false);
     });
+  }
+
+  openAlert(){
+    this.cambiarCita = true;
+    //guardar el valor de la hora y la fecha nueva seleccionada con la clase eleccion
+    let hora = document.querySelector<HTMLButtonElement>('.eleccion');// tambien sirve document.querySelector('.eleccion') as HTMLButtonElement
+    let dia = document.querySelector('.dia') as HTMLButtonElement;
+    if(hora){
+      this.datosNuevos['hour'] = hora.value;
+    }else{
+      this.datosNuevos['hour'] = null;
+    }
+    if(dia){
+      console.log(dia.textContent)
+      this.datosNuevos['date'] = this.year + '-0' + (this.mes + 1)  + '-' + dia.textContent.trim();
+    }else{
+      this.datosNuevos['date'] = null;
+    }
+    console.log(this.datosNuevos)
+
+    this.closeModal();
+
+  }
+
+  closeAlert(){
+    this.cambiarCita = false;
+
+    this.modal = false;
+  }
+
+  cancelAlert(){
+    this.cambiarCita = false;
+
+    this.modal = true;
   }
   
   showModal(event: Event){
@@ -136,7 +177,7 @@ export class Citas implements OnInit{
       let dia = divHijos[2];
       let hora = divHijos[3];
       console.log(dia.textContent.match(/,\s*(\d{1,2})/)?.[1]);
-      this.pruebaDia = dia.textContent.match(/,\s*(\d{1,2})/)?.[1];
+      this.pruebaDia.set(dia.textContent.match(/,\s*(\d{1,2})/)?.[1]);
       
       this.pruebaMes = this.getMesNumero((dia.textContent.match(/\d{1,2} de (\w+) de/)?.[1]));
 
@@ -148,21 +189,24 @@ export class Citas implements OnInit{
 
       this.yearCondicion = this.pruebaYear;
 
+      console.log(this.pruebaDia())
+      console.log(this.pruebaDia().length)
+      if(this.pruebaDia().length == 1){
+        this.pruebaDia.set('0' + this.pruebaDia());
+        console.log(this.pruebaDia())
 
-      if(this.pruebaDia.length == 1){
-        this.pruebaDia = '0' + this.pruebaDia;
       }
 
-      this.pruebaHora = hora.textContent;
+      this.pruebaHora.set(hora.textContent)
       
-      if(this.pruebaHora.length == 4){
-        this.pruebaHora = '0' + this.pruebaHora;
+      if(this.pruebaHora().length == 4){
+        this.pruebaHora.set('0' + this.pruebaHora()); 
       }
-      console.log(this.pruebaYear)
+      console.log(this.pruebaDia())
 
 
-      this.pruebaFecha = `${this.pruebaYear}-0${this.pruebaMes}-${this.pruebaDia}T${this.pruebaHora}`;
-      console.log(this.pruebaFecha)
+      this.pruebaFecha.set(`${this.pruebaYear}-0${this.pruebaMes}-${this.pruebaDia()}T${this.pruebaHora()}`);
+      console.log(this.pruebaFecha())
 
     } 
 
@@ -210,13 +254,14 @@ export class Citas implements OnInit{
       if(dia == 1 && diaSemana == 0){
         this.inicioColumna = diaSemana - 1;
         this.finColumna = diaSemana - 2;
+        this.estiloGridPrimerDia.set(`${this.inicioColumna} / ${this.finColumna}`);
       }else if(dia == 1 && diaSemana != 0){
         this.inicioColumna = diaSemana;
         this.finColumna = diaSemana + 1;
+        this.estiloGridPrimerDia.set(`${this.inicioColumna} / ${this.finColumna}`);
       }
       this.contenidoCalendario.push(dias);
-      }
-    this.ajustarcalendario();
+    }
   }
 
   getMes(){
@@ -293,36 +338,33 @@ export class Citas implements OnInit{
 
   seleccionarHora(event: Event){
     let eleccion = event.target as HTMLElement;
-    let boton = document.querySelector('.hora.eleccion');
 
-    if(boton?.className.includes('eleccion')){
-      boton.classList.remove('eleccion');
-      if(eleccion == boton){
-        return;
-      }
-    }
-    eleccion.classList.add('eleccion')
+    this.pruebaHora.set(eleccion?.textContent?.trim());
+
+    this.pruebaFecha.set(`${this.pruebaYear}-0${this.pruebaMes}-${this.pruebaDia()}T${this.pruebaHora()}`)
+
+    console.log(this.pruebaHora());
+
   }
 
   seleccionarDia(event: Event){
     let eleccion = event.target as HTMLElement;
-    let botonAntiguo = document.querySelector('.calendario button.dia');
 
-    if(botonAntiguo?.className.includes('dia')){
-      botonAntiguo.classList.remove('dia');
-      if(eleccion == botonAntiguo){
-        return;
-      }
+    this.pruebaDia.set(eleccion?.textContent?.trim());
+
+    if(this.pruebaDia().length == 1){
+      this.pruebaDia.set('0' + this.pruebaDia());
     }
-    eleccion.classList.add('dia')
+
+    this.mesCondicion = this.mes;
+    this.yearCondicion = this.year;
+
+    this.pruebaFecha.set(`${this.pruebaYear}-0${this.pruebaMes}-${this.pruebaDia()}T${this.pruebaHora()}`)
+
+
+    console.log(this.pruebaDia());
   }
 
-  ajustarcalendario(){
-    setTimeout(() => {
-      const primerDia = document.querySelector('.calendario button') as HTMLButtonElement;
-      primerDia.style.gridColumn = `${this.inicioColumna} / ${this.finColumna}`;
-    }, 0);//hago q se espere un poco para encontrar el boton ya que al generarlo no se crea en tiempo de ejecucion y daría null como resultado
-  } 
 
   getDiaCita(id: any): any{
     this.citaService.getCita(id).subscribe((r)=>{
@@ -347,33 +389,24 @@ export class Citas implements OnInit{
   }
 
   async guardarCambios(){
-    let datosNuevos: any = {
-      'date': '',
-      'hour': '',
-    };
-    //guardar el valor de la hora y la fecha nueva seleccionada con la clase eleccion
-    let hora = document.querySelector<HTMLButtonElement>('.eleccion');// tambien sirve document.querySelector('.eleccion') as HTMLButtonElement
-    let dia = document.querySelector('.dia') as HTMLButtonElement;
-    if(hora){
-      datosNuevos['hour'] = hora.value;
-    }else{
-      datosNuevos['hour'] = null;
-    }
-    if(dia){
-      datosNuevos['date'] = this.year + '-0' + (this.mes + 1)  + '-' + dia.textContent;
-    }else{
-      datosNuevos['date'] = null;
-    }
-    console.log(datosNuevos)
-
-    await firstValueFrom(this.citaService.updateCita(this.idCita, datosNuevos));
+    await firstValueFrom(this.citaService.updateCita(this.idCita, this.datosNuevos));
     this.pintarCitas();
 
-    this.modal = !this.modal;
+    this.closeAlert()
 
-    return datosNuevos;
+    return this.datosNuevos;
   }
-  deleteCita(){
+
+  deleteCita(event: Event){
+    let boton = event.target as HTMLButtonElement;
+    let inputID = boton.parentElement?.firstElementChild as HTMLElement;
+    let idCita = inputID.getAttribute('value');
+
+    console.log(idCita)
+
+    this.citaService.deleteCita(idCita).subscribe(() => {
+      this.pintarCitas()
+    });
 
   }
 }
