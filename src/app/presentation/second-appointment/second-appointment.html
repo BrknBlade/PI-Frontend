@@ -1,0 +1,68 @@
+<section class="info">
+  <div>1</div>
+  <div class="first">2</div>
+  <div>3</div>
+  <div>4</div>
+</section>
+<section class="select">
+  <p>Elige tu peluquero</p>
+</section>
+<section class="back">
+  <div class="back_div">
+    <nav class="back_nav">
+      <a [routerLink]="['/home/appointment/first-appointment']">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          class="bi bi-arrow-left"
+          viewBox="0 0 16 16"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"
+          />
+        </svg>
+        <span>Cambiar servicio</span>
+      </a>
+    </nav>
+    @if (appointmentService.selectedService(); as service) {
+      <div class="div_info">
+        <h3>Servicio elegido</h3>
+        <p><strong>Servicio seleccionado:</strong> {{ service.name }}</p>
+        <p><strong>Duración:</strong> {{ service.time }}</p>
+        <p><strong>Precio:</strong> {{ service.price }}</p>
+        <p><strong>Descripción:</strong> {{ service.description }}</p>
+      </div>
+    }
+  </div>
+</section>
+<section class="services">
+  <div class="services_content">
+    <header class="section_header">
+      <h2>Elige tu peluquero</h2>
+      <p>Selecciona el profesional que deseas para tu cita o elige al que este disponible</p>
+    </header>
+    <ul class="services_grid">
+       <li class="service_card" *ngFor="let service of services">
+        <a (click)="selectStylist(service)">
+          <article>
+            <div class="image_card">
+              <img [src]="service.image" alt="foto_peluqueria" />
+              
+            </div>
+            <div class="content_card">
+              <h3>{{ service.name }}</h3>
+              <p class="description">{{ service.specialty }}</p>
+              <p class="description">{{ service.description }}</p>
+            </div>
+          </article>
+        </a>
+      </li>
+    </ul>
+  </div>
+</section>
+<section class="next">
+  <a [routerLink]="['/home/appointment/third-appointment']">Elegir al que no este en la carcel</a>
+</section>

@@ -1,0 +1,32 @@
+.header_content {
+    background: rgba(255, 255, 255, 0.75);
+}
+
+/*CONTENEDOR PADRE DIV*/
+.headaer_content_div {
+    /*FLEX Y ROW*/
+    display: flex;
+    flex-direction: row;
+    /*ALINEAR VERTICALMENTE*/
+    align-items: center;
+    gap: 10px;
+    padding: 15px 20px;
+}
+
+/*CONTENEDOR DEL H2 + IMG (TITULO)*/
+.header_content_main {
+    /*FLEX Y ROW*/
+    display: flex;
+    flex-direction: row;
+    /*ALINEAR VERTICALMENTE*/
+    align-items: center;
+    /*SEPARACION DEL LOGO Y DEL TITULO*/
+    gap: 10px;
+}
+
+/*CONTENEDOR PARA MODIFICAR LA IMAGEN DEL TITULO*/
+.header_content_main img {
+    /* ALTURA Y ANCHURA DEL LOGO*/
+    width: auto;
+    height: 50px;
+}

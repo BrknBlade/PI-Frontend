@@ -2,10 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import { Component, inject, signal } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { environment } from '../environments/environment.development';
+import { HomePage } from './presentation/home-page/home-page';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,RouterLink],
+  imports: [RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
