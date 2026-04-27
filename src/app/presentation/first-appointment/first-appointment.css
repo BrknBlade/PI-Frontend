@@ -18,9 +18,9 @@
 }
 
 .first {
-    background-color: #d4a373;
+    background-color: var(--color-img-home-page);
     border-radius: 50%;
-    color: white;
+    color: var(--color-blanco);
 }
 
 /*<---PRIMER SECTION--->*/
@@ -30,7 +30,7 @@
 
 .select p {
     font-size: 1.1rem;
-    color: #6b6b6b;
+    color: var(--texto-secundario);
 }
 
 /*<---Tercer SECTION--->*/
@@ -45,13 +45,13 @@
 .section_header h2 {
     font-size: 2.8rem;
     font-weight: 700;
-    color: #1f1f1f;
+    color: var(--texto-principal);
     margin-bottom: 1rem;
 }
 
 .section_header p {
     font-size: 1.1rem;
-    color: #6b6b6b;
+    color: var(--texto-secundario);
     /* max-width: 650px;
     margin: 0 auto; */
     line-height: 1.6;
@@ -65,7 +65,7 @@
 .services_grid {
     list-style: none;
     margin-top: 40px;
-
+    margin-bottom: 20px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 2rem;
@@ -84,16 +84,17 @@
 }
 
 .service_card article {
-    background-color: #fff;
+    background-color: var(--fondo-paneles);
     border-radius: 18px;
     overflow: hidden;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 10px 25px var(--sombra-card);
     transition: transform .2s ease, box-shadow .2s ease;
 
     &:hover {
         transform: translateY(-4px);
-        box-shadow: 0 14px 35px rgba(0, 0, 0, 0.12);
+        box-shadow: 0 14px 35px var(--sombra-card-hover);
     }
+
 }
 
 .image_card {
@@ -115,11 +116,11 @@
 .content_card h3 {
     font-size: 22px;
     margin-bottom: 10px;
-    color: #222;
+    color: var(--texto-principal);
 }
 
 .description {
-    color: #6b6b6b;
+    color: var(--texto-secundario);
     font-size: 15px;
     line-height: 1.5;
     margin-bottom: 20px;
@@ -132,12 +133,12 @@
 }
 
 .time {
-    color: #777;
+    color: var(--texto-secundario);
     font-size: 14px;
 }
 
 .price {
-    color: #d4a373;
+    color: var(--color-primario-home-page);
     font-weight: 600;
     font-size: 18px;
 }

@@ -1,5 +1,5 @@
 .header_content {
-    background: rgba(255, 255, 255, 0.75);
+    background: var(--color-blanco-header);
 }
 
 /*CONTENEDOR PADRE DIV*/
@@ -21,7 +21,7 @@
     /*ALINEAR VERTICALMENTE*/
     align-items: center;
     /*SEPARACION DEL LOGO Y DEL TITULO*/
-    gap: 10px;
+    gap: 15px;
 }
 
 /*CONTENEDOR PARA MODIFICAR LA IMAGEN DEL TITULO*/
@@ -29,4 +29,17 @@
     /* ALTURA Y ANCHURA DEL LOGO*/
     width: auto;
     height: 50px;
+}
+.main_nav a {
+    display: inline-block;
+    text-decoration: none;
+    padding: 5px;
+    border-radius: 10px;
+    color: var(--texto-principal);
+    transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+.main_nav a:hover{
+    background-color: var(--color-boton-rojo-home-page);
+    border-radius: 10px;
+    color: var(--color-blanco)
 }
