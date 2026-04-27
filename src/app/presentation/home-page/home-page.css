@@ -1,0 +1,401 @@
+/*<-------------- CONTENDOR HEADER -------------->*/
+/*CONTENEDOR PADRE*/
+.header_content{
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(10px);
+}
+/*CONTENEDOR PADRE DIV*/
+.hedaer_content_div{
+    /*FLEX Y ROW*/
+    display: flex;
+    flex-direction: row;
+    /*ALINEAR VERTICALMENTE*/
+    align-items: center;
+    /*ESPACIO ENTRE LOS HIJOS*/
+    justify-content: space-between;
+    padding: 15px 20px;
+}
+/*CONTENEDOR DEL H2 + IMG (TITULO)*/
+.header_content_main{
+    /*FLEX Y ROW*/
+    display: flex;
+    flex-direction: row;
+    /*ALINEAR VERTICALMENTE*/
+    align-items: center;
+    /*SEPARACION DEL LOGO Y DEL TITULO*/
+    gap: 10px;
+}
+/*CONTENEDOR PARA MODIFICAR LA IMAGEN DEL TITULO*/
+.header_content_main img{
+    /* ALTURA Y ANCHURA DEL LOGO*/
+    width: auto;
+    height: 50px;
+}
+/*CONTENEDOR DE LA NAVEGACION*/
+.main_nav a{
+    display: inline-block;
+    text-decoration: none;
+    margin-left: 20px;
+    transition: transform 0.3s, background-color 0.3s, color 0.3s;
+}
+.main_nav a:first-child{
+    color: black;
+    padding: 10px;
+    border-radius: 15px;
+}
+.main_nav a:first-child:hover{
+    color: white;
+    background-color: red;
+    transform: scale(1.1);
+}
+.main_nav a:last-child{
+    color: white;
+    background-color: rgb(218, 175, 119);
+    padding: 10px;
+    border-radius: 15px;
+}
+.main_nav a:last-child:hover{
+    transform: scale(1.1);
+}
+/*<-------------- CONTENDOR MAIN -------------->*/
+/*<---PRIMER SECTION--->*/
+.hero_overlay{
+    position: relative;
+    width: 100%;
+}
+/*IMG DEL SECTION*/
+.hero_overlay img{
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: blur(3px);
+}
+/*CONTENIDO DEL SECTION*/
+.container_hero_overlay{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    text-align: center;
+    /* background: rgba(0, 0, 0, 0.4); */
+    padding: 20px 30px;
+    border-radius: 20px;
+    width: 800px;
+}
+/*CONTENIDO DEL SECTION H2*/
+.container_hero_overlay_info{
+    margin-bottom: 30px;
+}
+.container_hero_overlay_info h2{
+    margin: 0 0 10px;
+    font-size: 3.5rem;
+    color: rgb(218, 175, 119);
+    /* -webkit-text-stroke: 0.5px white;  */
+}
+.container_hero_overlay_info h2 span{
+    color: rgb(218, 175, 119);;
+}
+/*CONTENIDO DEL SECTION P*/
+.container_hero_overlay_info p{
+    margin: 0;
+    font-size: 1.8rem;
+    /* -webkit-text-stroke: 0.5px black;  */
+}
+/*CONTENIDO DEL SECTION NAV*/
+.hero_actions a{
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    margin: 0px 10px;
+    transition: transform 0.3s, background-color 0.3s;
+}
+.hero_actions a:first-child{
+    background-color: rgb(218, 175, 119);
+    padding: 10px 20px;
+    border-radius: 15px;
+    border: 1px solid white;
+}
+.hero_actions a:first-child:hover{
+    background-color: rgb(220, 189, 148);
+    transform: scale(1.1);
+}
+.hero_actions a:last-child{
+    border: 1px solid white;
+    padding: 10px 20px;
+    border-radius: 15px;
+}
+.hero_actions a:last-child:hover{
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+/*<---SEGUNDO SECTION--->*/
+.services{
+    padding: 5rem 1.5rem;
+}
+.services_content{
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.section_header{
+    text-align: center;
+    margin-bottom: 3.5rem;
+}
+.section_header h2{
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #1f1f1f;
+    margin-bottom: 1rem;
+}
+.section_header p{
+    font-size: 1.1rem;
+    color: #6b6b6b;
+    max-width: 650px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+.services_grid{
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+    padding: 0;
+    margin: 0;
+}
+.service_card article{
+    background: #ffff;
+    padding: 2.5rem 2rem;
+    border-radius: 14px;
+    border: 1px solid #ececec;
+    box-shadow: 0px 8px 18px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    height: 100%;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+    &:hover{
+        transform: translateY(-6px);
+        box-shadow: 0px 14px 28px  rgba(0, 0, 0, 0.2);
+    }
+}
+.icon{
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background-color: #f3e8dc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+.icon svg{
+    width: 20px;
+    height: 20px;
+    color: #c8a27a;
+}
+.service_card h3{
+    font-size: 1.3rem;
+    margin-bottom: 0.6rem;
+}
+.service_card p:not(.price){
+    color: #666;
+    line-height: 1.6;
+}
+.price{
+    margin-top: 1.2rem;
+    font-weight: 700;
+    color: #c8a27a;
+}
+/*<---TERCER SECTION--->*/
+.info{
+    padding: 5rem 1.5rem;
+    background-color: #faf9f7;
+}
+.info_content{
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.info_header{
+    text-align: center;
+    margin-bottom: 3.5rem;
+}
+.info_header h2{
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #1f1f1f;
+    margin-bottom: 1rem;
+}
+.info_header p{
+    font-size: 1.1rem;
+    color: #6b6b6b;
+    max-width: 650px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+.info_grid{
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+    padding: 0;
+    margin: 0;
+}
+.info_card{
+    text-align: center;
+}
+.info_card article{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.info_card h3{
+    font-size: 1.3rem;
+    margin-bottom: 0.6rem;
+}
+.info_card p{
+    color: #666;
+    line-height: 1.6;
+}
+/*<---TERCER SECTION--->*/
+.experience{
+    padding: 5rem 1.5rem;
+}
+.experience_content{
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.experience_header{
+    text-align: center;
+    margin-bottom: 3.5rem;
+}
+.experience_header h2{
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #1f1f1f;
+    margin-bottom: 1rem;
+}
+.experience_header p{
+    font-size: 1.1rem;
+    color: #6b6b6b;
+    max-width: 650px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+.experience_grid{
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+    padding: 0;
+    margin: 0;
+}
+.experience_card article{
+    background: #ffff;
+    padding: 2.5rem 2rem;
+    border-radius: 14px;
+    border: 1px solid #ececec;
+    box-shadow: 0px 8px 18px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    height: 100%;
+}
+.experience_card p{
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+.experience_icon{
+    display: flex;
+    justify-content: left;
+    margin-bottom: 1.5rem;
+    gap: 5px;
+}
+.experience_icon svg{
+    width: 20px;
+    height: 20px;
+    color: #c8a27a;
+}
+.appointment{
+    padding: 5rem 1.5rem;
+    background-color: rgb(218, 175, 119);
+}
+.appointment_content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.appointment_header{
+    text-align: center;
+    margin-bottom: 3.5rem;
+}
+.appointment_header h2{
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #1f1f1f;
+    margin-bottom: 1rem;
+}
+.appointment_header p{
+    font-size: 1.5rem;
+    color: #6b6b6b;
+    max-width: 650px;
+    margin: 0 auto;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+.appointment_header a{
+    display: inline-block;
+    font-size: 1.2rem;
+    font-weight: 500;
+    padding: 5px 20px;
+    border-radius: 15px;
+    text-decoration: none;
+    background-color: white;
+    color: black;
+    transition: transform 0.3s, background-color 0.3s;
+}
+.appointment_header a:hover{
+    background-color: rgb(231, 231, 231);
+    transform: scale(1.1);
+}
+/*<-------------- CONTENDOR FOOTER -------------->*/
+.footer_content{
+    padding: 5rem 1.5rem;
+    background-color: rgb(2, 2, 65)
+}
+.footer_grid{
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+}
+.footer_card p{
+    color: #666;
+    line-height: 1.6;
+}
+.footer_card address{
+    color: #666;
+    line-height: 1.6;
+}
+.footer_card h2{
+    color: white;
+}
+.footer_card nav a{
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: white;
+    line-height: 1.6;
+    transition: color 0.3s;
+}
+.footer_card nav a:hover{
+    color: rgb(218, 175, 119);
+}
+.copy{
+    text-align: center;
+    color: #666;
+    font-size: 0.9rem;
+    margin-top: 1.5rem;
+}

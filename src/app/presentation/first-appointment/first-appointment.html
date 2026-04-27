@@ -1,0 +1,37 @@
+<section class="info">
+  <div class="first">1</div>
+  <div>2</div>
+  <div>3</div>
+  <div>4</div>
+</section>
+<section class="select">
+  <p>Seleccione un servicio</p>
+</section>
+<section class="services">
+  <div class="services_content">
+    <header class="section_header">
+      <h2>Seleccione un servicio</h2>
+      <p>Elige el servicio que deseas reservar</p>
+    </header>
+    <ul class="services_grid">
+      <li class="service_card" *ngFor="let service of services">
+        <a (click)="selectService(service)">
+          <article>
+            <div class="image_card">
+              <img [src]="service.image" alt="foto_peluqueria" />
+              
+            </div>
+            <div class="content_card">
+              <h3>{{ service.name }}</h3>
+              <p class="description">{{ service.description }}</p>
+              <div class="footer_card">
+                <p class="time">{{ service.time }}</p>
+                <p class="price">{{ service.price }}</p>
+              </div>
+            </div>
+          </article>
+        </a>
+      </li>
+    </ul>
+  </div>
+</section>
