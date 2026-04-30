@@ -262,7 +262,7 @@ p{
     font-family: Inter, sans-serif;
 }
 .blur{
-    filter: blur(5px);
+    filter: blur(10px);
 }
 .backdrop{
     position: fixed;
@@ -282,9 +282,30 @@ p{
     border: none;
     padding: 10px;
     font-family: Inter Bold, sans-serif;
-    width: 45px;
-    height: 45px;
+    width: 43px;
+    height: 43px;
     background-color: var(--calendario);
+}
+.eliminar{
+    border-radius: 15px;
+    border: none;
+    padding: 12px;
+    width: 100%;
+    font-family: Inter Bold, sans-serif;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    max-height: 45px;
+    transition: all .2s ease-in-out;
+    background-color: #ef4444;
+    color: white;
+    &:hover{
+        cursor: pointer;
+        background-color: #8f0606;
+    }
+}
+.modal .header-mod{
+    padding-bottom: 10px;
 }
 .anterior{
     color: var(--calendario-disabled);
@@ -425,6 +446,32 @@ p{
 }
 .container-fechas p{
     font-family: Inter Bold, sans-serif ;
+    flex-direction: row;
+}
+
+.modal-peque{
+    width: 80vw;
+    height: 60vh;
+}
+.modal-cancelar{
+    width: 70vw;
+    height: fit-content;
+}
+.modal-cancelar p{
+    font-size: 18px;
+    margin: 0;
+}
+.modal-cancelar p strong{
+    color: black;
+}
+.container-fechas{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--calendario);
+    border-radius: 15px;
+    padding: 25px;
 }
 
 /* MEDIA QUERIES */
@@ -458,19 +505,38 @@ p{
         height: 100vh;
         border-radius: 0;
     }
+    .modal-peque{
+        width: 100vw;
+        height: 100vh;
+    }
+    .container-fechas{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        background-color: var(--calendario);
+        border-radius: 15px;
+        height: 100vh;
+        padding: 25px;
+    }
+
+    .container-fechas svg{
+        transition: all .2s ease-in-out;
+        rotate: 90deg;
+    }
 }
 
 @media (min-width: 1024px) {
     .modal{
         width: 60vw;
     }
-    .modal-peque{
+    .modal-cancelar{
         width: 50vw;
-        height: 50vh;
-
+        height: fit-content;
     }
     .container-fechas{
         display: flex;
+        flex-direction: row;
         justify-content: space-between;
         align-items: center;
         background-color: var(--calendario);

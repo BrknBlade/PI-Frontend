@@ -21,6 +21,7 @@ interface NumberDictionary{
 export class Citas implements OnInit{
   modal = false;
   cambiarCita = false;
+  cancelarCita = false;
 
   datosNuevos: any = {
     'date': '',
@@ -67,6 +68,11 @@ export class Citas implements OnInit{
   yearCondicion: any;
   pruebaYear: any;
 
+  fechaAntigua: any;
+  horaAntigua: any;
+
+  idCita: any;
+  nombreCorte: any;
 
   horas = [
       { hora: '09:00', disponible: true },
@@ -81,8 +87,6 @@ export class Citas implements OnInit{
       { hora: '18:00', disponible: true },
       { hora: '19:00', disponible: true },
   ];
-
-  idCita: any;
 
   ngOnInit(): void {
     this.pintarCitas()
@@ -109,6 +113,29 @@ export class Citas implements OnInit{
     });
   }
 
+  openCancelCita(event: Event){
+    this.cancelarCita = true;
+    //guardar el valor de la hora y la fecha nueva seleccionada con la clase eleccion
+    let boton = event.target as HTMLButtonElement;
+    let inputID = boton.parentElement?.firstElementChild as HTMLElement;
+    let nombreCorteElement = boton.parentElement?.parentElement?.firstElementChild as HTMLElement;
+    this.nombreCorte = nombreCorteElement.textContent;
+    let idCita = inputID.getAttribute('value');
+
+    if(idCita){
+      idCita = idCita?.trim();
+      let valores = idCita.split(' ');
+      let id = valores[0];
+      console.log('id: ', id);
+      this.idCita = id;
+    }
+  }
+
+  closeCancel(){
+    this.cancelarCita = false;
+
+  }
+
   openAlert(){
     this.cambiarCita = true;
     //guardar el valor de la hora y la fecha nueva seleccionada con la clase eleccion
@@ -119,11 +146,12 @@ export class Citas implements OnInit{
     }else{
       this.datosNuevos['hour'] = null;
     }
+
     if(dia){
       console.log(dia.textContent)
       this.datosNuevos['date'] = this.year + '-0' + (this.mes + 1)  + '-' + dia.textContent.trim();
     }else{
-      this.datosNuevos['date'] = null;
+      this.datosNuevos['date'] = `${this.pruebaYear}-0${this.pruebaMes}-${this.pruebaDia()}`;
     }
     console.log(this.datosNuevos)
 
@@ -146,19 +174,32 @@ export class Citas implements OnInit{
   showModal(event: Event){
     let boton = event.target as HTMLButtonElement;
     let inputID = boton.parentElement?.firstElementChild as HTMLElement;
+
+    let idCita = inputID.getAttribute('value');
+
+    if(idCita){
+      idCita = idCita?.trim();
+      let valores = idCita.split(' ');
+      let horaValores = valores[1].split(':');
+      this.horaAntigua = `${horaValores[0]}:${horaValores[1]}`;
+    }
     this.idCita = inputID.getAttribute('value');
+
+    let div = boton.parentElement?.parentElement?.children;
+    if(div){
+      let fechaAntigua = div[4] as HTMLInputElement;
+      this.fechaAntigua =  fechaAntigua.value;
+
+    }
 
     //this.getDiaCita(this.idCita);
 
     this.recogerDatosCitasDOM(event);
 
-
-    
-
     this.getCalendarContent();
 
-      console.log(this.yearActual, this.yearCondicion, this.mesActual, this.mesCondicion, this.mes)
-      console.log(this.mesCondicion == this.mes)
+    console.log(this.yearActual, this.yearCondicion, this.mesActual, this.mesCondicion, this.mes)
+    console.log(this.mesCondicion == this.mes)
 
 
     return this.modal = true;
@@ -349,6 +390,7 @@ export class Citas implements OnInit{
 
   seleccionarDia(event: Event){
     let eleccion = event.target as HTMLElement;
+    
 
     this.pruebaDia.set(eleccion?.textContent?.trim());
 
@@ -397,16 +439,10 @@ export class Citas implements OnInit{
     return this.datosNuevos;
   }
 
-  deleteCita(event: Event){
-    let boton = event.target as HTMLButtonElement;
-    let inputID = boton.parentElement?.firstElementChild as HTMLElement;
-    let idCita = inputID.getAttribute('value');
-
-    console.log(idCita)
-
-    this.citaService.deleteCita(idCita).subscribe(() => {
+  deleteCita(){
+    this.citaService.deleteCita(this.idCita).subscribe(() => {
       this.pintarCitas()
+      this.closeCancel()
     });
-
   }
 }

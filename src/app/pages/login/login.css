@@ -104,7 +104,11 @@
 .login-form label input::placeholder{
     color: var(--placeholder);
 }
-.login-form input[type="submit"]{
+.login-form button[type="submit"]{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
     background-color: var(--primario);
     border: none;
     border-radius: 15px;
@@ -159,6 +163,22 @@
 .login p + a:hover::after{
     transform: scaleX(1);
     transform-origin: left;
+}
+
+.carga{
+    width: 25px;
+    height: 25px;
+    animation: girar 1.2s linear infinite;
+    animation-delay: 0s;
+}
+
+.carga-disabled{
+    background-color: #9b7d96 !important;
+}
+
+@keyframes girar {
+    0% {rotate: 0deg;}
+    100% {rotate: 360deg;}
 }
 
 /* MEDIA QUERIES */

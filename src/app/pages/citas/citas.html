@@ -1,4 +1,4 @@
-<section class="citas" [class.blur]="modal || cambiarCita">
+<section class="citas" [class.blur]="modal || cambiarCita || cancelarCita">
   <h1>¡Bienvenido, <span>{{user()?.name}}</span>!</h1>
   <p>Gestiona tus citas y tu perfil</p>
   <div class="citas-acciones">
@@ -36,8 +36,9 @@
             <p><svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="22px" fill="#585857"><path d="m612-292 56-56-148-148v-184h-80v216l172 172ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-400Zm0 320q133 0 226.5-93.5T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 133 93.5 226.5T480-160Z"/></svg>{{(cita.date+ 'T' + cita.hour)  | date: 'shortTime'}}</p>
             <input type="hidden" value="{{cita.date}}">
             <div class="cita-acciones">
+              <input type="hidden" value="{{cita.id}} {{cita.hour}}">
               <button class="modificar" (click)="showModal($event)">Modificar</button>
-              <button class="cancelar" (click)="deleteCita($event)">Cancelar</button>
+              <button class="cancelar" (click)="openCancelCita($event)">Cancelar</button>
             </div>
           </div>
         </article>
@@ -135,7 +136,7 @@
           }
         }
 
-          <input type="hidden" value="{{horaCitaCalendario}}">
+        <input type="hidden" value="{{horaCitaCalendario}}">
       </div>
       <div class="nueva-cita">
         <h4>Nueva cita:</h4>
@@ -152,7 +153,7 @@
 }
 @if (cambiarCita) {
   <dialog class="modal modal-peque">
-    <header>
+    <header  class="header-mod">
       <div>
         <h2>Confirmar cambios</h2>
         <p>Corte y peinado</p>
@@ -165,18 +166,38 @@
     <section class="container-fechas">
       <div class="fecha-antigua">
         <h3>Fecha actual:</h3>
-        <p> {{pruebaFecha() | date:'EEEE, d \'de\' MMMM \'de\' y' : '' : 'es' }} </p>
+        <p> {{fechaAntigua | date:'EEEE, d \'de\' MMMM \'de\' y' : '' : 'es' }} a las {{ horaAntigua }}</p>
       </div>
       <svg fill="#70536b" width="60px" height="60px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m11.293 17.293 1.414 1.414L19.414 12l-6.707-6.707-1.414 1.414L15.586 11H6v2h9.586z"/></svg>
       <div class="fecha-nueva">
         <h3>Fecha actualizada:</h3>
-        <p> {{pruebaFecha() | date:'EEEE, d \'de\' MMMM \'de\' y' : '' : 'es' }} </p>
+        <p> {{pruebaFecha() | date:'EEEE, d \'de\' MMMM \'de\' y' : '' : 'es' }} a las {{ pruebaHora() }}</p>
       </div>
     </section>
     </article>
     <footer>
       <button class="cancelar-calendario" (click)="cancelAlert()">Cancelar</button>
       <button class="confirmar-calendario" (click)="guardarCambios()">Confirmar</button>
+    </footer>
+  </dialog>
+  <div class="backdrop"></div>
+}
+@if (cancelarCita) {
+  <dialog class="modal modal-cancelar">
+    <header class="header-mod">
+      <div>
+        <h2>¿Cancelar cita?</h2>
+      </div>
+      <button (click)="closeCancel()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x w-5 h-5 md:w-6 md:h-6" style="color: rgb(102, 102, 102);"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+      </button>
+    </header>
+    <article class="articulo-calendario">
+      <p> Estás a punto de cancelar tu cita de <strong>{{ nombreCorte }}</strong></p>
+    </article>
+    <footer>
+      <button class="cancelar-calendario" (click)="closeCancel()">Volver</button>
+      <button class="eliminar" (click)="deleteCita()">Sí, cancelar</button>
     </footer>
   </dialog>
   <div class="backdrop"></div>

@@ -4,6 +4,7 @@ import { Citas } from './pages/citas/citas';
 import { authGuard } from './guards/auth.guard';
 import { UserData } from './services/userData/user-data';
 import { inject } from '@angular/core';
+import { guestGuard } from './guards/guest.guard';
 
 export const routes: Routes = [
   {
@@ -13,7 +14,8 @@ export const routes: Routes = [
   },
   {
     path : 'login',
-    component : Login
+    component : Login,
+    //canActivate: [guestGuard]
   },
   {
     path : 'citas',

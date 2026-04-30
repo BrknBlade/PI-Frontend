@@ -23,7 +23,9 @@ export const appConfig: ApplicationConfig = {
     provideAppInitializer(() => {
       const authService = inject(AuthService);
 
-      return firstValueFrom(authService.loadCurrentUser());
+      return firstValueFrom(
+        authService.loadCurrentUser()
+      ).catch(() => null);
     })
   ]
 };

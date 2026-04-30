@@ -14,17 +14,23 @@ export class UserData {
   userId = this.authService.userID;
   citas = signal<any>(null);
 
-  getCitas(): Observable<any>{
-    return this.http.get<any>(`${environment.BASE_URL}/api/users/${this.userId()}/bookings`).pipe(
+  getCitas(): Observable<any> {
+    const id = this.userId();
+    
+    if (!id) {
+      this.citas.set([]);
+      return of(null);
+    }
+
+    return this.http.get<any>(`${environment.BASE_URL}/api/users/${id}/bookings`).pipe(
       tap((data) => {
-        console.log(data.data)
         this.citas.set(data.data ?? []);
       }),
       catchError(() => {
         this.citas.set([]);
         return of(null);
       })
-    );;
+    );
   }
 
 }

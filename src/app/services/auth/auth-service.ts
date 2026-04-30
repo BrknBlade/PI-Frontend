@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { computed, Injectable, signal } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { switchMap, tap, catchError, of } from 'rxjs';
 
@@ -18,9 +18,12 @@ export class AuthService {
         return this.http.post<any>(`${environment.BASE_URL}/api/login`, credentials)
       }),
       tap((response) => {
-        if (response?.user) {
-          this.user.set(response.user);
-          this.userID.set(response.user.id);
+        console.log(response)
+        if (response?.user_id) {
+          //this.user.set(response.user);
+          this.userID.set(response.user_id);
+        } else{
+          throw new Error(response?.message ?? 'Login fallido');
         }
       })
     );
