@@ -9,6 +9,10 @@
   --texto-secundario: #585857;
 
   --borde: #e8e8e8;
+  --error: #ef4444;
+  --error-hover: #8f0606;
+  --error-focus: #ef4444ad;
+  --error-placeholder: #ef4444d5;
 
   --primario: #70536b;
   --primario-hover: #391633;
@@ -22,6 +26,35 @@
   --placeholder: #696969;
   --input-focus: #7d5f7863;
   --sombra-panel: 0px 1px 8px -5px #00000075;
+
+
+  
+
+
+
+
+
+  /***********HOME PAGE VARIABLES**************/
+  --fondo-header-home-page: #ffffffbf;
+
+  --color-blanco: #ffffff;
+  --color-blanco-hover: #ffffff4d;
+  --color-blanco-info: #faf9f7;
+  --color-blanco-border: #ececec;
+  --color-blanco-header: #ffffffbf;
+
+  --color-primario-home-page: #daaf77;
+  --color-primario-hover-home-page: #dcbd94;
+
+  --color-boton-rojo-home-page: #eb8b8b;
+
+  --color-icono-home-page: #f3e8dc;
+  --color-img-home-page: #c8a27a;
+
+  --color-footer: #020241;
+
+  --sombra-card: #0000001a;
+  --sombra-card-hover: #00000033;
 }
 
 * {
@@ -37,7 +70,7 @@ app-login{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 90vh;
     text-align: center;
 }
 app-citas{

@@ -15,7 +15,7 @@ export const routes: Routes = [
   {
     path : 'login',
     component : Login,
-    //canActivate: [guestGuard]
+    canActivate: [guestGuard]
   },
   {
     path : 'citas',

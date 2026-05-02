@@ -80,16 +80,37 @@
     font-family: Inter Medium, sans-serif;
     
 }
+
 .login-form label input:focus-visible{
     background-color: var(--fondo-paneles);
-    border: none;
     padding: 12px;
-    border: var(--borde) 1px solid;
     border-radius: 10px;
     box-shadow: var(--sombra-panel);
     font-size: 18px;
     outline: 3px var(--input-focus) solid;
     border: var(--primario) 1px solid;
+}
+.login-form .error::placeholder {
+    color: var(--error-placeholder)!important ;
+}
+
+.login-form label input.error:focus-visible{
+    outline: 3px var(--error-focus) solid;
+    border: var(--error) 1px solid;
+    color: black;
+}
+.login-form label input.error{
+    border: var(--error-hover) 1px solid;
+    color: var(--error);
+}
+
+.login-form label input.error-fix{
+    color: black;
+    border: var(--borde) 1px solid;
+    &:focus-visible{
+        border: var(--borde) 1px solid;
+        outline: 3px var(--fondo-secundario) solid;
+    }
 }
 .login-form label input{
     background-color: var(--fondo-paneles);
@@ -100,6 +121,10 @@
     font-size: 18px;
     transition: all .1s ease-in;
     padding: 12px 12px 12px 15px;
+    &:hover{
+        border-color: var(--primario);
+        box-shadow:0px 0px 10px 2px rgba(112,83,107,0.5);
+    }
 }
 .login-form label input::placeholder{
     color: var(--placeholder);
@@ -176,6 +201,65 @@
     background-color: #9b7d96 !important;
 }
 
+.conf-svg{
+    width: 20px;
+    height: 20px;
+    fill: var(--primario);
+}
+.login-notificacion {
+    position: absolute;
+    background-color: var(--fondo-paneles);
+    border-radius: 15px;
+    border: var(--borde) 1px solid;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    width: 500px;
+    text-align: start;
+    box-shadow: var(--sombra-panel);
+    gap: 10px;
+    opacity: 0;
+    bottom: 0px;
+}
+.entrada{
+    animation: slide-up .5s;
+
+    bottom: 74px;
+    opacity: 1;
+}
+
+.salida{
+    animation: slide-down .5s;
+    bottom: 0px;
+    opacity: 0;
+}
+
+.login-notificacion p{
+    display: inline-block;
+}
+
+@keyframes slide-up {
+    0% {
+        bottom: 0px;
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+        bottom: 74px;
+    }
+}
+
+@keyframes slide-down {
+    0% {
+        opacity: 1;
+        bottom: 74px;
+    }
+    100% {
+        bottom: 0px;
+        opacity: 0;
+    }
+}
+
 @keyframes girar {
     0% {rotate: 0deg;}
     100% {rotate: 360deg;}
@@ -186,6 +270,10 @@
     .login-form{
         width: 100%;
         margin: 0 auto;
+    }
+    .login-notificacion{
+        width: 90%;
+        justify-content: center;
     }
     .login-acciones{
         display: flex;

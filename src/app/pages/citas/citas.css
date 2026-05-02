@@ -297,11 +297,11 @@ p{
     text-decoration: none;
     max-height: 45px;
     transition: all .2s ease-in-out;
-    background-color: #ef4444;
+    background-color: var(--error);
     color: white;
     &:hover{
         cursor: pointer;
-        background-color: #8f0606;
+        background-color: var(--error-hover);
     }
 }
 .modal .header-mod{
@@ -528,7 +528,7 @@ p{
 
 @media (min-width: 1024px) {
     .modal{
-        width: 60vw;
+        width: 45vw;
     }
     .modal-cancelar{
         width: 50vw;

@@ -1,0 +1,31 @@
+<header class="header_content">
+  <div class="hedaer_content_div">
+    @switch (router.url) {
+      @case ('/login') {
+        <div class="header_content_main">
+          <a [routerLink]="['/home']">
+            <img src="logo_peluqueria-color.webp" alt="logo_peluqueria" />
+          </a>
+          <h2>Salón Elegancia</h2>
+        </div>
+        <nav class="main_nav">
+          <a [routerLink]="['/#']">Acceso Clientes</a>
+          <a [routerLink]="['/home/appointment']">Reservar Cita</a>
+        </nav>
+      }
+      @case ('/citas') {
+        <div class="header_content_main">
+          <-
+          <a [routerLink]="['/home']">
+            <img src="logo_peluqueria-color.webp" alt="logo_peluqueria" />
+          </a>
+          <h2>Salón Elegancia</h2>
+        </div>
+        <nav class="main_nav">
+          <a [routerLink]="['/home/appointment']">Reservar Cita</a>
+        </nav>
+      }
+    }
+    
+  </div>
+</header>
