@@ -1,4 +1,4 @@
-<header class="header_content">
+<header class="header_content" [class.blur]="cerrarSesion() || cancelarCita">
   <div class="hedaer_content_div">
     @switch (router.url) {
       @case ('/login') {
@@ -9,13 +9,11 @@
           <h2>Salón Elegancia</h2>
         </div>
         <nav class="main_nav">
-          <a [routerLink]="['/#']">Acceso Clientes</a>
           <a [routerLink]="['/home/appointment']">Reservar Cita</a>
         </nav>
       }
       @case ('/citas') {
         <div class="header_content_main">
-          <-
           <a [routerLink]="['/home']">
             <img src="logo_peluqueria-color.webp" alt="logo_peluqueria" />
           </a>
@@ -23,9 +21,29 @@
         </div>
         <nav class="main_nav">
           <a [routerLink]="['/home/appointment']">Reservar Cita</a>
+          <a class="logout" (click)="mostrarAviso()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-out w-4 h-4 mr-2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" x2="9" y1="12" y2="12"></line></svg>
+            <span>Cerrar sesión</span>
+          </a>
         </nav>
       }
     }
-    
   </div>
 </header>
+@if(cerrarSesion()) {
+  <dialog class="modal modal-cancelar">
+    <header class="header-mod">
+      <div>
+        <h2>¿Cerrar sesión?</h2>
+      </div>
+    </header>
+    <article class="articulo-calendario">
+      <p> Estás a punto de cerrar sesión.</p>
+    </article>
+    <footer>
+      <button class="cancelar-calendario" (click)="closeCancel()">Volver</button>
+      <button class="eliminar" (click)="logout()">Sí, cancelar</button>
+    </footer>
+  </dialog>
+  <div class="backdrop"></div>
+}

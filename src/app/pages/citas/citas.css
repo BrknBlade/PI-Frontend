@@ -60,6 +60,7 @@ p{
     text-align: start;
     max-width: 1200px;
     width: 85%;
+    height: inherit;
 }
 .citas-panel {
     background-color: var(--fondo-paneles);
@@ -180,13 +181,11 @@ p{
     }
 }
 
-
-
 /* MODAL */
 .modal{
     position: fixed;
     inset: 0;
-    width: 80dvw;
+    width: 85dvw;
     height: 90vh;
     background-color: var(--fondo-paneles);
     z-index: 2;
@@ -306,7 +305,9 @@ p{
 }
 .modal .header-mod{
     padding-bottom: 10px;
+    align-items: center;
 }
+
 .anterior{
     color: var(--calendario-disabled);
     cursor: not-allowed;
@@ -474,6 +475,8 @@ p{
     padding: 25px;
 }
 
+
+
 /* MEDIA QUERIES */
 @media (max-width: 768px) {
     .citas-acciones {
@@ -528,7 +531,7 @@ p{
 
 @media (min-width: 1024px) {
     .modal{
-        width: 45vw;
+        width: 65vw;
     }
     .modal-cancelar{
         width: 50vw;

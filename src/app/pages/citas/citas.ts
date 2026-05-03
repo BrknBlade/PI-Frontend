@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, signal} from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, inject, signal} from '@angular/core';
 import { UserData } from '../../services/userData/user-data';
 import { AuthService } from '../../services/auth/auth-service';
 import { CutData } from '../../services/cutData/cut-data';
@@ -28,7 +28,7 @@ export class Citas implements OnInit{
     'hour': '',
   };
 
-
+  private cdr = inject(ChangeDetectorRef);
   private authService = inject(AuthService);
   private userDataService = inject(UserData);
   private cutDataService = inject(CutData);
@@ -114,6 +114,8 @@ export class Citas implements OnInit{
   }
 
   openCancelCita(event: Event){
+    this.controlHeader();
+
     this.cancelarCita = true;
     //guardar el valor de la hora y la fecha nueva seleccionada con la clase eleccion
     let boton = event.target as HTMLButtonElement;
@@ -132,11 +134,13 @@ export class Citas implements OnInit{
   }
 
   closeCancel(){
+    this.controlHeader();
     this.cancelarCita = false;
-
   }
 
   openAlert(){
+    let e: Event = new Event('click');
+
     this.cambiarCita = true;
     //guardar el valor de la hora y la fecha nueva seleccionada con la clase eleccion
     let hora = document.querySelector<HTMLButtonElement>('.eleccion');// tambien sirve document.querySelector('.eleccion') as HTMLButtonElement
@@ -156,16 +160,21 @@ export class Citas implements OnInit{
     console.log(this.datosNuevos)
 
     this.closeModal();
-
   }
 
-  closeAlert(){
+  async closeAlert(){
     this.cambiarCita = false;
-
     this.modal = false;
+
+    this.cdr.detectChanges();
+
+    await new Promise(resolve => setTimeout(resolve, 0));
+    this.controlHeader();
   }
 
   cancelAlert(){
+    this.controlHeader();
+
     this.cambiarCita = false;
 
     this.modal = true;
@@ -198,14 +207,15 @@ export class Citas implements OnInit{
 
     this.getCalendarContent();
 
-    console.log(this.yearActual, this.yearCondicion, this.mesActual, this.mesCondicion, this.mes)
-    console.log(this.mesCondicion == this.mes)
-
-
-    return this.modal = true;
+    this.modal = true;
+    if(this.modal){
+      this.controlHeader();
+    }
   }
   closeModal(){
-    return this.modal = false;
+    this.modal = false;
+    
+    this.controlHeader();
   }
 
   recogerDatosCitasDOM(event: Event){
@@ -433,10 +443,23 @@ export class Citas implements OnInit{
   async guardarCambios(){
     await firstValueFrom(this.citaService.updateCita(this.idCita, this.datosNuevos));
     this.pintarCitas();
-
-    this.closeAlert()
+    
+    await this.closeAlert()
 
     return this.datosNuevos;
+  }
+
+  async controlHeader() {
+    await new Promise(resolve => setTimeout(resolve, 0));
+
+    const header = document.querySelector('app-header');
+    const dialog = document.querySelector('dialog');
+
+    if (dialog) {
+      header?.classList.add('header-off');
+    } else {
+      header?.classList.remove('header-off');
+    }
   }
 
   deleteCita(){

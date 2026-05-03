@@ -19,6 +19,7 @@ export class Login {
   private notificacionService = inject(NotificationService);
   tipoNotificacion = signal(false);
   error = signal(false);
+  verPswd = signal(false);
 
 
   constructor(private router: Router){}
@@ -28,6 +29,15 @@ export class Login {
     inputs.forEach((i) =>{
         i.classList.remove('error-fix');
     });
+  }
+
+  cambiarPswd(){
+    if(this.verPswd()){
+      this.verPswd.set(false)
+    }else{
+      this.verPswd.set(true)
+    }
+    //this.verPswd() ? this.verPswd.set(true) : this.verPswd.set(false);
   }
 
   addFix(){
@@ -65,7 +75,7 @@ export class Login {
           this.router.navigate(['/citas'])
         }, 2500);
       },
-      error: (err) =>{
+      error: () =>{
         this.error.set(true)
         this.addColorRojo();
         this.tipoNotificacion.set(false);
@@ -74,7 +84,9 @@ export class Login {
         button.lastElementChild?.classList.remove('carga-disabled')
         setTimeout(() => {
           this.notificacionService.hideNotif(notificacion, this.cargando());
-        }, 3000);        
+
+        }, 3000); 
+          notificacion.classList.remove('salida');
       },
     });
   }

@@ -212,7 +212,7 @@
     border-radius: 15px;
     border: var(--borde) 1px solid;
     padding: 10px 20px;
-    display: flex;
+    display: none;
     align-items: center;
     width: 500px;
     text-align: start;
@@ -223,12 +223,13 @@
 }
 .entrada{
     animation: slide-up .5s;
-
+    display: flex;
     bottom: 74px;
     opacity: 1;
 }
 
 .salida{
+    display: flex;
     animation: slide-down .5s;
     bottom: 0px;
     opacity: 0;
@@ -236,6 +237,20 @@
 
 .login-notificacion p{
     display: inline-block;
+}
+
+.login-form label:nth-child(2){
+    position: relative;
+}
+
+.eye{
+    position: absolute;
+    right: 10px;
+    top: 69%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
 }
 
 @keyframes slide-up {

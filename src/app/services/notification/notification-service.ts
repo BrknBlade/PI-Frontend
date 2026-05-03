@@ -16,6 +16,10 @@ export class NotificationService {
     if(!typeOf){
       e?.classList.remove('entrada')
       e?.classList.add('salida')
+      setTimeout(() => {
+        e.classList.remove('salida');
+      }, 300); 
+
     }
   }
 }

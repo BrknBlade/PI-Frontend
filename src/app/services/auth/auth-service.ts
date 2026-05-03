@@ -25,7 +25,8 @@ export class AuthService {
         } else{
           throw new Error(response?.message ?? 'Login fallido');
         }
-      })
+      }),
+      switchMap(() => this.loadCurrentUser()) 
     );
   }
 
@@ -44,7 +45,10 @@ export class AuthService {
 
   logout() {
     return this.http.post(`${environment.BASE_URL}/api/logout`, {}).pipe(
-      tap(() => this.user.set(null))
+      tap(() => {
+        this.user.set(null);
+        this.userID.set(null);
+      })
     );
   }
 }
