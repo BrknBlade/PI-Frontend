@@ -4,6 +4,9 @@
   <div class="first">3</div>
   <div>4</div>
 </section>
+<section class="select">
+  <p>Elige fecha y hora</p>
+</section>
 <section class="back">
   <div class="back_div">
     <nav class="back_nav">
@@ -21,7 +24,7 @@
             d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"
           />
         </svg>
-        <span>Cambiar servicio</span>
+        <span>Cambiar peluquero</span>
       </a>
     </nav>
     @if (appointmentService.selectedService(); as service) {
@@ -126,5 +129,5 @@
   </div> -->
 </section>
 <section class="section_confirm">
-  <button class="confirm" [routerLink]="['/home/appointment/fourth-appointment']">Confirmar cita</button>
+  <button class="confirm" [routerLink]="['/home/appointment/fourth-appointment']" (click)="confirmarCita()">Confirmar cita</button>
 </section>

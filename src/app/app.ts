@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, inject, signal } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { environment } from '../environments/environment.development';
-import { HomePage } from './presentation/home-page/home-page';
+import { HomePage } from './pages/home-page/home-page';
 
 @Component({
   selector: 'app-root',

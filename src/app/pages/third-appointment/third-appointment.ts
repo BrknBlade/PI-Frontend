@@ -2,6 +2,7 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AppointmentService } from '../../models/appointment-model';
 import { AppointmentStylist } from '../../models/secondAppointment-model';
+import { AppointmentDatetime } from '../../models/thirdAppointment-model';
 @Component({
   selector: 'app-third-appointment',
   imports: [RouterLink],
@@ -11,6 +12,7 @@ import { AppointmentStylist } from '../../models/secondAppointment-model';
 export class ThirdAppointment implements OnInit {
   appointmentService = inject(AppointmentService);
   appointmentStylist = inject(AppointmentStylist);
+  appointmentDatetime = inject(AppointmentDatetime);
 
   ngOnInit(): void {
     this.getCalendarContent();
@@ -158,5 +160,14 @@ export class ThirdAppointment implements OnInit {
     this.pruebaFecha.set(
       `${this.pruebaYear}-0${this.pruebaMes}-${this.pruebaDia()}T${this.pruebaHora()}`,
     );
+  }
+
+  confirmarCita() {
+    if (this.pruebaDia() && this.pruebaHora()) {
+      this.appointmentDatetime.setDatetime(
+        `${this.year}-${String(this.mes + 1).padStart(2, '0')}-${this.pruebaDia()}`,
+        this.pruebaHora(),
+      );
+    }
   }
 }

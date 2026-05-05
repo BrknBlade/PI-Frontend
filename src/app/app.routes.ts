@@ -1,11 +1,11 @@
 import { Routes } from '@angular/router';
-import { Login } from './presentation/login/login';
-import { HomePage } from './presentation/home-page/home-page';
-import { AppointmentPage } from './presentation/appointment-page/appointment-page';
-import { FirstAppointment } from './presentation/first-appointment/first-appointment';
-import { SecondAppointment } from './presentation/second-appointment/second-appointment';
-import { ThirdAppointment } from './presentation/third-appointment/third-appointment';
-import { FourthAppointment } from './presentation/fourth-appointment/fourth-appointment';
+import { Login } from './pages/login/login';
+import { HomePage } from './pages/home-page/home-page';
+import { AppointmentPage } from './pages/appointment-page/appointment-page';
+import { FirstAppointment } from './pages/first-appointment/first-appointment';
+import { SecondAppointment } from './pages/second-appointment/second-appointment';
+import { ThirdAppointment } from './pages/third-appointment/third-appointment';
+import { FourthAppointment } from './pages/fourth-appointment/fourth-appointment';
 
 export const routes: Routes = [
   {
