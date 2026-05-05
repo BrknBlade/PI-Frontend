@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HeaderLayout } from './header-layout';
+import { HeaderLayout } from '../header/header-layout/header-layout';
 
 describe('HeaderLayout', () => {
   let component: HeaderLayout;

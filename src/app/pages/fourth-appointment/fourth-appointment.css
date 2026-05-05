@@ -1,0 +1,273 @@
+.info {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 50px;
+}
+
+.info div {
+    width: 40px;
+    height: 40px;
+    padding: 10px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.first {
+    background-color: var(--fondo-secundario);
+    border-radius: 50%;
+    color: var(--primario);
+}
+
+.back {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.back_div {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.back_div h2 {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--texto-principal);
+    margin-bottom: 20px;
+}
+
+.back_nav a {
+    text-decoration: none;
+    color: var(--texto-principal);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    width: 200px;
+    border-radius: 18px;
+    padding: 5px;
+    margin-bottom: 10px;
+
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.back_nav a:hover {
+    background-color: var(--primario-hover);
+    color: var(--color-blanco);
+}
+
+.div_info {
+    background-color: var(--color-blanco);
+    border: 1px solid var(--color-borde);
+    border-radius: 18px;
+    box-shadow: 0 10px 25px var(--sombra-card);
+    padding: 10px 16px;
+    margin-bottom: 12px;
+}
+
+.div_info h3 {
+    text-align: center;
+    margin-bottom: 8px;
+    color: var(--primario);
+}
+
+.div_info p {
+    color: var(--texto-secundario);
+    line-height: 1.6;
+    margin: 4px 0;
+}
+
+.section_confirm {
+    display: flex;
+    justify-content: center;
+}
+
+.confirm {
+    display: block;
+    width: 100%;
+    max-width: 800px;
+    margin-top: 8px;
+    margin-bottom: 20px;
+    padding: 12px 20px;
+    background-color: var(--primario);
+    color: var(--fondo-paneles);
+    border: none;
+    border-radius: 15px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+}
+
+.confirm:hover {
+    background-color: var(--primario-hover);
+    transform: scale(1.02);
+}
+
+.confirm_user {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.form_info {
+    margin-top: 4px;
+    /* max-width: 100%; */
+}
+
+.form_field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 16px;
+}
+
+.form_field label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--texto-principal);
+}
+
+.form_field input {
+    padding: 12px 16px;
+    border: 1px solid var(--color-borde);
+    border-radius: 12px;
+    font-size: 1rem;
+    color: var(--texto-principal);
+    background-color: var(--fondo-paneles, #fff);
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form_field input:focus {
+    border-color: var(--fondo-secundario);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--fondo-secundario) 15%, transparent);
+}
+
+.form_field input::placeholder {
+    color: var(--texto-secundario);
+}
+
+.form_check {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 8px;
+    max-width: 800px;
+}
+
+.form_check input[type="checkbox"] {
+    margin-top: 3px;
+    width: 17px;
+    height: 17px;
+    flex-shrink: 0;
+    accent-color: var(--fondo-secundario);
+    cursor: pointer;
+}
+
+.form_check label {
+    font-size: 0.9rem;
+    color: var(--texto-secundario);
+    line-height: 1.5;
+    cursor: pointer;
+}
+
+.form_check label a {
+    color: var(--primario);
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.2s;
+}
+
+.form_check label a:hover {
+    opacity: 0.75;
+}
+
+.confirm:disabled {
+    background-color: color-mix(in srgb, var(--primario) 40%, white);
+    cursor: not-allowed;
+    transform: none;
+    /* max-width: 800px; */
+}
+
+@media (max-width: 1024px) {
+
+    .back_div,
+    .confirm_user,
+    .confirm {
+        max-width: 90%;
+    }
+}
+
+@media (max-width: 768px) {
+    .info {
+        gap: 20px;
+    }
+
+    .back_div,
+    .confirm_user,
+    .confirm {
+        max-width: 95%;
+    }
+
+    .back_div h2 {
+        font-size: 1.6rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .info {
+        gap: 10px;
+    }
+
+    .info div {
+        width: 32px;
+        height: 32px;
+        font-size: 0.85rem;
+    }
+
+    .back_div,
+    .confirm_user,
+    .confirm {
+        max-width: 95%;
+    }
+
+    .back_div h2 {
+        font-size: 1.4rem;
+    }
+
+    .div_info {
+        padding: 10px 12px;
+    }
+
+    .div_info p {
+        font-size: 0.9rem;
+    }
+
+    .confirm {
+        font-size: 15px;
+        padding: 10px;
+    }
+
+    .form_field input {
+        font-size: 0.95rem;
+        padding: 10px 14px;
+    }
+
+    .form_check label {
+        font-size: 0.85rem;
+    }
+}
