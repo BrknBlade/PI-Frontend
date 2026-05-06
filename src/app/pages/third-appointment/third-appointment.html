@@ -1,0 +1,133 @@
+<section class="info">
+  <div>1</div>
+  <div>2</div>
+  <div class="first">3</div>
+  <div>4</div>
+</section>
+<section class="select">
+  <p>Elige fecha y hora</p>
+</section>
+<section class="back">
+  <div class="back_div">
+    <nav class="back_nav">
+      <a [routerLink]="['/home/appointment/second-appointment']">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          class="bi bi-arrow-left"
+          viewBox="0 0 16 16"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"
+          />
+        </svg>
+        <span>Cambiar peluquero</span>
+      </a>
+    </nav>
+    @if (appointmentService.selectedService(); as service) {
+      <div class="div_info">
+        <h3>Servicio elegido</h3>
+        <p><strong>Servicio seleccionado:</strong> {{ service.name }}</p>
+        <p><strong>Duración:</strong> {{ service.time }}</p>
+        <p><strong>Precio:</strong> {{ service.price }}</p>
+        <p><strong>Descripción:</strong> {{ service.description }}</p>
+      </div>
+    }
+    @if (appointmentStylist.selectedService(); as stylist) {
+      <div class="div_info">
+        <h3>Peluquero elegido</h3>
+        <p><strong>Peluquero seleccionado:</strong> {{ stylist.name }}</p>
+        <p><strong>Especialidad:</strong> {{ stylist.description }}</p>
+      </div>
+    }
+  </div>
+</section>
+<section class="container-calendario">
+  <h3 class="calendario-txt">Selecciona un día</h3>
+  <div class="acciones-calendario">
+    <button (click)="restarMes()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"></path></svg>
+    </button>
+    <h3>{{getMes()}} {{year}}</h3>
+    <button (click)="sumarMes()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg>
+    </button>
+  </div>
+  <div class="calendario">
+    <p>Lun</p><p>Mar</p><p>Mié</p><p>Jue</p><p>Vie</p><p>Sáb</p><p>Dom</p>
+
+    @for (item of contenidoCalendario; track $index) {
+      @if (year == yearActual) {
+        @if (mes == mesActual && year == yearActual) {
+          @if (item['dia'] < diaActual) {
+            <button (click)="seleccionarDia($event)" disabled
+              [class]="'anterior' + (item['dia'] == pruebaDia() && yearCondicion == year && mesCondicion == mes ? ' dia' : '')"
+              [style.grid-column]="$index === 0 ? estiloGridPrimerDia() : null">
+              {{item['dia']}}
+            </button>
+          } @else if (item['dia'] > diaActual) {
+            <button (click)="seleccionarDia($event)"
+              [class]="'posterior' + (item['dia'] == pruebaDia() && yearCondicion == year && mesCondicion == mes ? ' dia' : '')"
+              [style.grid-column]="$index === 0 ? estiloGridPrimerDia() : null">
+              {{item['dia']}}
+            </button>
+          } @else {
+            <button (click)="seleccionarDia($event)"
+              [class]="'actual' + (item['dia'] == pruebaDia() && yearCondicion == year && mesCondicion == mes ? ' dia' : '')"
+              [style.grid-column]="$index === 0 ? estiloGridPrimerDia() : null">
+              {{item['dia']}}
+            </button>
+          }
+        } @else if (mes > mesActual) {
+          <button (click)="seleccionarDia($event)"
+            [class]="'posterior' + (item['dia'] == pruebaDia() && yearCondicion == year && mesCondicion == mes ? ' dia' : '')"
+            [style.grid-column]="$index === 0 ? estiloGridPrimerDia() : null">
+            {{item['dia']}}
+          </button>
+        } @else if (mes < mesActual) {
+          <button (click)="seleccionarDia($event)" disabled
+            [class]="'anterior' + (item['dia'] == pruebaDia() && yearCondicion == year && mesCondicion == mes ? ' dia' : '')"
+            [style.grid-column]="$index === 0 ? estiloGridPrimerDia() : null">
+            {{item['dia']}}
+          </button>
+        }
+      } @else if (year < yearActual) {
+        <button (click)="seleccionarDia($event)" disabled
+          [class]="'anterior' + (item['dia'] == pruebaDia() && yearCondicion == year && mesCondicion == mes ? ' dia' : '')"
+          [style.grid-column]="$index === 0 ? estiloGridPrimerDia() : null">
+          {{item['dia']}}
+        </button>
+      } @else if (year > yearActual) {
+        <button (click)="seleccionarDia($event)"
+          [class]="'posterior' + (item['dia'] == pruebaDia() && yearCondicion == year && mesCondicion == mes ? ' dia' : '')"
+          [style.grid-column]="$index === 0 ? estiloGridPrimerDia() : null">
+          {{item['dia']}}
+        </button>
+      }
+    }
+  </div>
+</section>
+
+<section class="section_hours">
+  <h3 class="calendario-txt">Selecciona una hora</h3>
+  <div class="horas">
+    @for (hora of horas; track $index) {
+      @if (hora.hora == pruebaHora()) {
+        <button (click)="seleccionarHora($event)" class="hora eleccion" value="{{hora.hora}}">{{hora.hora}}</button>
+      } @else {
+        <button (click)="seleccionarHora($event)" class="hora" value="{{hora.hora}}">{{hora.hora}}</button>
+      }
+    }
+    <!-- <input type="hidden" value="{{horaCitaCalendario}}"> -->
+  </div>
+  <!-- <div class="nueva-cita">
+    <h4>Nueva cita:</h4>
+    <p>{{ pruebaFecha() | date:"EEEE, d 'de' MMMM 'de' y" : '' : 'es' }} a las {{ pruebaHora() }}</p>
+  </div> -->
+</section>
+<section class="section_confirm">
+  <button class="confirm" [routerLink]="['/home/appointment/fourth-appointment']" (click)="confirmarCita()">Confirmar cita</button>
+</section>

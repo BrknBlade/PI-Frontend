@@ -1,0 +1,97 @@
+<section class="info">
+  <div>1</div>
+  <div>2</div>
+  <div>3</div>
+  <div class="first">4</div>
+</section>
+
+<section class="back">
+  <div class="back_div">
+    <nav class="back_nav">
+      <a [routerLink]="['/home/appointment/third-appointment']">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          class="bi bi-arrow-left"
+          viewBox="0 0 16 16"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"
+          />
+        </svg>
+        <span>Cambiar fecha y hora</span>
+      </a>
+    </nav>
+    <h2>Resumen de tu cita</h2>
+
+    @if (appointmentService.selectedService(); as service) {
+      <div class="div_info">
+        <h3>Servicio</h3>
+        <p><strong>Nombre:</strong> {{ service.name }}</p>
+        <p><strong>Duración:</strong> {{ service.time }}</p>
+        <p><strong>Precio:</strong> {{ service.price }}</p>
+      </div>
+    }
+
+    @if (appointmentStylist.selectedService(); as stylist) {
+      <div class="div_info">
+        <h3>Peluquero</h3>
+        <p><strong>Nombre:</strong> {{ stylist.name }}</p>
+        <p><strong>Especialidad:</strong> {{ stylist.description }}</p>
+      </div>
+    }
+
+    @if (appointmentDatetime.selectedDatetime(); as dt) {
+      <div class="div_info">
+        <h3>Fecha y hora</h3>
+        <p><strong>Fecha:</strong> {{ dt.fecha | date: "d 'de' MMMM 'de' y" }}</p>
+        <p><strong>Hora:</strong> {{ dt.hora }}</p>
+      </div>
+    }
+  </div>
+</section>
+<section class="confirm_user">
+  <div class="div_info form_info">
+    <h3>Tu información</h3>
+
+    <div class="form_field">
+      <label for="fullName">Nombre completo *</label>
+      <input
+        id="fullName"
+        type="text"
+        placeholder="Introduce tu nombre completo"
+        [(ngModel)]="fullName"
+      />
+    </div>
+
+    <div class="form_field">
+      <label for="email">Correo electrónico *</label>
+      <input id="email" type="email" placeholder="tu@email.com" [(ngModel)]="email" />
+    </div>
+
+    <div class="form_field">
+      <label for="phone">Número de teléfono *</label>
+      <input id="phone" type="tel" placeholder="(555) 123-4567" [(ngModel)]="phone" />
+    </div>
+
+    <div class="form_check">
+      <input id="terms" type="checkbox" [(ngModel)]="acceptedTerms" />
+      <label for="terms">
+        Acepto la <a routerLink="/privacy-policy">Política de Privacidad</a> y los
+        <a routerLink="/terms">Términos y Condiciones</a>. Consiento el tratamiento de mis datos
+        personales para la gestión de citas. *
+      </label>
+    </div>
+  </div>
+
+  <button
+    class="confirm"
+    [disabled]="!fullName || !email || !phone || !acceptedTerms"
+    (click)="reservarCita()"
+  >
+    Confirmar cita
+  </button>
+</section>

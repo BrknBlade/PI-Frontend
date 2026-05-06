@@ -27,21 +27,14 @@
   --input-focus: #7d5f7863;
   --sombra-panel: 0px 1px 8px -5px #00000075;
 
-
-  
-
-
-
-
-
   /***********HOME PAGE VARIABLES**************/
-  --fondo-header-home-page: #ffffffbf;
+  --fondo-header-home-page: #ffffffbf;/*repe*/
 
   --color-blanco: #ffffff;
   --color-blanco-hover: #ffffff4d;
   --color-blanco-info: #faf9f7;
   --color-blanco-border: #ececec;
-  --color-blanco-header: #ffffffbf;
+  --color-blanco-header: #ffffffbf;/*repe*/
 
   --color-primario-home-page: #daaf77;
   --color-primario-hover-home-page: #dcbd94;
@@ -51,7 +44,7 @@
   --color-icono-home-page: #f3e8dc;
   --color-img-home-page: #c8a27a;
 
-  --color-footer: #020241;
+  --color-footer: #101828;
 
   --sombra-card: #0000001a;
   --sombra-card-hover: #00000033;
@@ -82,4 +75,7 @@ app-citas{
 }
 .header-off{
     display: none;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }

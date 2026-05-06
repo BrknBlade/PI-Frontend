@@ -1,0 +1,363 @@
+.info {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 50px;
+}
+
+.info div {
+  width: 40px;
+  height: 40px;
+  padding: 10px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  margin-bottom: 15px
+}
+
+.first {
+  background-color: var(--fondo-secundario);
+  border-radius: 50%;
+  color: var(--primario);
+}
+
+.select {
+    text-align: center;
+}
+
+.select p {
+    font-size: 1.1rem;
+    color: var(--texto-secundario);
+}
+
+.back {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.back_div {
+  width: 800px;
+}
+
+.back_nav a {
+  text-decoration: none;
+  color: var(--texto-principal);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  width: 200px;
+  border-radius: 18px;
+  padding: 5px;
+  margin-bottom: 10px;
+
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.back_nav a:hover {
+  background-color: var(--primario-hover);
+  color: var(--color-blanco);
+}
+
+.div_info {
+  background-color: var(--color-blanco);
+  border: 1px solid var(--color-borde);
+  border-radius: 18px;
+  box-shadow: 0 10px 25px var(--sombra-card);
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.div_info h3 {
+  text-align: center;
+  margin-bottom: 5px;
+  color: var(--primario);
+}
+
+/* CALENDARIO */
+.container-calendario {
+  background-color: var(--calendario);
+  border-radius: 15px;
+  padding: 25px;
+  max-height: fit-content;
+  min-height: fit-content;
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.acciones-calendario {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.acciones-calendario h3 {
+  margin: 0;
+}
+
+.acciones-calendario button {
+  background-color: var(--calendario);
+  border-color: var(--calendario);
+  border-style: none;
+  cursor: pointer;
+  border-radius: 10px;
+  padding: 10px;
+
+  &:hover {
+    background-color: var(--fondo-paneles);
+  }
+}
+
+.acciones-calendario button svg {
+  transition: all 0.1s ease-in;
+}
+
+.acciones-calendario button:hover svg {
+  transform: scale(1.3);
+}
+
+.calendario {
+  display: grid;
+  gap: 5px;
+  grid-template-columns: repeat(7, 45px);
+  justify-content: space-around;
+}
+
+.calendario button {
+  border: none;
+  padding: 10px;
+  font-family: Inter Bold, sans-serif;
+  width: 45px;
+  height: 45px;
+  background-color: var(--calendario);
+}
+
+.anterior {
+  color: var(--calendario-disabled);
+  cursor: not-allowed;
+}
+
+.actual,
+.posterior {
+  cursor: pointer;
+}
+
+.calendario .actual {
+  background-color: var(--fondo-paneles);
+  color: var(--primario);
+  border: 2px solid var(--primario);
+  border-radius: 10px;
+}
+
+.calendario .posterior {
+  border-radius: 10px;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    background-color: var(--fondo-paneles);
+  }
+}
+
+.calendario .dia {
+  background-color: var(--primario);
+  color: var(--fondo-paneles);
+  border: 2px solid var(--primario);
+  border-radius: 10px;
+  transition: background-color, border 0.2s ease-in-out;
+
+  &:hover {
+    border: 2px solid var(--primario-hover);
+    background-color: var(--primario-hover);
+  }
+}
+
+/* HORAS */
+.horas {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.hora {
+  border: none;
+  font-family: Inter Medium;
+  font-size: 16px;
+  padding: 15px;
+  background-color: var(--calendario);
+  border-radius: 15px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    background-color: var(--calendario-hover);
+  }
+}
+
+.eleccion {
+  background-color: var(--primario);
+  color: var(--fondo-paneles);
+
+  &:hover {
+    background-color: var(--primario-hover);
+  }
+}
+
+.calendario-txt {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.section_hours {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  max-width: 800px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* NUEVA CITA */
+/* .nueva-cita {
+  padding: 20px;
+  background-color: var(--secundario-hover);
+  margin-top: 20px;
+  margin-bottom: 60px;
+  border-radius: 15px;
+  text-align: left;
+}
+.nueva-cita h4 {
+  color: var(--texto-principal);
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+.nueva-cita p {
+  color: var(--texto-principal);
+  margin: 0;
+} */
+
+/*
+*Media Query
+*/
+/* @media (max-width: 1024px) {
+  .back_div {
+    width: 100%;
+  }
+} */
+
+@media (max-width: 768px) {
+
+  .info {
+    gap: 20px;
+  }
+
+  .back_div {
+    width: 90%;
+  }
+
+  .calendario {
+    grid-template-columns: repeat(7, 35px);
+  }
+
+  .container-calendario {
+    max-width: 90%;
+  }
+
+  .section_hours {
+    max-width: 90%;
+  }
+
+  .horas {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .hora {
+    font-size: 14px;
+    padding: 12px;
+  }
+}
+
+.section_confirm {
+  display: flex;
+  justify-content: center;
+}
+
+.confirm {
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  background-color: var(--primario);
+  color: var(--fondo-paneles);
+  border: none;
+  border-radius: 15px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+}
+
+.confirm:hover {
+  background-color: var(--primario-hover);
+  transform: scale(1.05);
+}
+
+@media (max-width: 480px) {
+
+  .info {
+    gap: 10px;
+  }
+
+  .info div {
+    width: 32px;
+    height: 32px;
+    font-size: 0.85rem;
+  }
+
+  .back_div {
+    width: 95%;
+  }
+
+  .calendario {
+    grid-template-columns: repeat(7, 1fr);
+    gap: 3px;
+  }
+
+  .calendario button {
+    width: 100%;
+    height: 38px;
+    padding: 6px;
+    font-size: 13px;
+  }
+
+  .container-calendario {
+    max-width: 95%;
+  }
+
+  .section_hours {
+    max-width: 95%;
+  }
+
+  .acciones-calendario h3 {
+    font-size: 1rem;
+  }
+
+  .horas {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+
+  .hora {
+    font-size: 13px;
+    padding: 10px;
+  }
+
+  .confirm {
+    width: 90%;
+    font-size: 15px;
+  }
+}

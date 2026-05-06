@@ -1,0 +1,473 @@
+<app-header></app-header>
+<main class="main_content">
+  <section class="hero">
+    <div class="hero_overlay">
+      <img src="fondo_peluqueria.jpg" alt="salon_peluqueria" />
+      <div class="container_hero_overlay">
+        <div class="container_hero_overlay_info">
+          <h2><span>Experimenta la Belleza</span></h2>
+          <h2>Redefinida</h2>
+          <p>Servicios de peluquería premium con reserva online disponible 24/7</p>
+        </div>
+        <div class="hero_actions">
+          <a [routerLink]="['']">Reservar Cita</a>
+          <a [routerLink]="['']">Ver Servicios</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="services">
+    <div class="services_content">
+      <header class="section_header">
+        <h2>Nuestros Servicios</h2>
+        <p>
+          Desde cortes de precisión hasta transformaciones de color impresionantes, ofrecemos una
+          gama completa de servicios profesionales para el cabello
+        </p>
+      </header>
+
+      <ul class="services_grid">
+        <li class="service_card">
+          <article>
+            <span class="icon" aria-hidden="true"
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-scissors"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M3.5 3.5c-.614-.884-.074-1.962.858-2.5L8 7.226 11.642 1c.932.538 1.472 1.616.858 2.5L8.81 8.61l1.556 2.661a2.5 2.5 0 1 1-.794.637L8 9.73l-1.572 2.177a2.5 2.5 0 1 1-.794-.637L7.19 8.61zm2.5 10a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0m7 0a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0"
+                /></svg
+            ></span>
+            <h3>Corte y Peinado</h3>
+            <p>Cortes profesionales adaptados a tu estilo</p>
+            <p class="price">Desde $45</p>
+          </article>
+        </li>
+
+        <li class="service_card">
+          <article>
+            <span class="icon" aria-hidden="true"
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-stars"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M7.657 6.247c.11-.33.576-.33.686 0l.645 1.937a2.89 2.89 0 0 0 1.829 1.828l1.936.645c.33.11.33.576 0 .686l-1.937.645a2.89 2.89 0 0 0-1.828 1.829l-.645 1.936a.361.361 0 0 1-.686 0l-.645-1.937a2.89 2.89 0 0 0-1.828-1.828l-1.937-.645a.361.361 0 0 1 0-.686l1.937-.645a2.89 2.89 0 0 0 1.828-1.828zM3.794 1.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387A1.73 1.73 0 0 0 4.593 5.69l-.387 1.162a.217.217 0 0 1-.412 0L3.407 5.69A1.73 1.73 0 0 0 2.31 4.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387A1.73 1.73 0 0 0 3.407 2.31zM10.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.16 1.16 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.16 1.16 0 0 0-.732-.732L9.1 2.137a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732z"
+                /></svg
+            ></span>
+            <h3>Coloración</h3>
+            <p>Servicios de coloración y asesoramiento experto</p>
+            <p class="price">Desde $95</p>
+          </article>
+        </li>
+
+        <li class="service_card">
+          <article>
+            <span class="icon" aria-hidden="true"
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-star-fill"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
+                /></svg
+            ></span>
+            <h3>Peinados</h3>
+            <p>Peinados para eventos especiales y para el día a día</p>
+            <p class="price">Desde $35</p>
+          </article>
+        </li>
+
+        <li class="service_card">
+          <article>
+            <span class="icon" aria-hidden="true"
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-check-circle-fill"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"
+                /></svg
+            ></span>
+            <h3>Tratamientos</h3>
+            <p>Tratamientos de hidratación profunda y keratina</p>
+            <p class="price">Desde $55</p>
+          </article>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="info">
+    <div class="info_content">
+      <header class="info_header">
+        <h2>Por Qué Elegirnos</h2>
+        <p>La comodidad moderna se une a la excelencia profesional</p>
+      </header>
+
+      <ul class="info_grid">
+        <li class="info_card">
+          <article>
+            <span class="icon" aria-hidden="true"
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-calendar"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"
+                /></svg
+            ></span>
+            <h3>Reservas Online 24/7</h3>
+            <p>
+              Reserva tu cita en cualquier momento y desde cualquier lugar con confirmación
+              instantánea
+            </p>
+          </article>
+        </li>
+
+        <li class="info_card">
+          <article>
+            <span class="icon" aria-hidden="true"
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-clock"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z"
+                />
+                <path
+                  d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0"
+                /></svg
+            ></span>
+            <h3>Rápido y Sencillo</h3>
+            <p>Completa tu reserva en menos de un minuto con nuestro proceso optimizado</p>
+          </article>
+        </li>
+
+        <li class="info_card">
+          <article>
+            <span class="icon" aria-hidden="true"
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-check-circle"
+                viewBox="0 0 16 16"
+              >
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                <path
+                  d="m10.97 4.97-.02.022-3.473 4.425-2.093-2.094a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05"
+                /></svg
+            ></span>
+            <h3>Confirmación Instantánea</h3>
+            <p>Recibe confirmación inmediata y recordatorios de tus citas</p>
+          </article>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="experience">
+    <div class="experience_content">
+      <header class="experience_header">
+        <h2>Lo Que Dicen Nuestros Clientes</h2>
+        <p>Experiencias reales de nuestros valiosos clientes</p>
+      </header>
+
+      <ul class="experience_grid">
+        <li class="experience_card">
+          <article>
+            <span class="experience_icon" aria-hidden="true"
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-star-fill"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
+                />
+              </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-star-fill"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
+                />
+              </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-star-fill"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
+                />
+              </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-star-fill"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
+                />
+              </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-star-fill"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
+                /></svg
+            ></span>
+            <p>
+              "¡Servicio increíble! La reserva online hizo que programar mi cita fuera muy fácil.
+              Sofía hizo un trabajo espectacular con mi corte."
+            </p>
+            <h4>Jennifer Anderson</h4>
+          </article>
+        </li>
+
+        <li class="experience_card">
+          <article>
+            <span class="experience_icon" aria-hidden="true"
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-star-fill"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
+                />
+              </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-star-fill"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
+                />
+              </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-star-fill"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
+                />
+              </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-star-fill"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
+                />
+              </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-star-fill"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
+                /></svg
+            ></span>
+            <p>
+              "Me encanta la comodidad de poder reservar en cualquier momento. Emma es una genia del
+              color. ¡Mis mechas quedaron preciosas!"
+            </p>
+            <h4>Michelle Roberts</h4>
+          </article>
+        </li>
+
+        <li class="experience_card">
+          <article>
+            <span class="experience_icon" aria-hidden="true"
+              ><svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-star-fill"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
+                />
+              </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-star-fill"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
+                />
+              </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-star-fill"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
+                />
+              </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-star-fill"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
+                />
+              </svg>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-star-fill"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
+                /></svg
+            ></span>
+            <p>
+              "Profesional, moderno y muy fácil de usar. El salón es hermoso y el equipo tiene
+              muchísimo talento."
+            </p>
+            <h4>Lauren Thompson</h4>
+          </article>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="appointment">
+    <div class="appointment_content">
+      <header class="appointment_header">
+        <h2>¿Lista para Transformar tu Imagen?</h2>
+        <p>Reserva tu cita ahora y vive la diferencia</p>
+        <a [routerLink]="['/home/appointment/first-appointment']">Reservar Ahora</a>
+      </header>
+    </div>
+  </section>
+</main>
+
+<footer class="footer_content">
+  <ul class="footer_grid">
+    <li class="footer_card">
+      <section>
+        <h2>Salón Elegancia</h2>
+        <p>Servicios de peluquería premium con la comodidad de la reserva online moderna</p>
+      </section>
+    </li>
+
+    <li class="footer_card">
+      <section>
+        <h2>Contacto</h2>
+        <address>
+          Calle Principal, 123<br />
+          Murcia, España<br />
+          Teléfono: +34 91 123 45 67<br />
+          Email: <a href="mailto:info@salonelegance.com">info@salonelegance.com</a>
+        </address>
+      </section>
+    </li>
+
+    <li class="footer_card">
+      <section>
+        <h2>Horarios</h2>
+        <p>Lunes - Viernes: 9AM - 7PM</p>
+        <p>Sábado: 9AM - 6PM</p>
+      </section>
+    </li>
+
+    <li class="footer_card">
+      <section>
+        <h2>Enlaces Rápidos</h2>
+        <nav aria-label="Quick links">
+          <a routerLink="/privacy-policy">Política de Privacidad</a>
+          <a routerLink="/terms">Términos y Condiciones</a>
+          <a routerLink="/staff">Portal del Personal</a>
+        </nav>
+      </section>
+    </li>
+  </ul>
+  <hr />
+  <p class="copy">© 2026 Salón Elegancia. Todos los derechos reservados.</p>
+</footer>
