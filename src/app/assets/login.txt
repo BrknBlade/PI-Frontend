@@ -1,7 +1,0 @@
-<nav>
-  <ul>
-    <li><a routerLink="login">Login</a></li>
-  </ul>
-</nav>
-<button (click)="test()">Comprobar que estas autenticado</button>
-<button (click)="logout()">Cerrar secion</button>

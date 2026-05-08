@@ -49,14 +49,31 @@
   --sombra-card: #0000001a;
   --sombra-card-hover: #00000033;
 }
-
+@font-face {
+  font-family: Inter;
+  src: 
+    url('../public/fonts/Inter_18pt-Regular.ttf') format('truetype');
+  font-weight: normal;
+}
+@font-face {
+  font-family: Inter Medium;
+  src: 
+    url('../public/fonts/Inter_28pt-Medium.ttf') format('truetype');
+  font-weight: bold;
+}
+@font-face {
+  font-family: Inter Bold;
+  src: 
+    url('../public/fonts/Inter_18pt-SemiBold.ttf') format('truetype');
+  font-weight: bolder;
+}
 * {
     box-sizing: border-box;
 }
 
 body{
     background-color: var(--fondo-principal);
-    font-family: Inter Bold, sans-serif;
+    font-family: Inter Medium, sans-serif;
     margin: 0;
 }
 app-login{

@@ -610,6 +610,9 @@
         background-color: var(--calendario-hover);
     }
 }
+.nav-login{
+    font-family: Inter Medium, sans-serif;
+}
 
 @media (min-width: 1024px) {
     .modal{
