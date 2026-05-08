@@ -95,22 +95,16 @@ export class Citas implements OnInit{
   }
 
   async pintarCitas() {
-    this.userDataService.getCitas().subscribe(async () => {
-      for (const cita of this.citas()) {
-        const data: any = await firstValueFrom(
-          this.cutDataService.getCut(cita.cut_type_id)
-        );
+    const response: any = await firstValueFrom(this.userDataService.getCitas());
+    const citas = response.data;
 
-        if (!data) continue;
+    for (const cita of citas) {
+      const data: any = await firstValueFrom(this.cutDataService.getCut(cita.cut_type_id));
+      if (!data) continue;
+      this.citaVars.update(current => ({ ...current, [cita.cut_type_id]: data.data.name }));
+    }
 
-        this.citaVars.update(current => ({
-          ...current,
-          [cita.cut_type_id]: data.data.name
-        }));
-      }
-
-      this.cargando.set(false);
-    });
+    this.cargando.set(false);
   }
 
   openCancelCita(event: Event){
@@ -462,10 +456,11 @@ export class Citas implements OnInit{
     }
   }
 
-  deleteCita(){
-    this.citaService.deleteCita(this.idCita).subscribe(() => {
-      this.pintarCitas()
-      this.closeCancel()
+  async deleteCita(){
+    this.citaService.deleteCita(this.idCita).subscribe(async () => {
+      await this.pintarCitas();
+      this.cancelarCita = false;
+      document.querySelector('app-header')?.classList.remove('header-off');
     });
   }
 }

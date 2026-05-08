@@ -35,7 +35,7 @@ export class HomePage {
 
   closeCancel(){
     this.cerrarSesion.set(false);
-    this.controlHeader(false); // cerrando
+    this.controlHeader(false);
     this.cancelarCita = false;
   }
 
