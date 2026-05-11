@@ -5,9 +5,10 @@ import { AppointmentStylist } from '../../models/secondAppointment-model';
 import { Stylist } from '../../models/secondAppointment-model';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { CheckShared } from "../../shared/check-shared/check-shared";
 @Component({
   selector: 'app-second-appointment',
-  imports: [RouterModule, CommonModule],
+  imports: [RouterModule, CommonModule, CheckShared],
   templateUrl: './second-appointment.html',
   styleUrl: './second-appointment.css',
 })
@@ -40,6 +41,6 @@ export class SecondAppointment {
 
   selectStylist(stylist: Stylist){
     this.secondAppointment.selectedService.set(stylist);
-    this.router.navigate(['/home/appointment/third-appointment']);
+    this.router.navigate(['/appointment/appointment-third']);
   }
 }

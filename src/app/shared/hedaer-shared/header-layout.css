@@ -12,15 +12,13 @@
     padding: 15px 20px;
 }
 
-/*CONTENEDOR DEL H2 + IMG (TITULO)*/
-.header_content_main {
-    /*FLEX Y ROW*/
+.header_content_main a {
     display: flex;
     flex-direction: row;
-    /*ALINEAR VERTICALMENTE*/
     align-items: center;
-    /*SEPARACION DEL LOGO Y DEL TITULO*/
     gap: 10px;
+    text-decoration: none;
+    color: var(--color-negro);
 }
 
 /*CONTENEDOR PARA MODIFICAR LA IMAGEN DEL TITULO*/
@@ -29,6 +27,7 @@
     width: auto;
     height: 50px;
 }
+
 .main_nav a {
     text-decoration: none;
     color: black;

@@ -6,6 +6,7 @@
 
   --texto-principal: #2f2f2f;
   --texto-secundario: #585857;
+  --texto-secundario-uwu: #727272;
 
   --borde: #e8e8e8;
   --error: #ef4444;
@@ -47,6 +48,8 @@
 
   --sombra-card: #0000001a;
   --sombra-card-hover: #00000033;
+
+  --color-negro: #000000;
 }
 
 * {

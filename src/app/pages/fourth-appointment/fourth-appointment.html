@@ -1,14 +1,9 @@
-<section class="info">
-  <div>1</div>
-  <div>2</div>
-  <div>3</div>
-  <div class="first">4</div>
-</section>
+<app-check-shared [currentPage]="4"></app-check-shared>
 
 <section class="back">
   <div class="back_div">
     <nav class="back_nav">
-      <a [routerLink]="['/home/appointment/third-appointment']">
+      <a [routerLink]="['/appointment/appointment-third']">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"
@@ -25,32 +20,49 @@
         <span>Cambiar fecha y hora</span>
       </a>
     </nav>
+
     <h2>Resumen de tu cita</h2>
 
-    @if (appointmentService.selectedService(); as service) {
-      <div class="div_info">
-        <h3>Servicio</h3>
-        <p><strong>Nombre:</strong> {{ service.name }}</p>
-        <p><strong>Duración:</strong> {{ service.time }}</p>
-        <p><strong>Precio:</strong> {{ service.price }}</p>
-      </div>
-    }
+    <div class="div_info">
+      <h3>Resumen de la Reserva</h3>
 
-    @if (appointmentStylist.selectedService(); as stylist) {
-      <div class="div_info">
-        <h3>Peluquero</h3>
-        <p><strong>Nombre:</strong> {{ stylist.name }}</p>
-        <p><strong>Especialidad:</strong> {{ stylist.description }}</p>
-      </div>
-    }
+      @if (appointmentService.selectedService(); as service) {
+        <div class="summary_row">
+          <span class="summary_label">Servicio:</span>
+          <span class="summary_value">{{ service.name }}</span>
+        </div>
+      }
 
-    @if (appointmentDatetime.selectedDatetime(); as dt) {
-      <div class="div_info">
-        <h3>Fecha y hora</h3>
-        <p><strong>Fecha:</strong> {{ dt.fecha | date: "d 'de' MMMM 'de' y" }}</p>
-        <p><strong>Hora:</strong> {{ dt.hora }}</p>
-      </div>
-    }
+      @if (appointmentStylist.selectedService(); as stylist) {
+        <div class="summary_row">
+          <span class="summary_label">Peluquero:</span>
+          <span class="summary_value">{{ stylist.name }}</span>
+        </div>
+      }
+
+      @if (appointmentDatetime.selectedDatetime(); as dt) {
+        <div class="summary_row">
+          <span class="summary_label">Fecha:</span>
+          <span class="summary_value">{{ dt.fecha | date: "d 'de' MMMM 'de' y" }}</span>
+        </div>
+        <div class="summary_row">
+          <span class="summary_label">Hora:</span>
+          <span class="summary_value">{{ dt.hora }}</span>
+        </div>
+      }
+
+      @if (appointmentService.selectedService(); as service) {
+        <div class="summary_row">
+          <span class="summary_label">Duración:</span>
+          <span class="summary_value">{{ service.time }}</span>
+        </div>
+
+        <div class="summary_row summary_total">
+          <span class="summary_label"><strong>Total:</strong></span>
+          <span class="summary_price">{{ service.price }}</span>
+        </div>
+      }
+    </div>
   </div>
 </section>
 <section class="confirm_user">
@@ -74,7 +86,7 @@
 
     <div class="form_field">
       <label for="phone">Número de teléfono *</label>
-      <input id="phone" type="tel" placeholder="(555) 123-4567" [(ngModel)]="phone" />
+      <input id="phone" type="tel" placeholder="(+34) 656 789 012" [(ngModel)]="phone" />
     </div>
 
     <div class="form_check">

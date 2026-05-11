@@ -24,12 +24,12 @@
 }
 
 .select {
-    text-align: center;
+  text-align: center;
 }
 
 .select p {
-    font-size: 1.1rem;
-    color: var(--texto-secundario);
+  font-size: 1.1rem;
+  color: var(--texto-secundario-uwu);
 }
 
 .back {
@@ -304,6 +304,12 @@
 .confirm:hover {
   background-color: var(--primario-hover);
   transform: scale(1.05);
+}
+
+.confirm:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 @media (max-width: 480px) {

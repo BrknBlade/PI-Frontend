@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { HeaderLayout } from '../../layout/hedaer-shared/header-layout';
+import { HeaderLayout } from '../../shared/hedaer-shared/header-layout';
 import { RouterOutlet } from '@angular/router';
 
 @Component({

@@ -11,42 +11,41 @@ export const routes: Routes = [
   {
     path: '',
     redirectTo: 'home',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
-    path : 'login',
-    component : Login
+    path: 'login',
+    component: Login,
   },
   {
     path: 'home',
     component: HomePage,
   },
   {
-    path: 'home/appointment',
+    path: 'appointment',
     component: AppointmentPage,
-    children: [ 
+    children: [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'first-appointment'
+        redirectTo: 'appointment-first',
       },
       {
-        path: 'first-appointment',
-        component: FirstAppointment
+        path: 'appointment-first',
+        component: FirstAppointment,
       },
       {
-        path: 'second-appointment',
-        component: SecondAppointment
+        path: 'appointment-second',
+        component: SecondAppointment,
       },
       {
-        path: 'third-appointment',
-        component: ThirdAppointment
+        path: 'appointment-third',
+        component: ThirdAppointment,
       },
       {
-        path: 'fourth-appointment',
-        component: FourthAppointment
-      }
-
-    ]
-  }
+        path: 'appointment-fourth',
+        component: FourthAppointment,
+      },
+    ],
+  },
 ];

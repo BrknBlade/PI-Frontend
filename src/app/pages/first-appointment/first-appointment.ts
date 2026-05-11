@@ -2,9 +2,10 @@ import { Component, inject } from '@angular/core';
 import { AppointmentService, Service } from '../../models/appointment-model';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { CheckShared } from '../../shared/check-shared/check-shared';
 @Component({
   selector: 'app-first-appointment',
-  imports: [CommonModule],
+  imports: [CommonModule, CheckShared],
   templateUrl: './first-appointment.html',
   styleUrl: './first-appointment.css',
 })
@@ -59,6 +60,6 @@ export class FirstAppointment {
 
   selectService(service: Service) {
     this.appointmentService.selectedService.set(service);
-    this.router.navigate(['/home/appointment/second-appointment']);
+    this.router.navigate(['/appointment/appointment-second']);
   }
 }

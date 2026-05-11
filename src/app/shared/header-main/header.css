@@ -10,7 +10,7 @@
 }
 
 /*CONTENEDOR PADRE DIV*/
-.hedaer_content_div {
+.headaer_content_div {
     /*FLEX Y ROW*/
     display: flex;
     flex-direction: row;

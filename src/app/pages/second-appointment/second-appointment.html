@@ -1,16 +1,11 @@
-<section class="info">
-  <div>1</div>
-  <div class="first">2</div>
-  <div>3</div>
-  <div>4</div>
-</section>
+<app-check-shared [currentPage]="2"></app-check-shared>
 <section class="select">
   <p>Elige tu peluquero</p>
 </section>
 <section class="back">
   <div class="back_div">
     <nav class="back_nav">
-      <a [routerLink]="['/home/appointment/first-appointment']">
+      <a [routerLink]="['/appointment/appointment-first']">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"
@@ -32,8 +27,8 @@
         <h3>Servicio elegido</h3>
         <p><strong>Servicio seleccionado:</strong> {{ service.name }}</p>
         <p><strong>Duración:</strong> {{ service.time }}</p>
-        <p><strong>Precio:</strong> {{ service.price }}</p>
-        <p><strong>Descripción:</strong> {{ service.description }}</p>
+        <!-- <p><strong>Precio:</strong> {{ service.price }}</p>
+        <p><strong>Descripción:</strong> {{ service.description }}</p> -->
       </div>
     }
   </div>
