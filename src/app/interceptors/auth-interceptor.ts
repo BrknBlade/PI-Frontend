@@ -1,7 +1,7 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
-  if(req.method === 'POST') {
+  if(['POST', 'PUT', 'PATCH', 'DELETE'].includes(req.method)) {
     const xsrfToken = document.cookie
       .split('; ')
       .find(row => row.startsWith('XSRF-TOKEN'))

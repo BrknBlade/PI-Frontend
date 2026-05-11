@@ -5,7 +5,7 @@ import { routes } from '../../app.routes';
 
 @Component({
   selector: 'app-home-page',
-  imports: [RouterLink, HeaderMain],
+  imports: [RouterLink],
   templateUrl: './home-page.html',
   styleUrl: './home-page.css',
 })

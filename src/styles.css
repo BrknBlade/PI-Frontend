@@ -1,3 +1,4 @@
+/* You can add global styles to this file, and also import other style files */
 :root{
   --fondo-principal: #f5f5f7 ;
   --fondo-paneles: #fdfcfb;
@@ -28,13 +29,13 @@
   --sombra-panel: 0px 1px 8px -5px #00000075;
 
   /***********HOME PAGE VARIABLES**************/
-  --fondo-header-home-page: #ffffffbf;
+  --fondo-header-home-page: #ffffffbf;/*repe*/
 
   --color-blanco: #ffffff;
   --color-blanco-hover: #ffffff4d;
   --color-blanco-info: #faf9f7;
   --color-blanco-border: #ececec;
-  --color-blanco-header: #ffffffbf;
+  --color-blanco-header: #ffffffbf;/*repe*/
 
   --color-primario-home-page: #daaf77;
   --color-primario-hover-home-page: #dcbd94;
@@ -51,17 +52,50 @@
 
   --color-negro: #000000;
 }
-
+@font-face {
+  font-family: Inter;
+  src: 
+    url('../public/fonts/Inter_18pt-Regular.ttf') format('truetype');
+  font-weight: normal;
+}
+@font-face {
+  font-family: Inter Medium;
+  src: 
+    url('../public/fonts/Inter_28pt-Medium.ttf') format('truetype');
+  font-weight: bold;
+}
+@font-face {
+  font-family: Inter Bold;
+  src: 
+    url('../public/fonts/Inter_18pt-SemiBold.ttf') format('truetype');
+  font-weight: bolder;
+}
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
-html,
-body {
-  font-family: Inter Bold, sans-serif;
-  min-height: 100%;
-  width: 100%;
-  background-color: var(--color-blanco-info);
+body{
+    background-color: var(--fondo-principal);
+    font-family: Inter Medium, sans-serif;
+    margin: 0;
+}
+app-login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 89vh;
+    text-align: center;
+}
+app-citas{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 89vh;
+}
+.header-off{
+    display: none;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }

@@ -1,5 +1,10 @@
 import { Routes } from '@angular/router';
 import { Login } from './pages/login/login';
+import { Citas } from './pages/citas/citas';
+import { authGuard } from './guards/auth.guard';
+import { UserData } from './services/userData/user-data';
+import { inject } from '@angular/core';
+import { guestGuard } from './guards/guest.guard';
 import { HomePage } from './pages/home-page/home-page';
 import { AppointmentPage } from './pages/appointment-page/appointment-page';
 import { FirstAppointment } from './pages/first-appointment/first-appointment';
@@ -14,8 +19,17 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'login',
-    component: Login,
+    path : 'login',
+    component : Login,
+    canActivate: [guestGuard]
+  },
+  {
+    path : 'citas',
+    component : Citas,
+    canActivate: [authGuard],
+    resolve: {
+      citas: () => inject(UserData).getCitas()
+    }
   },
   {
     path: 'home',
