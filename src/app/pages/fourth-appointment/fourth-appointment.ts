@@ -5,10 +5,11 @@ import { AppointmentStylist } from '../../models/secondAppointment-model';
 import { DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { CheckShared } from "../../shared/check-shared/check-shared";
 
 @Component({
   selector: 'app-fourth-appointment',
-  imports: [DatePipe, FormsModule, RouterLink],
+  imports: [DatePipe, FormsModule, RouterLink, CheckShared],
   templateUrl: './fourth-appointment.html',
   styleUrl: './fourth-appointment.css',
 })

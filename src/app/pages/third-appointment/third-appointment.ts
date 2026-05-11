@@ -3,9 +3,10 @@ import { RouterLink } from '@angular/router';
 import { AppointmentService } from '../../models/appointment-model';
 import { AppointmentStylist } from '../../models/secondAppointment-model';
 import { AppointmentDatetime } from '../../models/thirdAppointment-model';
+import { CheckShared } from "../../shared/check-shared/check-shared";
 @Component({
   selector: 'app-third-appointment',
-  imports: [RouterLink],
+  imports: [RouterLink, CheckShared],
   templateUrl: './third-appointment.html',
   styleUrl: './third-appointment.css',
 })

@@ -1,3 +1,5 @@
+import { withInMemoryScrolling } from '@angular/router';
+
 import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZonelessChangeDetection, provideAppInitializer, inject, LOCALE_ID  } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
@@ -16,7 +18,7 @@ export const appConfig: ApplicationConfig = {
     provideZonelessChangeDetection(),
     provideRouter(routes),
     provideHttpClient(
-      withInterceptors([ authInterceptor ])
+    withInterceptors([ authInterceptor ])
     ),
     { provide: LOCALE_ID, useValue: 'es' }, 
     // Al arrancar la app, intenta recuperar el usuario de la sesión activa
