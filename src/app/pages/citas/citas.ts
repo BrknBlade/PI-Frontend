@@ -87,6 +87,7 @@ export class Citas implements OnInit{
       { hora: '18:00', disponible: true },
       { hora: '19:00', disponible: true },
   ];
+  
 
   ngOnInit(): void {
     this.pintarCitas()

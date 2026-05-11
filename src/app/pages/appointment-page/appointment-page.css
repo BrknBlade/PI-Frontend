@@ -2,5 +2,5 @@
 /*<---PRIMER SECTION--->*/
 
 .main{
-    background-color: #faf9f7;
+    background-color: var(--color-blanco-info);
 }

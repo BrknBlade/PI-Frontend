@@ -508,6 +508,11 @@ p{
         height: 100vh;
         border-radius: 0;
     }
+    .modal-cancelar{
+        width: 70vw;
+        height: 40vh;
+        border-radius: 25px;
+    }
     .modal-peque{
         width: 100vw;
         height: 100vh;
@@ -526,6 +531,21 @@ p{
     .container-fechas svg{
         transition: all .2s ease-in-out;
         rotate: 90deg;
+    }
+}
+
+
+@media (max-width: 486px) {
+    .modal-cancelar{
+        width: 100vw;
+        height: 100vh;
+        border-radius: 0;
+    }
+    .modal-cancelar .articulo-calendario{
+        width: 100vw;
+        height: 100vh;
+        border-radius: 0;
+        justify-content: center;
     }
 }
 

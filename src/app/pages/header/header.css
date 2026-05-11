@@ -551,9 +551,9 @@
 }
 
 .modal{
-    width: 100vw;
-    height: 100vh;
-    border-radius: 0;
+    width: 65vw;
+    height: fit-content;
+    border-radius: 25px;
 }
 
 .backdrop{
@@ -617,15 +617,25 @@
 @media (min-width: 1024px) {
     .modal{
         width: 65vw;
-        border-radius: 25px;
-    }
-    .modal-cancelar{
-        width: 50vw;
         height: fit-content;
+        border-radius: 25px;
     }
 }
 @media (max-width: 486px) {
     .hedaer_content_div h2 {
         display: none;
+    }
+    .modal-cancelar{
+        width: 100vw;
+        height: 100vh;
+        border-radius: 0;
+    }
+    .modal-cancelar .articulo-calendario{
+        display: flex;
+        justify-content: center;
+        height: stretch;
+    }
+    .modal footer{
+        flex-direction: column-reverse;
     }
 }

@@ -406,7 +406,7 @@
 
 .appointment_header p {
     font-size: 1.5rem;
-    color: var(--color-blanco-info);
+    color: var(--color-blanco);
     max-width: 650px;
     margin: 0 auto;
     line-height: 1.6;

@@ -18,9 +18,9 @@
 }
 
 .first {
-    background-color: var(--fondo-secundario);
+    background-color: var(--primario);
     border-radius: 50%;
-    color: var(--primario);
+    color: var(--color-blanco);
 }
 
 /*<---PRIMER SECTION--->*/
