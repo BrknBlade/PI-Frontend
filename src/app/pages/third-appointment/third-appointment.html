@@ -1,16 +1,11 @@
-<section class="info">
-  <div>1</div>
-  <div>2</div>
-  <div class="first">3</div>
-  <div>4</div>
-</section>
+<app-check-shared [currentPage]="3"></app-check-shared>
 <section class="select">
   <p>Elige fecha y hora</p>
 </section>
 <section class="back">
   <div class="back_div">
     <nav class="back_nav">
-      <a [routerLink]="['/home/appointment/second-appointment']">
+      <a [routerLink]="['/appointment/appointment-second']">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"
@@ -32,8 +27,8 @@
         <h3>Servicio elegido</h3>
         <p><strong>Servicio seleccionado:</strong> {{ service.name }}</p>
         <p><strong>Duración:</strong> {{ service.time }}</p>
-        <p><strong>Precio:</strong> {{ service.price }}</p>
-        <p><strong>Descripción:</strong> {{ service.description }}</p>
+        <!-- <p><strong>Precio:</strong> {{ service.price }}</p>
+        <p><strong>Descripción:</strong> {{ service.description }}</p> -->
       </div>
     }
     @if (appointmentStylist.selectedService(); as stylist) {
@@ -129,5 +124,11 @@
   </div> -->
 </section>
 <section class="section_confirm">
-  <button class="confirm" [routerLink]="['/home/appointment/fourth-appointment']" (click)="confirmarCita()">Confirmar cita</button>
+  <button 
+  class="confirm" 
+  [routerLink]="pruebaDia() && pruebaHora() ? ['/appointment/appointment-fourth'] : null"
+  [disabled]="!pruebaDia() || !pruebaHora()"
+  (click)="confirmarCita()">
+  Confirmar cita
+</button>
 </section>

@@ -76,7 +76,7 @@
 
 .select p {
     font-size: 1.1rem;
-    color: var(--texto-secundario);
+    color: var(--texto-secundario-uwu);
 }
 
 /*<---Tercer SECTION--->*/
@@ -97,7 +97,7 @@
 
 .section_header p {
     font-size: 1.1rem;
-    color: var(--texto-secundario);
+    color: var(--texto-secundario-uwu);
     /* max-width: 650px;
     margin: 0 auto; */
     line-height: 1.6;
@@ -166,7 +166,7 @@
 }
 
 .description {
-    color: var(--texto-secundario);
+    color: var(--texto-secundario-uwu);
     font-size: 15px;
     line-height: 1.5;
     margin-bottom: 20px;

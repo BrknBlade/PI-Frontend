@@ -1,0 +1,16 @@
+<section class="section_pages">
+  <ng-container *ngFor="let page of totalPages; let last = last">
+
+    <div class="div_page">
+      <div class="page_circle" [ngClass]="getPage(page)">
+        <span *ngIf="getPage(page) === 'done'" class="check">✓</span>
+        <span *ngIf="getPage(page) !== 'done'">{{ page }}</span>
+      </div>
+    </div>
+
+    <div *ngIf="!last" class="connector">
+      <div class="connector-fill" [class.filled]="getPage(page) === 'done'"></div>
+    </div>
+
+  </ng-container>
+</section>

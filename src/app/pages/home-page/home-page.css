@@ -52,7 +52,6 @@
     color: var(--texto-principal);
     padding: 10px;
     border-radius: 15px;
-
     transition: color 0.3 ease;
 }
 
@@ -188,7 +187,7 @@
 
 .section_header p {
     font-size: 1.1rem;
-    color: var(--texto-secundario);
+    color: var(--texto-secundario-uwu);
     max-width: 650px;
     margin: 0 auto;
     line-height: 1.6;
@@ -242,7 +241,7 @@
 }
 
 .service_card p:not(.price) {
-    color: var(--texto-secundario);
+    color: var();
     line-height: 1.6;
 }
 
@@ -277,7 +276,7 @@
 
 .info_header p {
     font-size: 1.1rem;
-    color: var(--texto-secundario);
+    color: var();
     max-width: 650px;
     margin: 0 auto;
     line-height: 1.6;
@@ -308,7 +307,7 @@
 }
 
 .info_card p {
-    color: var(--texto-secundario);
+    color: var();
     line-height: 1.6;
 }
 
@@ -337,7 +336,7 @@
 
 .experience_header p {
     font-size: 1.1rem;
-    color: var(--texto-secundario);
+    color: var();
     max-width: 650px;
     margin: 0 auto;
     line-height: 1.6;
@@ -363,7 +362,7 @@
 }
 
 .experience_card p {
-    color: var(--texto-secundario);
+    color: var();
     line-height: 1.6;
     margin-bottom: 1.5rem;
 }
@@ -679,3 +678,26 @@
         padding: 1.8rem 1.4rem;
     }
 }
+
+/* @keyframes show {
+    from {
+        opacity: 0;
+        scale: 25%;
+    }
+
+    to {
+        opacity: 1;
+        scale: 100%;
+    }
+}
+
+section, footer {
+    view-timeline-name: --section;
+    view-timeline-axis: block;
+
+    animation-timeline: --section;
+    animation-name: show;
+
+    animation-range: entry 25% cover 30%;
+    animation-fill-mode: both;
+} */

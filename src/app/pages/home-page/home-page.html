@@ -9,14 +9,14 @@
           <p>Servicios de peluquería premium con reserva online disponible 24/7</p>
         </div>
         <div class="hero_actions">
-          <a [routerLink]="['']">Reservar Cita</a>
-          <a [routerLink]="['']">Ver Servicios</a>
+          <a [routerLink]="['/appointment']">Reservar Cita</a>
+          <a (click)="scrollsToServices()">Ver Servicios</a>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="services">
+  <section class="services" id="services">
     <div class="services_content">
       <header class="section_header">
         <h2>Nuestros Servicios</h2>
@@ -421,7 +421,7 @@
       <header class="appointment_header">
         <h2>¿Lista para Transformar tu Imagen?</h2>
         <p>Reserva tu cita ahora y vive la diferencia</p>
-        <a [routerLink]="['/home/appointment/first-appointment']">Reservar Ahora</a>
+        <a [routerLink]="['/appointment']">Reservar Ahora</a>
       </header>
     </div>
   </section>
