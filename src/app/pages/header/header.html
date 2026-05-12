@@ -24,19 +24,7 @@
           <a [routerLink]="['/home/appointment']">Reservar Cita</a>
         </nav>
       }
-      @case ('/appointment/first-appointment') {
-        <div class="header_content_main">
-          <a [routerLink]="['/home']">
-            <img src="logo_peluqueria-color.webp" alt="logo_peluqueria" />
-          </a>
-          <h2>Salón Elegancia</h2>
-        </div>
-        <nav class="main_nav">
-          <a class="nav-login" [routerLink]="['/login']">Ir al Login</a>
-          <a [routerLink]="['/home/appointment']">Reservar Cita</a>
-        </nav>
-      }
-      @case ('/home/appointment/first-appointment') {
+      @case ('/appointment/first') {
         <div class="header_content_main">
           <a [routerLink]="['/home']">
             <img src="logo_peluqueria-color.webp" alt="logo_peluqueria" />
@@ -47,7 +35,7 @@
           <a class="nav-login" [routerLink]="['/login']">Ir al Login</a>
         </nav>
       }
-      @case ('/home/appointment/second-appointment') {
+      @case ('/appointment/second') {
         <div class="header_content_main">
           <a [routerLink]="['/home']">
             <img src="logo_peluqueria-color.webp" alt="logo_peluqueria" />
@@ -58,7 +46,7 @@
           <a class="nav-login" [routerLink]="['/login']">Ir al Login</a>
         </nav>
       }
-      @case ('/home/appointment/third-appointment') {
+      @case ('/appointment/third') {
         <div class="header_content_main">
           <a [routerLink]="['/home']">
             <img src="logo_peluqueria-color.webp" alt="logo_peluqueria" />
@@ -69,7 +57,7 @@
           <a class="nav-login" [routerLink]="['/login']">Ir al Login</a>
         </nav>
       }
-      @case ('/home/appointment/fourth-appointment') {
+      @case ('/appointment/fourth') {
         <div class="header_content_main">
           <a [routerLink]="['/home']">
             <img src="logo_peluqueria-color.webp" alt="logo_peluqueria" />
@@ -88,7 +76,7 @@
           <h2>Salón Elegancia</h2>
         </div>
         <nav class="main_nav">
-          <a [routerLink]="['/home/appointment']">Reservar Cita</a>
+          <a [routerLink]="['/appointment']">Reservar Cita</a>
           <a class="logout" (click)="mostrarAviso()">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-out w-4 h-4 mr-2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" x2="9" y1="12" y2="12"></line></svg>
             <span>Cerrar sesión</span>

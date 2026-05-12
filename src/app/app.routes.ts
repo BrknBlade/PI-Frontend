@@ -42,22 +42,22 @@ export const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'appointment-first',
+        redirectTo: 'first',
       },
       {
-        path: 'appointment-first',
+        path: 'first',
         component: FirstAppointment,
       },
       {
-        path: 'appointment-second',
+        path: 'second',
         component: SecondAppointment,
       },
       {
-        path: 'appointment-third',
+        path: 'third',
         component: ThirdAppointment,
       },
       {
-        path: 'appointment-fourth',
+        path: 'fourth',
         component: FourthAppointment,
       },
     ],

@@ -60,6 +60,6 @@ export class FirstAppointment {
 
   selectService(service: Service) {
     this.appointmentService.selectedService.set(service);
-    this.router.navigate(['/appointment/appointment-second']);
+    this.router.navigate(['/appointment/second']);
   }
 }

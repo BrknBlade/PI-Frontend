@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { provideRouter, RouterLink, withInMemoryScrolling } from '@angular/router';
-import { HeaderMain } from '../../shared/header-main/header';
 import { routes } from '../../app.routes';
 
 @Component({

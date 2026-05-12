@@ -5,7 +5,7 @@
 <section class="back">
   <div class="back_div">
     <nav class="back_nav">
-      <a [routerLink]="['/appointment/appointment-second']">
+      <a [routerLink]="['/appointment/second']">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"
@@ -126,7 +126,7 @@
 <section class="section_confirm">
   <button 
   class="confirm" 
-  [routerLink]="pruebaDia() && pruebaHora() ? ['/appointment/appointment-fourth'] : null"
+  [routerLink]="pruebaDia() && pruebaHora() ? ['/appointment/fourth'] : null"
   [disabled]="!pruebaDia() || !pruebaHora()"
   (click)="confirmarCita()">
   Confirmar cita

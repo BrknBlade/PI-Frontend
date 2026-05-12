@@ -41,6 +41,6 @@ export class SecondAppointment {
 
   selectStylist(stylist: Stylist){
     this.secondAppointment.selectedService.set(stylist);
-    this.router.navigate(['/appointment/appointment-third']);
+    this.router.navigate(['/appointment/third']);
   }
 }
