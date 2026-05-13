@@ -11,6 +11,9 @@ import { FirstAppointment } from './pages/first-appointment/first-appointment';
 import { SecondAppointment } from './pages/second-appointment/second-appointment';
 import { ThirdAppointment } from './pages/third-appointment/third-appointment';
 import { FourthAppointment } from './pages/fourth-appointment/fourth-appointment';
+import { NavigationAdmin } from './components/navigation-admin/navigation-admin';
+import { Dashboard } from './pages/admin/dashboard/dashboard';
+import { Calendario } from './pages/admin/calendario/calendario';
 
 export const routes: Routes = [
   {
@@ -34,6 +37,25 @@ export const routes: Routes = [
   {
     path: 'home',
     component: HomePage,
+  },
+  {
+    path: 'admin',
+    component: NavigationAdmin,
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'panel',
+      },
+      {
+        path: 'panel',
+        component: Dashboard
+      },
+      {
+        path: 'calendario',
+        component: Calendario
+      },
+    ],
   },
   {
     path: 'appointment',
