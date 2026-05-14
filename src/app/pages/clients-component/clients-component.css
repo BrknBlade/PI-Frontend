@@ -1,0 +1,26 @@
+.contenedor {
+    font-family: Inter, sans-serif;
+    text-align: start;
+    max-width: 1200px;
+    width: 85%;
+    height: inherit;
+}
+
+h2 {
+    color: var(--texto-principal);
+}
+
+p{
+    color: var(--texto-secundario);
+}
+
+.contenedor h1 {
+    font-family: Inter Bold, sans-serif;
+    color: var(--texto-principal);
+    margin-bottom: 0;
+}
+
+.contenedor h1 + p {
+    font-family: Inter, sans-serif;
+    font-size: 18px;
+}

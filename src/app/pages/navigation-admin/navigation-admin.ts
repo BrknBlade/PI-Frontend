@@ -1,22 +1,13 @@
 import { Component, DoCheck } from '@angular/core';
-import { Router, RouterLink } from "@angular/router";
+import { Router, RouterLink, RouterOutlet } from "@angular/router";
 
 @Component({
   selector: 'app-navigation-admin',
-  imports: [RouterLink],
+  imports: [RouterLink, RouterOutlet],
   templateUrl: './navigation-admin.html',
   styleUrl: './navigation-admin.css',
 })
 export class NavigationAdmin implements DoCheck{
-
-  enlacesContenido = [
-    'Panel',
-    'Calendario',
-    'Servicios',
-    'Empleados',
-    'Clientes',
-    'Ajustes'
-  ]
 
   ngDoCheck(): void {
     this.controlActivo();
@@ -35,8 +26,10 @@ export class NavigationAdmin implements DoCheck{
       if(seccionActual.toLocaleLowerCase() == a.textContent.toLocaleLowerCase()){
         a.classList.add('activo');
       }
-    })
+    });
   }
+
+  
 
 
 

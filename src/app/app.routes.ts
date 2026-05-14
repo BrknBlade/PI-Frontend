@@ -13,6 +13,7 @@ import { ThirdAppointment } from './pages/third-appointment/third-appointment';
 import { FourthAppointment } from './pages/fourth-appointment/fourth-appointment';
 import { ClientsComponent } from './pages/clients-component/clients-component';
 import { SettingsComponent } from './pages/settings-component/settings-component';
+import { NavigationAdmin } from './pages/navigation-admin/navigation-admin';
 
 export const routes: Routes = [
   {
@@ -39,6 +40,7 @@ export const routes: Routes = [
   },
   {
     path: 'admin',
+    component: NavigationAdmin,
     children: [
       {
         path: '',
