@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { provideRouter, RouterLink, withInMemoryScrolling } from '@angular/router';
 import { routes } from '../../app.routes';
-
 @Component({
   selector: 'app-home-page',
   imports: [RouterLink],

@@ -4,11 +4,12 @@ import { loginModel } from '../../models/login-model';
 import { AuthService } from '../../services/auth/auth-service';
 import { Router } from '@angular/router';
 import { NotificationService } from '../../services/notification/notification-service';
+import { HomePage as Header } from '../header/header';
 
 
 @Component({
   selector: 'app-login',
-  imports: [FormField],
+  imports: [FormField, Header],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
@@ -55,7 +56,7 @@ export class Login {
     this.cargando.set(true);
     if(this.cargando()){
       button.lastElementChild?.classList.add('carga-disabled')
-      
+
     }
 
     const credentials: Object = {
@@ -85,7 +86,7 @@ export class Login {
         setTimeout(() => {
           this.notificacionService.hideNotif(notificacion, this.cargando());
 
-        }, 3000); 
+        }, 3000);
           notificacion.classList.remove('salida');
       },
     });
