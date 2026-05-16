@@ -82,6 +82,25 @@
 /*<---Tercer SECTION--->*/
 .services {
     padding: 0rem 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.services_content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.services_grid {
+    list-style: none;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    width: 100%;
+    padding: 0;
 }
 
 .section_header {
@@ -106,16 +125,6 @@
 .section_services {
     text-align: center;
     margin-bottom: 3.5rem;
-}
-
-.services_grid {
-    list-style: none;
-    margin-top: 40px;
-    margin-bottom: 40px;
-
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
 }
 
 .service_card a {

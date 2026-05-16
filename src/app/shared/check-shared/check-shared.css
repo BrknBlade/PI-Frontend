@@ -24,7 +24,9 @@
   background: transparent;
   border: none;
   color: #bbb;
-  transition: background 0.3s, color 0.3s;
+  transition: background 0.3s, color 0.3s, transform 0.2s;
+  cursor: default;
+  user-select: none;
 }
 
 .page_circle.done {
@@ -38,6 +40,15 @@
   animation: pulse 3s ease-out infinite;
 }
 
+.page_circle.unlocked {
+  cursor: pointer;
+}
+
+.page_circle.unlocked:hover {
+  transform: scale(1.1);
+  opacity: 0.85;
+}
+
 .check {
   font-size: 18px;
   animation: popIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -45,7 +56,7 @@
 
 .connector {
   width: 60px;
-  height: 1.5px;
+  height: 3px; /* más gruesa */
   background: #ddd;
   margin-top: 22px;
   position: relative;
@@ -65,7 +76,19 @@
   width: 100%;
 }
 
+/* Al volver atrás sale por la derecha */
+.connector-fill.unfilled {
+  width: 0%;
+  transition: width 0.5s ease;
+  transform-origin: right;
+}
+
 @keyframes popIn {
   from { transform: scale(0); opacity: 0; }
   to   { transform: scale(1); opacity: 1; }
+}
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(112, 83, 107, 0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(112, 83, 107, 0); }
 }
