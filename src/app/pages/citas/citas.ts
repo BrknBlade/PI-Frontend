@@ -5,6 +5,7 @@ import { CutData } from '../../services/cutData/cut-data';
 import { firstValueFrom } from 'rxjs';
 import { DatePipe } from '@angular/common';
 import { CitaService } from '../../services/citas/cita-service';
+import { RouterLink } from '@angular/router';
 
 interface NumberDictionary{
   [key: string]: number;
@@ -12,7 +13,7 @@ interface NumberDictionary{
 
 @Component({
   selector: 'app-citas',
-  imports: [DatePipe],
+  imports: [DatePipe, RouterLink],
   templateUrl: './citas.html',
   styleUrl: './citas.css',
 })
@@ -22,6 +23,8 @@ export class Citas implements OnInit{
   modal = false;
   cambiarCita = false;
   cancelarCita = false;
+  tabActiva = signal<string>('citas');
+
 
   datosNuevos: any = {
     'date': '',
@@ -73,6 +76,8 @@ export class Citas implements OnInit{
 
   idCita: any;
   nombreCorte: any;
+  eliminando = signal(false);
+  guardando = signal(false);
 
   horas = [
       { hora: '09:00', disponible: true },
@@ -87,7 +92,7 @@ export class Citas implements OnInit{
       { hora: '18:00', disponible: true },
       { hora: '19:00', disponible: true },
   ];
-  
+
 
   ngOnInit(): void {
     this.pintarCitas()
@@ -96,66 +101,55 @@ export class Citas implements OnInit{
   }
 
   async pintarCitas() {
-    const response: any = await firstValueFrom(this.userDataService.getCitas());
-    const citas = response.data;
+  const response: any = await firstValueFrom(this.userDataService.getCitas());
+  const citas = response.data;
 
-    for (const cita of citas) {
-      const data: any = await firstValueFrom(this.cutDataService.getCut(cita.cut_type_id));
-      if (!data) continue;
-      this.citaVars.update(current => ({ ...current, [cita.cut_type_id]: data.data.name }));
-    }
+  for (const cita of citas) {
+    const data: any = await firstValueFrom(this.cutDataService.getCut(cita.cut_type_id));
+    if (!data) continue;
 
-    this.cargando.set(false);
+    this.citaVars.update(current => ({
+      ...current,
+      [cita.cut_type_id]: {
+        name: data.data.name,
+        price: data.data.price ? `${data.data.price}€` : null,
+        duration: data.data.duration ? `${data.data.duration} min` : null,
+      }
+    }));
   }
 
-  openCancelCita(event: Event){
-    this.controlHeader();
+  this.cargando.set(false);
+}
 
-    this.cancelarCita = true;
-    //guardar el valor de la hora y la fecha nueva seleccionada con la clase eleccion
-    let boton = event.target as HTMLButtonElement;
-    let inputID = boton.parentElement?.firstElementChild as HTMLElement;
-    let nombreCorteElement = boton.parentElement?.parentElement?.firstElementChild as HTMLElement;
-    this.nombreCorte = nombreCorteElement.textContent;
-    let idCita = inputID.getAttribute('value');
+  openCancelCita(event: Event) {
+  const boton = event.target as HTMLButtonElement;
+  const div = boton.closest('.cita-info') as HTMLElement;
+  const h2 = div.querySelector('h2');
 
-    if(idCita){
-      idCita = idCita?.trim();
-      let valores = idCita.split(' ');
-      let id = valores[0];
-      console.log('id: ', id);
-      this.idCita = id;
-    }
-  }
+  this.nombreCorte = h2?.textContent?.trim();
+  this.idCita = div.dataset['id'];
+
+  this.cancelarCita = true;
+  this.controlHeader();
+}
 
   closeCancel(){
     this.controlHeader();
     this.cancelarCita = false;
   }
 
-  openAlert(){
-    let e: Event = new Event('click');
-
-    this.cambiarCita = true;
-    //guardar el valor de la hora y la fecha nueva seleccionada con la clase eleccion
-    let hora = document.querySelector<HTMLButtonElement>('.eleccion');// tambien sirve document.querySelector('.eleccion') as HTMLButtonElement
-    let dia = document.querySelector('.dia') as HTMLButtonElement;
-    if(hora){
-      this.datosNuevos['hour'] = hora.value;
-    }else{
-      this.datosNuevos['hour'] = null;
-    }
-
-    if(dia){
-      console.log(dia.textContent)
-      this.datosNuevos['date'] = this.year + '-0' + (this.mes + 1)  + '-' + dia.textContent.trim();
-    }else{
-      this.datosNuevos['date'] = `${this.pruebaYear}-0${this.pruebaMes}-${this.pruebaDia()}`;
-    }
-    console.log(this.datosNuevos)
-
-    this.closeModal();
+  openAlert() {
+  // Si no se seleccionó nada nuevo, usar los datos originales
+  if (!this.datosNuevos['date']) {
+    this.datosNuevos['date'] = this.fechaAntigua;
   }
+  if (!this.datosNuevos['hour']) {
+    this.datosNuevos['hour'] = this.horaAntigua; // ya viene sin segundos
+  }
+  console.log('openAlert datos:', this.datosNuevos);
+  this.cambiarCita = true;
+  this.closeModal();
+}
 
   async closeAlert(){
     this.cambiarCita = false;
@@ -174,42 +168,43 @@ export class Citas implements OnInit{
 
     this.modal = true;
   }
-  
-  showModal(event: Event){
-    let boton = event.target as HTMLButtonElement;
-    let inputID = boton.parentElement?.firstElementChild as HTMLElement;
 
-    let idCita = inputID.getAttribute('value');
+  showModal(event: Event) {
+  const boton = event.target as HTMLButtonElement;
+  const div = boton.closest('.cita-info') as HTMLElement;
 
-    if(idCita){
-      idCita = idCita?.trim();
-      let valores = idCita.split(' ');
-      let horaValores = valores[1].split(':');
-      this.horaAntigua = `${horaValores[0]}:${horaValores[1]}`;
-    }
-    this.idCita = inputID.getAttribute('value');
+  const fecha = div.dataset['date']!;
+  const hora = div.dataset['hour']!;
+  const id = div.dataset['id']!;
 
-    let div = boton.parentElement?.parentElement?.children;
-    if(div){
-      let fechaAntigua = div[4] as HTMLInputElement;
-      this.fechaAntigua =  fechaAntigua.value;
+  this.idCita = id;
+  this.fechaAntigua = fecha;
 
-    }
+  const horaValores = hora.split(':');
+  this.horaAntigua = `${horaValores[0]}:${horaValores[1]}`;
 
-    //this.getDiaCita(this.idCita);
+  // para el calendario
+const partesFecha = fecha.split('-');
+this.pruebaYear = partesFecha[0];
+this.pruebaMes = parseInt(partesFecha[1]); // mes real (1-12)
+this.pruebaDia.set(partesFecha[2]);
+this.mesCondicion = this.pruebaMes - 1; // mes para el calendario (0-11)
+this.yearCondicion = parseInt(this.pruebaYear);
+this.mes = this.pruebaMes - 1; // mes para el calendario (0-11)
+this.year = parseInt(this.pruebaYear);
 
-    this.recogerDatosCitasDOM(event);
+const horaLimpia = hora.slice(0, 5);
+this.pruebaHora.set(horaLimpia);
+// el mes ya viene bien de la API sin el 0 extra
+this.pruebaFecha.set(`${fecha}T${horaLimpia}`);
 
-    this.getCalendarContent();
-
-    this.modal = true;
-    if(this.modal){
-      this.controlHeader();
-    }
-  }
+  this.getCalendarContent();
+  this.modal = true;
+  this.controlHeader();
+}
   closeModal(){
     this.modal = false;
-    
+
     this.controlHeader();
   }
 
@@ -224,7 +219,7 @@ export class Citas implements OnInit{
       let hora = divHijos[3];
       console.log(dia.textContent.match(/,\s*(\d{1,2})/)?.[1]);
       this.pruebaDia.set(dia.textContent.match(/,\s*(\d{1,2})/)?.[1]);
-      
+
       this.pruebaMes = this.getMesNumero((dia.textContent.match(/\d{1,2} de (\w+) de/)?.[1]));
 
       this.mesCondicion = this.pruebaMes;
@@ -244,9 +239,9 @@ export class Citas implements OnInit{
       }
 
       this.pruebaHora.set(hora.textContent)
-      
+
       if(this.pruebaHora().length == 4){
-        this.pruebaHora.set('0' + this.pruebaHora()); 
+        this.pruebaHora.set('0' + this.pruebaHora());
       }
       console.log(this.pruebaDia())
 
@@ -254,7 +249,7 @@ export class Citas implements OnInit{
       this.pruebaFecha.set(`${this.pruebaYear}-0${this.pruebaMes}-${this.pruebaDia()}T${this.pruebaHora()}`);
       console.log(this.pruebaFecha())
 
-    } 
+    }
 
   }
   getMesNumero(mes: any) {
@@ -351,7 +346,7 @@ export class Citas implements OnInit{
     }
       return this.mesElegido;
   }
-  
+
   restarMes(){
     if(this.mes <= 0){
       this.year = this.year-1;
@@ -382,36 +377,24 @@ export class Citas implements OnInit{
 
   }
 
-  seleccionarHora(event: Event){
-    let eleccion = event.target as HTMLElement;
+seleccionarHora(event: Event) {
+  const eleccion = event.target as HTMLElement;
+  const hora = eleccion?.textContent?.trim() ?? '';
+  this.pruebaHora.set(hora);
+  this.datosNuevos['hour'] = hora; // sin :00
+  this.pruebaFecha.set(`${this.pruebaYear}-${String(this.pruebaMes).padStart(2,'0')}-${this.pruebaDia()}T${hora}`);
+}
 
-    this.pruebaHora.set(eleccion?.textContent?.trim());
-
-    this.pruebaFecha.set(`${this.pruebaYear}-0${this.pruebaMes}-${this.pruebaDia()}T${this.pruebaHora()}`)
-
-    console.log(this.pruebaHora());
-
-  }
-
-  seleccionarDia(event: Event){
-    let eleccion = event.target as HTMLElement;
-    
-
-    this.pruebaDia.set(eleccion?.textContent?.trim());
-
-    if(this.pruebaDia().length == 1){
-      this.pruebaDia.set('0' + this.pruebaDia());
-    }
-
-    this.mesCondicion = this.mes;
-    this.yearCondicion = this.year;
-
-    this.pruebaFecha.set(`${this.pruebaYear}-0${this.pruebaMes}-${this.pruebaDia()}T${this.pruebaHora()}`)
-
-
-    console.log(this.pruebaDia());
-  }
-
+seleccionarDia(event: Event) {
+  const eleccion = event.target as HTMLElement;
+  const dia = eleccion?.textContent?.trim().padStart(2,'0') ?? '';
+  this.pruebaDia.set(dia);
+  this.mesCondicion = this.mes;
+  this.yearCondicion = this.year;
+  const mesNum = String(this.mes + 1).padStart(2, '0');
+  this.datosNuevos['date'] = `${this.year}-${mesNum}-${dia}`;
+  this.pruebaFecha.set(`${this.year}-${mesNum}-${dia}T${this.pruebaHora()}`);
+}
 
   getDiaCita(id: any): any{
     this.citaService.getCita(id).subscribe((r)=>{
@@ -435,14 +418,19 @@ export class Citas implements OnInit{
     });
   }
 
-  async guardarCambios(){
+  async guardarCambios() {
+  this.guardando.set(true);
+  console.log('Enviando:', this.datosNuevos);
+  try {
     await firstValueFrom(this.citaService.updateCita(this.idCita, this.datosNuevos));
-    this.pintarCitas();
-    
-    await this.closeAlert()
-
-    return this.datosNuevos;
+    await this.pintarCitas();
+    this.guardando.set(false);
+    await this.closeAlert();
+  } catch (err: any) {
+    console.log('Error detallado:', err.error);
+    this.guardando.set(false);
   }
+}
 
   async controlHeader() {
     await new Promise(resolve => setTimeout(resolve, 0));
@@ -457,11 +445,19 @@ export class Citas implements OnInit{
     }
   }
 
-  async deleteCita(){
-    this.citaService.deleteCita(this.idCita).subscribe(async () => {
-      await this.pintarCitas();
-      this.cancelarCita = false;
-      document.querySelector('app-header')?.classList.remove('header-off');
-    });
-  }
+  async deleteCita() {
+  this.eliminando.set(true);
+  this.citaService.deleteCita(this.idCita).subscribe(async () => {
+    await this.pintarCitas();
+    this.eliminando.set(false);
+    this.cancelarCita = false;
+    document.querySelector('app-header')?.classList.remove('header-off');
+  });
+}
+
+  logout() {
+  this.authService.logout().subscribe(() => {
+    window.location.href = '/login';
+  });
+}
 }

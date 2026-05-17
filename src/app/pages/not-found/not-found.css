@@ -1,0 +1,103 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem;
+  text-align: center;
+}
+
+.num {
+  font-size: 120px;
+  font-weight: 500;
+  letter-spacing: -4px;
+  color: var(--texto-principal);
+  line-height: 1;
+  margin: 0;
+}
+
+.num span {
+  color: var(--primario);
+}
+
+.scissors {
+  font-size: 52px;
+  color: var(--primario);
+  margin: 12px 0;
+  display: block;
+}
+
+.divider {
+  width: 48px;
+  height: 2px;
+  background: var(--primario);
+  border-radius: 2px;
+  margin: 0 auto 2rem;
+}
+
+.title {
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--texto-principal);
+  margin: 0 0 8px;
+}
+
+.sub {
+  font-size: 15px;
+  color: var(--texto-secundario);
+  margin: 0 0 2rem;
+  max-width: 320px;
+  line-height: 1.6;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.btn-home {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--primario);
+  color: var(--color-blanco);
+  border: none;
+  border-radius: 8px;
+  padding: 10px 24px;
+  font-size: 15px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-home:hover {
+  background: var(--primario-hover);
+}
+
+.btn-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--texto-secundario);
+  border: 0.5px solid var(--borde);
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 15px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-back:hover {
+  background: var(--fondo-secundario);
+}
+
+.logo {
+  width: 80px;
+  height: auto;
+  margin: 12px 0;
+}

@@ -14,15 +14,42 @@
   font-weight: bolder;
 }
 
+.citas-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 40px 0;
+}
+
 .citas-acciones {
     display: flex;
     justify-content: space-evenly;
     background-color: var(--fondo-secundario);
     padding: 4px;
     border-radius: 17px;
-    margin: 40px 0px;
-    max-width: 400px;
+    max-width: 500px;
+    width: 100%;
     text-align: center;
+    margin: 0;
+}
+
+.btn-nueva-cita {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--primario);
+    color: var(--fondo-paneles);
+    text-decoration: none;
+    border-radius: 15px;
+    padding: 10px 20px;
+    font-family: Inter Bold, sans-serif;
+    font-size: 15px;
+    white-space: nowrap;
+    transition: background-color .2s ease-in-out;
+}
+
+.btn-nueva-cita:hover {
+    background-color: var(--primario-hover);
 }
 
 .citas-acciones a {
@@ -32,6 +59,7 @@
     border-radius: 13px;
     color: var(--texto-principal);
     font-family: Inter Medium, sans-serif;
+    cursor: pointer;
 }
 .activo {
     background-color: var(--fondo-paneles);
@@ -75,32 +103,116 @@ p{
     text-align: center;
     box-shadow: var(--sombra-panel);
 }
+/* ── Cita reservada ─────────────────────────────── */
 .cita-reservada {
     background-color: var(--fondo-paneles);
     border-radius: 15px;
-    border: var(--borde) 1px solid;
-    padding: 24px;
-    display: flex;
-    align-items: flex-start;
-    gap: 20px;
+    border: 1px solid var(--borde);
+    padding: 20px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: start;
+    gap: 16px;
     width: 100%;
+    box-sizing: border-box;
     box-shadow: var(--sombra-panel);
     margin-bottom: 20px;
-    transition: all .3s ease-in-out;
-
+    transition: transform .3s ease-in-out, box-shadow .3s ease-in-out;
 }
 
-.cita-reservada:hover{
+.cita-reservada:hover {
     transform: translateY(-3px);
     box-shadow: 0 8px 20px #4242424b;
 }
+
+/* Icono SVG */
 .cita-reservada > svg {
     box-sizing: content-box;
     padding: 13px;
     background-color: var(--fondo-secundario);
-    border-radius: 15px;
-    min-height: 28px;
-    min-width: 28px;
+    border-radius: 12px;
+    height: 28px;
+    width: 28px;
+    flex-shrink: 0;
+}
+
+.perfil-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: var(--fondo-secundario);
+  color: var(--primario);
+  font-family: Inter Bold, sans-serif;
+  font-size: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.perfil-nombre {
+  margin: 0;
+  font-size: 24px;
+  font-family: Inter Bold, sans-serif;
+  color: var(--texto-principal);
+  text-transform: capitalize;
+}
+
+.perfil-email {
+  margin: 0 !important;
+  font-size: 16px !important;
+  color: var(--texto-secundario-uwu) !important;
+}
+
+.perfil-divider {
+  width: 100%;
+  height: 1px;
+  background-color: var(--borde);
+  margin: 10px 0;
+}
+
+.perfil-logout {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: transparent;
+  border: 2px solid var(--error);
+  color: var(--error);
+  border-radius: 15px;
+  padding: 10px 24px;
+  font-family: Inter Bold, sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all .2s ease-in-out;
+}
+
+.perfil-logout:hover {
+  background-color: var(--error);
+  color: white;
+}
+
+@media (max-width: 780px) {
+  .citas-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+}
+
+/* ── Mobile ≤ 678px ─────────────────────────────── */
+@media (max-width: 678px) {
+    .cita-reservada {
+        grid-template-columns: 1fr;
+        padding: 16px;
+        gap: 12px;
+        border-radius: 12px;
+    }
+
+    .cita-reservada > svg {
+        padding: 10px;
+        height: 24px;
+        width: 24px;
+        border-radius: 10px;
+    }
 }
 .cita-info {
     width: 100%;
@@ -192,7 +304,7 @@ p{
     border: none;
     border-radius: 25px;
     padding: 0px;
-    display: flex;          
+    display: flex;
     flex-direction: column;
     overflow: hidden;
 }
@@ -475,7 +587,16 @@ p{
     padding: 25px;
 }
 
+.carga {
+  width: 18px;
+  height: 18px;
+  animation: girar 1.2s linear infinite;
+}
 
+@keyframes girar {
+  0% { rotate: 0deg; }
+  100% { rotate: 360deg; }
+}
 
 /* MEDIA QUERIES */
 @media (max-width: 768px) {

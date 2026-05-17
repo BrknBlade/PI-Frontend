@@ -2,9 +2,9 @@ import { Routes } from '@angular/router';
 import { Login } from './pages/login/login';
 import { Citas } from './pages/citas/citas';
 import { authGuard } from './guards/auth.guard';
+import { guestGuard } from './guards/guest.guard';
 import { UserData } from './services/userData/user-data';
 import { inject } from '@angular/core';
-import { guestGuard } from './guards/guest.guard';
 import { HomePage } from './pages/home-page/home-page';
 import { AppointmentPage } from './pages/appointment-page/appointment-page';
 import { FirstAppointment } from './pages/first-appointment/first-appointment';
@@ -14,29 +14,27 @@ import { FourthAppointment } from './pages/fourth-appointment/fourth-appointment
 import { ClientsComponent } from './pages/clients-component/clients-component';
 import { SettingsComponent } from './pages/settings-component/settings-component';
 import { NavigationAdmin } from './pages/navigation-admin/navigation-admin';
+import { NotFound } from './pages/not-found/not-found';
 
 export const routes: Routes = [
   {
+    // Ruta raíz → carga directamente el HomePage (sin redirect)
     path: '',
-    redirectTo: 'home',
-    pathMatch: 'full',
+    component: HomePage,
+    canActivate: [guestGuard], // Si no está logueado, lo manda a /login
   },
   {
-    path : 'login',
-    component : Login,
-    canActivate: [guestGuard]
+    path: 'login',
+    component: Login,
+    canActivate: [guestGuard], // Si ya está logueado, lo manda a /
   },
   {
-    path : 'citas',
-    component : Citas,
+    path: 'citas',
+    component: Citas,
     canActivate: [authGuard],
     resolve: {
-      citas: () => inject(UserData).getCitas()
-    }
-  },
-  {
-    path: 'home',
-    component: HomePage,
+      citas: () => inject(UserData).getCitas(),
+    },
   },
   {
     path: 'admin',
@@ -60,28 +58,18 @@ export const routes: Routes = [
   {
     path: 'appointment',
     component: AppointmentPage,
+    canActivate: [authGuard],
     children: [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'first',
+        redirectTo: 'servicio',
       },
-      {
-        path: 'first',
-        component: FirstAppointment,
-      },
-      {
-        path: 'second',
-        component: SecondAppointment,
-      },
-      {
-        path: 'third',
-        component: ThirdAppointment,
-      },
-      {
-        path: 'fourth',
-        component: FourthAppointment,
-      },
+      { path: 'servicio', component: FirstAppointment },
+      { path: 'peluquero', component: SecondAppointment },
+      { path: 'fecha-y-hora', component: ThirdAppointment },
+      { path: 'confirmacion', component: FourthAppointment },
     ],
   },
+  { path: '**', component: NotFound },
 ];

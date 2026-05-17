@@ -5,7 +5,7 @@
 <section class="back">
   <div class="back_div">
     <nav class="back_nav">
-      <a [routerLink]="['/appointment/first']">
+      <a [routerLink]="['/appointment']">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"
@@ -26,9 +26,7 @@
       <div class="div_info">
         <h3>Servicio elegido</h3>
         <p><strong>Servicio seleccionado:</strong> {{ service.name }}</p>
-        <p><strong>Duración:</strong> {{ service.time }}</p>
-        <!-- <p><strong>Precio:</strong> {{ service.price }}</p>
-        <p><strong>Descripción:</strong> {{ service.description }}</p> -->
+        <p><strong>Duración:</strong> {{ service.duration }}</p>
       </div>
     }
   </div>
@@ -40,21 +38,21 @@
       <p>Selecciona el profesional que deseas para tu cita o elige al que este disponible</p>
     </header>
     <ul class="services_grid">
-       <li class="service_card" *ngFor="let service of services">
-        <a (click)="selectStylist(service)">
-          <article>
-            <div class="image_card">
-              <img [src]="service.image" alt="foto_peluqueria" />
-              
-            </div>
-            <div class="content_card">
-              <h3>{{ service.name }}</h3>
-              <p class="description">{{ service.specialty }}</p>
-              <p class="description">{{ service.description }}</p>
-            </div>
-          </article>
-        </a>
-      </li>
+      @for (employee of employees(); track employee.id) {
+        <li class="service_card">
+          <a (click)="selectStylist(employee)">
+            <article>
+              <div class="image_card">
+                <img [src]="'https://picsum.photos/seed/' + employee.id + '/400/300'" alt="foto_peluquero" />
+              </div>
+              <div class="content_card">
+                <h3>{{ employee.name }}</h3>
+                <p class="description">{{ employee.email }}</p>
+              </div>
+            </article>
+          </a>
+        </li>
+      }
     </ul>
   </div>
 </section>

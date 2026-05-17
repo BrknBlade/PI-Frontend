@@ -1,5 +1,5 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AppointmentService } from '../../models/appointment-model';
 import { AppointmentStylist } from '../../models/secondAppointment-model';
 import { AppointmentDatetime } from '../../models/thirdAppointment-model';
@@ -14,10 +14,28 @@ export class ThirdAppointment implements OnInit {
   appointmentService = inject(AppointmentService);
   appointmentStylist = inject(AppointmentStylist);
   appointmentDatetime = inject(AppointmentDatetime);
+  router = inject(Router);
+
 
   ngOnInit(): void {
+  this.getCalendarContent();
+
+  // Restaurar selección previa si existe
+  const dt = this.appointmentDatetime.selectedDatetime();
+  if (dt) {
+    const partes = dt.fecha.split('-');
+    this.year = parseInt(partes[0]);
+    this.mes = parseInt(partes[1]) - 1;
+    this.pruebaMes = parseInt(partes[1]);
+    this.pruebaYear = parseInt(partes[0]);
+    this.pruebaDia.set(partes[2]);
+    this.pruebaHora.set(dt.hora);
+    this.mesCondicion = this.mes;
+    this.yearCondicion = this.year;
     this.getCalendarContent();
   }
+}
+
   contenidoCalendario: any[] = [];
   estiloGridPrimerDia = signal<string>('');
   mesElegido = '';
@@ -32,10 +50,10 @@ export class ThirdAppointment implements OnInit {
   pruebaDia = signal<any>('');
   pruebaHora = signal<any>('');
   pruebaFecha = signal<any>('');
-  pruebaMes: any;
+  pruebaMes = this.mes + 1;
   mesCondicion: any;
   yearCondicion: any;
-  pruebaYear: any;
+  pruebaYear = this.year;
 
   inicioColumna = 0;
   finColumna = 0;
@@ -122,10 +140,12 @@ export class ThirdAppointment implements OnInit {
     if (this.mes <= 0) {
       this.year = this.year - 1;
       this.mes = 11;
-      this.pruebaMes = 11;
+      this.pruebaMes = 12;
+      this.pruebaYear = this.year;
     } else {
       this.mes--;
       this.pruebaMes--;
+      this.pruebaYear = this.year;
     }
     this.getCalendarContent();
   }
@@ -134,10 +154,12 @@ export class ThirdAppointment implements OnInit {
     if (this.mes >= 11) {
       this.year = this.year + 1;
       this.mes = 0;
-      this.pruebaMes = 0;
+      this.pruebaMes = 1;
+      this.pruebaYear = this.year;
     } else {
       this.mes++;
       this.pruebaMes++;
+      this.pruebaYear = this.year;
     }
     this.getCalendarContent();
   }
@@ -169,6 +191,7 @@ export class ThirdAppointment implements OnInit {
         `${this.year}-${String(this.mes + 1).padStart(2, '0')}-${this.pruebaDia()}`,
         this.pruebaHora(),
       );
+      this.router.navigate(['/appointment/confirmacion']);
     }
   }
 }

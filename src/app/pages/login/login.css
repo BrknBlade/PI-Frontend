@@ -60,7 +60,7 @@
     gap: 5px;
     color: var(--texto-principal);
     font-family: Inter Medium, sans-serif;
-    
+
 }
 
 .login-form label input:focus-visible{
