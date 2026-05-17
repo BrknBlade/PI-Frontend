@@ -14,6 +14,14 @@ export class UserData {
   userId = this.authService.userID;
   citas = signal<any>(null);
 
+  getAll(): Observable<any> {
+    return this.http.get<any>(`${environment.BASE_URL}/api/users`);
+  }
+
+  getCitasEachClient(id: any): Observable<any> {
+    return this.http.get<any>(`${environment.BASE_URL}/api/users/${id}/bookings`);
+  }
+
   getCitas(): Observable<any> {
     const id = this.userId();
     

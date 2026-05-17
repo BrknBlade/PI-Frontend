@@ -24,3 +24,75 @@ p{
     font-family: Inter, sans-serif;
     font-size: 18px;
 }
+
+.tabla-estilizada {
+    margin-top: 20px;
+    background-color: var(--fondo-paneles);
+    border: 1px solid #dfdfdf;
+    text-align: center;
+    border-radius: 25px;
+    overflow: hidden;
+    width: fit-content;
+}
+.tabla-estilizada table{
+    border: hidden;
+    border-collapse: collapse;
+}
+.info tr{
+    transition: all 1s ease-in;
+}
+.nuevo{
+    background-color: var(--fondo-secundario);
+    padding: 10px;
+    border-radius: 20px;
+    color: var(--primario-hover);
+    font-family: Inter Bold, sans-serif;
+}
+.precio{
+    color: var(--primario-hover);
+    font-family: Inter Bold, sans-serif;
+}
+.carga{
+    padding: 20px;
+}
+form {
+    display: flex;
+    align-items: center;
+}
+form input {
+    width: 60%;
+    padding: 10px 0 10px 40px;
+    font-size: 16px;
+    border: 1px solid #dfdfdf;
+    border-radius: 10px;
+    transition: all .1s ease-in-out;
+}
+form input:focus-visible {
+    outline: 2px solid var(--placeholder);
+}
+form input::placeholder {
+    color: var(--placeholder);
+}
+
+form svg {
+    position: relative;
+    left: 30px;
+    top: -2px;
+    fill: var(--placeholder);
+    width: 17px;
+    height: 15px;
+}
+tr{
+    border: 1px solid #dfdfdf;
+    transition: all .2s ease-in;
+} 
+tr:has(> td):hover{
+    background-color: #f1f1f1;
+}
+th, tr{
+    padding: 10px 30px;
+}
+td{
+    font-size: 14px;
+    padding: 5px 30px;
+}
