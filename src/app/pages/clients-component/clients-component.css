@@ -6,14 +6,6 @@
     height: inherit;
 }
 
-h2 {
-    color: var(--texto-principal);
-}
-
-p{
-    color: var(--texto-secundario);
-}
-
 .contenedor h1 {
     font-family: Inter Bold, sans-serif;
     color: var(--texto-principal);
@@ -23,12 +15,13 @@ p{
 .contenedor h1 + p {
     font-family: Inter, sans-serif;
     font-size: 18px;
+    color: var(--texto-secundario);
 }
 
 .tabla-estilizada {
     margin-top: 20px;
     background-color: var(--fondo-paneles);
-    border: 1px solid #dfdfdf;
+    border: 1px solid var(--borde-admin);
     text-align: center;
     border-radius: 25px;
     overflow: hidden;
@@ -63,9 +56,10 @@ form input {
     width: 60%;
     padding: 10px 0 10px 40px;
     font-size: 16px;
-    border: 1px solid #dfdfdf;
+    border: 1px solid var(--borde-admin);
     border-radius: 10px;
     transition: all .1s ease-in-out;
+    margin-left: -17px;
 }
 form input:focus-visible {
     outline: 2px solid var(--placeholder);
@@ -76,14 +70,14 @@ form input::placeholder {
 
 form svg {
     position: relative;
-    left: 30px;
+    left: 13px;
     top: -2px;
     fill: var(--placeholder);
     width: 17px;
     height: 15px;
 }
 tr{
-    border: 1px solid #dfdfdf;
+    border: 1px solid var(--borde-admin);
     transition: all .2s ease-in;
 } 
 tr:has(> td):hover{
@@ -95,4 +89,41 @@ th, tr{
 td{
     font-size: 14px;
     padding: 5px 30px;
+}
+@media (max-width: 486px) {
+    .tabla-estilizada{
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 20px;
+    }
+    .contenedor{
+        width: 100%;
+    }
+    table{
+        width: 100%;
+        table-layout: fixed;
+    }
+    thead tr > td {
+        font-family: Inter Bold, sans-serif;
+    }
+    tr{
+        display: flex;
+        gap: 10px;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 5px;
+    }
+    
+    td{
+        font-size: 14px;
+        padding: 5px 10px;
+    }
+    td p {
+        display: inline;
+        color: var(--texto-principal);
+    }
+    form input {
+        width: 100%;
+    }
 }

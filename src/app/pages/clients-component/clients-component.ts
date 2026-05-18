@@ -15,33 +15,42 @@ export class ClientsComponent implements DoCheck{
   cutService = inject(CutData);
 
   arrInfo = signal<any[]>([]);
-  arrBusqueda= signal<any[]>([]);
+  arrBusqueda = signal<any[]>([]);
+  busqueda:any = ''; 
+  resolucionWidth = signal(window.innerWidth);
 
   cargando = signal(true);
 
   timestampActual = Date.now() - 60 * 60 * 24 * 7 * 1000;// el por mil es pq es en milisegundos lo q delvuelve now()
+  constructor(){
+    this.infoBusinness();
+    
+    console.log(this.resolucionWidth);
+  }
 
   ngDoCheck(): void {
-    this.infoBusinness();
+      window.addEventListener('resize', () => {
+      this.resolucionWidth.set(window.innerWidth);
+    })
   }
+
   infoBusinness(){
     this.getClientsNameContact();
     this.getClientsCitas();
   }
 
   buscador(){
+    this.arrBusqueda.set([...this.arrInfo()]);
     let input = document.querySelector('form input') as HTMLInputElement;
-    let busqueda = input.value;
+    this.busqueda = input.value;
 
-    for (const user of this.arrInfo()) {
-      let nombre:string = user.name;
-      let email:string = user.email;
-      if((nombre.includes(busqueda) || email.includes(busqueda))){
-        console.log('Filtro lo pasa', user)
-        //this.arrInfo().splice() CONTINUAR
-      }
-    }
-    console.log(this.arrInfo());
+    let filtrados = this.arrInfo().filter( user => {
+      let nombre = user.name as String;
+      let email = user.email as String;
+      return nombre.toLowerCase().includes(this.busqueda) || email.toLowerCase().includes(this.busqueda);
+    })
+
+    this.arrBusqueda.set(filtrados);
   }
 
   getClientsCitas() {

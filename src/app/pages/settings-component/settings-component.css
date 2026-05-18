@@ -1,0 +1,38 @@
+.contenedor {
+    font-family: Inter, sans-serif;
+    text-align: start;
+    max-width: 1200px;
+    width: 85%;
+    height: inherit;
+}
+
+.contenedor h1 {
+    font-family: Inter Bold, sans-serif;
+    color: var(--texto-principal);
+    margin-bottom: 0;
+}
+
+.contenedor h1 + p {
+    font-family: Inter, sans-serif;
+    font-size: 18px;
+    color: var(--texto-secundario);
+}
+
+.card{
+    padding: 20px;
+    border-radius: 20px;
+    border: 1px solid var(--borde-admin);
+    background-color: var(--fondo-paneles);
+}
+.card-header{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.card-header h2{
+    margin: 0;
+}
+.card-header svg{
+    stroke: var(--primario-hover);
+}

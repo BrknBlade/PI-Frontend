@@ -29,3 +29,9 @@
 .activo{
     background-color: var(--fondo-paneles);
 }
+@media (max-width: 486px) {
+    .admin-acciones{
+        flex-wrap: wrap;
+        margin: 20px auto 0 auto;
+    }
+}

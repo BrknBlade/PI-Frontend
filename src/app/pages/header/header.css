@@ -20,6 +20,20 @@
     border-bottom: 1px solid #dfdfdf;
 }
 
+.cerrarSesion{
+    text-decoration: none;
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 15px;
+    color: black;
+    transition: all .2s ease-in-out;
+    &:hover{
+        background-color: var(--fondo-secundario);
+        color: var(--primario);
+        border-color: var(--primario);
+    }
+}
+
 .logout{
     display: flex;
     align-items: center;
@@ -640,6 +654,9 @@
     }
     .modal footer{
         flex-direction: column-reverse;
+    }
+    .admin-acciones{
+        flex-wrap: wrap;
     }
 }
 
