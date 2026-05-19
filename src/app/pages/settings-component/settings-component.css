@@ -1,9 +1,11 @@
 .contenedor {
-    font-family: Inter, sans-serif;
     text-align: start;
     max-width: 1200px;
     width: 85%;
     height: inherit;
+}
+section *{
+    font-family: Inter, sans-serif;
 }
 
 .contenedor h1 {
@@ -20,6 +22,7 @@
 
 .card{
     padding: 20px;
+    margin-top: 30px;
     border-radius: 20px;
     border: 1px solid var(--borde-admin);
     background-color: var(--fondo-paneles);
@@ -35,4 +38,141 @@
 }
 .card-header svg{
     stroke: var(--primario-hover);
+    color: var(--primario-hover);
+}
+.card-options{
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(2, 1fr);
+}
+.contenedor .card .card-options .campos{
+    font-family: Inter Bold, sans-serif;
+    color: var(--texto-principal);
+}
+.campos input{
+    display: block;
+    margin-top: 5px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px var(--fondo-paneles) solid;
+    outline: 3px var(--fondo-paneles) solid;
+    min-width: -webkit-fill-available;
+    min-width: stretch;
+    transition: all .2s ease-in-out;
+    background: var(--fondo-paneles);
+}
+.campos input:focus-visible{
+    outline: 3px var(--input-focus) solid;
+    border: var(--primario) 1px solid;
+    border-radius: 10px;
+}
+.campos input::placeholder{
+    color: var(--placeholder);
+}
+.contenedor .card button{
+    border-radius: 10px;
+    margin-top: 15px;
+    color: var(--fondo-paneles);
+    background-color: var(--primario);
+    padding: 10px;
+    border: none;
+    font-family: Inter Bold, sans-serif;
+    transition: all .1s ease-in-out;
+    &:hover{
+        cursor: pointer;
+        background-color: var(--primario-hover);
+    }
+}
+.row{
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.row.campos input{
+    display: inline-block;
+    margin-top: 0;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px var(--fondo-paneles) solid;
+    outline: 3px var(--fondo-paneles) solid;
+    min-width: auto;
+    transition: all .2s ease-in-out;
+    background: var(--fondo-paneles);
+}
+@media (max-width: 486px) {
+    .contenedor {
+        text-align: start;
+        max-width: 1200px;
+        width: 85%;
+        margin: 0 auto;
+        height: inherit;
+    }
+    .card-options{
+        display: grid;
+        gap: 10px;
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 55px;
+  height: 28px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 5px;
+  bottom: 2.5px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: var(--primario);
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px var(--primario);
+}
+
+input:checked + .slider:before {
+  transform: translateX(22px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
 }

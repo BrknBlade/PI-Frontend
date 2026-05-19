@@ -90,6 +90,14 @@ td{
     font-size: 14px;
     padding: 5px 30px;
 }
+@media (max-width: 768px) {
+    td{
+        padding: 5px 10px;
+    }
+    th, tr{
+        padding: 10px 10px;
+    }
+}
 @media (max-width: 486px) {
     .tabla-estilizada{
         width: 100%;
@@ -98,7 +106,8 @@ td{
         margin-bottom: 20px;
     }
     .contenedor{
-        width: 100%;
+        width: 90%;
+        margin: 0 auto;
     }
     table{
         width: 100%;
