@@ -108,19 +108,20 @@
 <section class="section_hours">
   <h3 class="calendario-txt">Selecciona una hora</h3>
   <div class="horas">
-    @for (hora of horas; track $index) {
-      @if (hora.hora == pruebaHora()) {
-        <button (click)="seleccionarHora($event)" class="hora eleccion" value="{{hora.hora}}">{{hora.hora}}</button>
-      } @else {
-        <button (click)="seleccionarHora($event)" class="hora" value="{{hora.hora}}">{{hora.hora}}</button>
+    @if (!horasCargadas) {
+      <p class="cargando">Cargando disponibilidad...</p>
+    } @else {
+      @for (hora of horas; track $index) {
+        @if (!hora.disponible) {
+          <button class="hora ocupada" disabled>{{hora.hora}}</button>
+        } @else if (hora.hora == pruebaHora()) {
+          <button (click)="seleccionarHora($event)" class="hora eleccion" value="{{hora.hora}}">{{hora.hora}}</button>
+        } @else {
+          <button (click)="seleccionarHora($event)" class="hora" value="{{hora.hora}}">{{hora.hora}}</button>
+        }
       }
     }
-    <!-- <input type="hidden" value="{{horaCitaCalendario}}"> -->
   </div>
-  <!-- <div class="nueva-cita">
-    <h4>Nueva cita:</h4>
-    <p>{{ pruebaFecha() | date:"EEEE, d 'de' MMMM 'de' y" : '' : 'es' }} a las {{ pruebaHora() }}</p>
-  </div> -->
 </section>
 <section class="section_confirm">
   <button

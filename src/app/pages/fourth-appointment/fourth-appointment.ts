@@ -22,8 +22,6 @@ export class FourthAppointment implements OnInit {
   citaService = inject(CitaService);
   authService = inject(AuthService);
   router = inject(Router);
-
-  showToast = false;
   confirmando = signal(false);
 
   fullName = '';
@@ -32,6 +30,12 @@ export class FourthAppointment implements OnInit {
   gender = '';
   description = '';
   acceptedTerms = false;
+  genderOpen = false;
+
+selectGender(value: string) {
+  this.gender = value;
+  this.genderOpen = false;
+}
 
   ngOnInit() {
     const user = this.authService.user();
@@ -41,44 +45,35 @@ export class FourthAppointment implements OnInit {
     }
   }
 
-  reservarCita() {
-    if (!this.fullName || !this.email || !this.phone || !this.acceptedTerms || !this.description || !this.gender) return;
+reservarCita() {
+  if (!this.fullName || !this.email || !this.phone || !this.acceptedTerms || !this.description || !this.gender) return;
 
-    const service = this.appointmentService.selectedService();
-    const datetime = this.appointmentDatetime.selectedDatetime();
+  const service = this.appointmentService.selectedService();
+  const datetime = this.appointmentDatetime.selectedDatetime();
+  const stylist = this.appointmentStylist.selectedService();
 
-    if (!service || !datetime) {
-      console.error('Faltan datos del paso anterior');
-      return;
+  if (!service || !datetime) return;
+
+  this.confirmando.set(true);
+
+  this.citaService.postCita({
+    cut_type_id: service.id,
+    employee_id: stylist?.id ?? null,
+    date: datetime.fecha,
+    hour: datetime.hora,
+    gender: this.gender,
+    description: this.description,
+  }).subscribe({
+    next: () => {
+      this.appointmentService.clear();
+      this.appointmentStylist.clear();
+      this.appointmentDatetime.clear();
+      this.router.navigate(['/citas']);
+    },
+    error: (err) => {
+      this.confirmando.set(false);
+      console.error('Error al reservar cita:', err.error);
     }
-
-    const datos = {
-      cut_type_id: service.id,
-      date: datetime.fecha,
-      hour: datetime.hora,
-      gender: this.gender,
-      description: this.description,
-    };
-
-    this.confirmando.set(true);
-
-    this.citaService.postCita(datos).subscribe({
-      next: () => {
-        this.confirmando.set(false);
-        // Limpiar localStorage al completar la reserva
-        this.appointmentService.clear();
-        this.appointmentStylist.clear();
-        this.appointmentDatetime.clear();
-        this.showToast = true;
-        setTimeout(() => {
-          this.showToast = false;
-          this.router.navigate(['/citas']);
-        }, 2500);
-      },
-      error: (err) => {
-        this.confirmando.set(false);
-        console.error('Error:', err.error);
-      }
-    });
-  }
+  });
+}
 }

@@ -1,6 +1,7 @@
 import { Injectable, signal } from '@angular/core';
 
 export interface Stylist {
+  id: number;
   name: string;
   specialty: string;
   description: string;

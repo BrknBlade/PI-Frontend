@@ -60,11 +60,6 @@
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.back_nav a:hover {
-    background-color: var(--primario-hover);
-    color: var(--color-blanco);
-}
-
 .div_info {
     background-color: var(--color-blanco);
     border: 1px solid var(--color-borde);
@@ -138,6 +133,8 @@
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+    height: 45px;
+    min-height: 45px;
 }
 
 .confirm:hover {
@@ -274,20 +271,70 @@
 
 .form_field textarea::placeholder {
     color: var(--texto-secundario-uwu);
+    font-family: arial, sans-serif;
 }
 
-.toast {
-  position: fixed;
-  bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #2e7d32;
-  color: white;
-  padding: 1rem 2rem;
-  border-radius: 8px;
-  font-weight: 500;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  z-index: 999;
+.custom_select {
+  position: relative;
+  width: 100%;
+}
+
+.custom_select_trigger {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--color-borde);
+  border-radius: 12px;
+  font-size: 1rem;
+  color: var(--texto-principal);
+  background-color: var(--borde);
+  outline: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  font-family: inherit;
+}
+
+.custom_select_trigger:focus,
+.custom_select.open .custom_select_trigger {
+  border-color: var(--fondo-secundario);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--fondo-secundario) 15%, transparent);
+}
+
+.custom_select_trigger .placeholder {
+  color: var(--texto-secundario-uwu);
+}
+
+.custom_select_options {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background-color: var(--color-blanco);
+  border: 1px solid var(--color-borde);
+  border-radius: 12px;
+  box-shadow: 0 4px 16px var(--sombra-card);
+  z-index: 10;
+  overflow: hidden;
+}
+
+.custom_option {
+  width: 100%;
+  padding: 12px 16px;
+  text-align: left;
+  background: none;
+  border: none;
+  font-size: 1rem;
+  color: var(--texto-principal);
+  cursor: pointer;
+  font-family: inherit;
+  transition: background-color 0.15s ease;
+}
+
+.custom_option:hover {
+  background-color: var(--secundario-hover);
+  color: var(--primario);
 }
 
 .carga {

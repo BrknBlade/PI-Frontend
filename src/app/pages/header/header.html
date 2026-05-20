@@ -17,9 +17,13 @@
           <h2>Salón Elegancia</h2>
         </div>
         <nav class="main_nav">
-          <a class="nav-login" [routerLink]="['/login']">Ir al Login</a>
-          <a [routerLink]="['/appointment']">Reservar Cita</a>
-        </nav>
+  @if (authService.userID()) {
+    <a [routerLink]="['/citas']">Ir al perfil</a>
+  } @else {
+    <a class="nav-login" [routerLink]="['/login']">Ir al Login</a>
+    <a [routerLink]="['/appointment']">Reservar Cita</a>
+  }
+</nav>
       }
       @case ('/appointment/servicio') {
         <div class="header_content_main">

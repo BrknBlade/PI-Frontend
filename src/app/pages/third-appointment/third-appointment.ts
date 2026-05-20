@@ -1,9 +1,11 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal, ChangeDetectorRef } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AppointmentService } from '../../models/appointment-model';
 import { AppointmentStylist } from '../../models/secondAppointment-model';
 import { AppointmentDatetime } from '../../models/thirdAppointment-model';
 import { CheckShared } from "../../shared/check-shared/check-shared";
+import { CitaService } from '../../services/citas/cita-service';
+
 @Component({
   selector: 'app-third-appointment',
   imports: [RouterLink, CheckShared],
@@ -14,27 +16,31 @@ export class ThirdAppointment implements OnInit {
   appointmentService = inject(AppointmentService);
   appointmentStylist = inject(AppointmentStylist);
   appointmentDatetime = inject(AppointmentDatetime);
+  citaService = inject(CitaService);
   router = inject(Router);
-
+  cdr = inject(ChangeDetectorRef);
 
   ngOnInit(): void {
-  this.getCalendarContent();
-
-  // Restaurar selección previa si existe
-  const dt = this.appointmentDatetime.selectedDatetime();
-  if (dt) {
-    const partes = dt.fecha.split('-');
-    this.year = parseInt(partes[0]);
-    this.mes = parseInt(partes[1]) - 1;
-    this.pruebaMes = parseInt(partes[1]);
-    this.pruebaYear = parseInt(partes[0]);
-    this.pruebaDia.set(partes[2]);
-    this.pruebaHora.set(dt.hora);
-    this.mesCondicion = this.mes;
-    this.yearCondicion = this.year;
     this.getCalendarContent();
+
+    const dt = this.appointmentDatetime.selectedDatetime();
+    if (dt) {
+      const partes = dt.fecha.split('-');
+      this.year = parseInt(partes[0]);
+      this.mes = parseInt(partes[1]) - 1;
+      this.pruebaMes = parseInt(partes[1]);
+      this.pruebaYear = parseInt(partes[0]);
+      this.pruebaDia.set(partes[2]);
+      this.pruebaHora.set(dt.hora);
+      this.mesCondicion = this.mes;
+      this.yearCondicion = this.year;
+      this.getCalendarContent();
+
+      // Al entrar en el paso 3 con fecha preseleccionada, cargamos las horas
+      // ocupadas inmediatamente sin esperar a que el usuario clique un día
+      this.cargarHorasOcupadas(dt.fecha);
+    }
   }
-}
 
   contenidoCalendario: any[] = [];
   estiloGridPrimerDia = signal<string>('');
@@ -57,21 +63,38 @@ export class ThirdAppointment implements OnInit {
 
   inicioColumna = 0;
   finColumna = 0;
+  horasCargadas = false;
 
-  horas = [
-    { hora: '09:00', disponible: true },
-    { hora: '10:00', disponible: false },
-    { hora: '11:00', disponible: true },
-    { hora: '12:00', disponible: true },
-    { hora: '13:00', disponible: false },
-    { hora: '14:00', disponible: true },
-    { hora: '15:00', disponible: true },
-    { hora: '16:00', disponible: false },
-    { hora: '17:00', disponible: true },
-    { hora: '18:00', disponible: true },
-    { hora: '19:00', disponible: true },
-    { hora: '20:00', disponible: true },
+  horasBase = [
+    '09:00', '10:00', '11:00', '12:00', '13:00', '14:00',
+    '15:00', '16:00', '17:00', '18:00', '19:00', '20:00',
   ];
+
+  // El array de horas lo generamos siempre desde horasBase para evitar
+  // que un .map() sobre datos corruptos acumule estado raro entre días
+  horas = this.horasBase.map(h => ({ hora: h, disponible: true }));
+
+  private cargarHorasOcupadas(fecha: string): void {
+  this.horasCargadas = false;
+  this.horas = this.horasBase.map(h => ({ hora: h, disponible: true }));
+
+  this.citaService.getOccupiedHours(fecha).subscribe({
+    next: ({ occupied }) => {
+      const normalizadas = occupied.map((h: string) => h.substring(0, 5));
+      this.horas = this.horasBase.map(h => ({
+        hora: h,
+        disponible: !normalizadas.includes(h),
+      }));
+      this.horasCargadas = true;
+      this.cdr.detectChanges();
+    },
+    error: (err) => {
+      console.error('Error cargando horas:', err);
+      this.horasCargadas = true;
+      this.cdr.detectChanges();
+    },
+  });
+}
 
   getCalendarContent() {
     this.contenidoCalendario = [];
@@ -95,94 +118,58 @@ export class ThirdAppointment implements OnInit {
   }
 
   getMes() {
-    switch (this.mes) {
-      case 0:
-        this.mesElegido = 'Enero';
-        break;
-      case 1:
-        this.mesElegido = 'Febrero';
-        break;
-      case 2:
-        this.mesElegido = 'Marzo';
-        break;
-      case 3:
-        this.mesElegido = 'Abril';
-        break;
-      case 4:
-        this.mesElegido = 'Mayo';
-        break;
-      case 5:
-        this.mesElegido = 'Junio';
-        break;
-      case 6:
-        this.mesElegido = 'Julio';
-        break;
-      case 7:
-        this.mesElegido = 'Agosto';
-        break;
-      case 8:
-        this.mesElegido = 'Septiembre';
-        break;
-      case 9:
-        this.mesElegido = 'Octubre';
-        break;
-      case 10:
-        this.mesElegido = 'Noviembre';
-        break;
-      case 11:
-        this.mesElegido = 'Diciembre';
-        break;
-    }
+    const meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
+                   'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+    this.mesElegido = meses[this.mes];
     return this.mesElegido;
   }
 
   restarMes() {
     if (this.mes <= 0) {
-      this.year = this.year - 1;
+      this.year--;
       this.mes = 11;
       this.pruebaMes = 12;
-      this.pruebaYear = this.year;
     } else {
       this.mes--;
       this.pruebaMes--;
-      this.pruebaYear = this.year;
     }
+    this.pruebaYear = this.year;
     this.getCalendarContent();
   }
 
   sumarMes() {
     if (this.mes >= 11) {
-      this.year = this.year + 1;
+      this.year++;
       this.mes = 0;
       this.pruebaMes = 1;
-      this.pruebaYear = this.year;
     } else {
       this.mes++;
       this.pruebaMes++;
-      this.pruebaYear = this.year;
     }
+    this.pruebaYear = this.year;
     this.getCalendarContent();
-  }
-
-  seleccionarHora(event: Event) {
-    let eleccion = event.target as HTMLElement;
-    this.pruebaHora.set(eleccion?.textContent?.trim());
-    this.pruebaFecha.set(
-      `${this.pruebaYear}-0${this.pruebaMes}-${this.pruebaDia()}T${this.pruebaHora()}`,
-    );
   }
 
   seleccionarDia(event: Event) {
     let eleccion = event.target as HTMLElement;
     this.pruebaDia.set(eleccion?.textContent?.trim());
+
     if (this.pruebaDia().length == 1) {
       this.pruebaDia.set('0' + this.pruebaDia());
     }
+
     this.mesCondicion = this.mes;
     this.yearCondicion = this.year;
-    this.pruebaFecha.set(
-      `${this.pruebaYear}-0${this.pruebaMes}-${this.pruebaDia()}T${this.pruebaHora()}`,
-    );
+    this.pruebaHora.set('');
+
+    const fecha = `${this.pruebaYear}-${String(this.pruebaMes).padStart(2, '0')}-${this.pruebaDia()}`;
+    this.cargarHorasOcupadas(fecha);
+    // Ya no hay reset manual aquí — cargarHorasOcupadas lo hace internamente al principio
+  }
+
+  seleccionarHora(event: Event) {
+    let eleccion = event.target as HTMLButtonElement;
+    this.pruebaHora.set(eleccion?.value?.trim());
   }
 
   confirmarCita() {

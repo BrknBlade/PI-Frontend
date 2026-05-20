@@ -18,7 +18,7 @@ export const routes: Routes = [
     // Ruta raíz → carga directamente el HomePage (sin redirect)
     path: '',
     component: HomePage,
-    canActivate: [guestGuard], // Si no está logueado, lo manda a /login
+
   },
   {
     path: 'login',

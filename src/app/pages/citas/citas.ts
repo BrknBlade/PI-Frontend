@@ -5,7 +5,7 @@ import { CutData } from '../../services/cutData/cut-data';
 import { firstValueFrom } from 'rxjs';
 import { DatePipe } from '@angular/common';
 import { CitaService } from '../../services/citas/cita-service';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 interface NumberDictionary{
   [key: string]: number;
@@ -36,7 +36,9 @@ export class Citas implements OnInit{
   private userDataService = inject(UserData);
   private cutDataService = inject(CutData);
   private citaService = inject(CitaService);
+  private router = inject(Router);
 
+  confirmarLogout = false;
   cargando = signal(true);
 
   user = this.authService.user;
@@ -48,7 +50,7 @@ export class Citas implements OnInit{
   diaCita: any;
   diaCitaCalendario: any;
   horaCitaCalendario: any;
-
+  empleadoVars = signal<Record<number, string>>({});
   contenidoCalendario:any = [];
   inicioColumna = 0;
   finColumna = 0;
@@ -79,19 +81,35 @@ export class Citas implements OnInit{
   eliminando = signal(false);
   guardando = signal(false);
 
-  horas = [
-      { hora: '09:00', disponible: true },
-      { hora: '10:00', disponible: false },
-      { hora: '11:00', disponible: true },
-      { hora: '12:00', disponible: true },
-      { hora: '13:00', disponible: false },
-      { hora: '14:00', disponible: true },
-      { hora: '15:00', disponible: true },
-      { hora: '16:00', disponible: false },
-      { hora: '17:00', disponible: true },
-      { hora: '18:00', disponible: true },
-      { hora: '19:00', disponible: true },
-  ];
+horasBase = [
+  '09:00', '10:00', '11:00', '12:00', '13:00', '14:00',
+  '15:00', '16:00', '17:00', '18:00', '19:00',
+];
+
+horas = this.horasBase.map(h => ({ hora: h, disponible: true }));
+horasCargadas = false;
+
+private cargarHorasOcupadas(fecha: string): void {
+  this.horasCargadas = false;
+  this.horas = this.horasBase.map(h => ({ hora: h, disponible: true }));
+
+  this.citaService.getOccupiedHours(fecha).subscribe({
+    next: ({ occupied }) => {
+      const normalizadas = occupied.map((h: string) => h.substring(0, 5));
+      this.horas = this.horasBase.map(h => ({
+        hora: h,
+        disponible: !normalizadas.includes(h),
+      }));
+      this.horasCargadas = true;
+      this.cdr.detectChanges();
+    },
+    error: (err) => {
+      console.error('Error cargando horas:', err);
+      this.horasCargadas = true;
+      this.cdr.detectChanges();
+    },
+  });
+}
 
 
   ngOnInit(): void {
@@ -103,6 +121,13 @@ export class Citas implements OnInit{
   async pintarCitas() {
   const response: any = await firstValueFrom(this.userDataService.getCitas());
   const citas = response.data;
+
+  const empleados: any = await firstValueFrom(this.citaService.getEmployees());
+  const mapaEmpleados: Record<number, string> = {};
+  for (const emp of (empleados.data ?? empleados)) {
+    mapaEmpleados[emp.id] = emp.name;
+  }
+  this.empleadoVars.set(mapaEmpleados);
 
   for (const cita of citas) {
     const data: any = await firstValueFrom(this.cutDataService.getCut(cita.cut_type_id));
@@ -119,6 +144,8 @@ export class Citas implements OnInit{
   }
 
   this.cargando.set(false);
+  console.log('citas:', citas);
+console.log('empleados:', mapaEmpleados);
 }
 
   openCancelCita(event: Event) {
@@ -139,12 +166,11 @@ export class Citas implements OnInit{
   }
 
   openAlert() {
-  // Si no se seleccionó nada nuevo, usar los datos originales
   if (!this.datosNuevos['date']) {
     this.datosNuevos['date'] = this.fechaAntigua;
   }
   if (!this.datosNuevos['hour']) {
-    this.datosNuevos['hour'] = this.horaAntigua; // ya viene sin segundos
+    this.datosNuevos['hour'] = this.horaAntigua;
   }
   console.log('openAlert datos:', this.datosNuevos);
   this.cambiarCita = true;
@@ -183,22 +209,22 @@ export class Citas implements OnInit{
   const horaValores = hora.split(':');
   this.horaAntigua = `${horaValores[0]}:${horaValores[1]}`;
 
-  // para el calendario
 const partesFecha = fecha.split('-');
 this.pruebaYear = partesFecha[0];
-this.pruebaMes = parseInt(partesFecha[1]); // mes real (1-12)
+this.pruebaMes = parseInt(partesFecha[1]);
 this.pruebaDia.set(partesFecha[2]);
-this.mesCondicion = this.pruebaMes - 1; // mes para el calendario (0-11)
+this.mesCondicion = this.pruebaMes - 1;
 this.yearCondicion = parseInt(this.pruebaYear);
-this.mes = this.pruebaMes - 1; // mes para el calendario (0-11)
+this.mes = this.pruebaMes - 1;
 this.year = parseInt(this.pruebaYear);
 
 const horaLimpia = hora.slice(0, 5);
 this.pruebaHora.set(horaLimpia);
-// el mes ya viene bien de la API sin el 0 extra
 this.pruebaFecha.set(`${fecha}T${horaLimpia}`);
 
   this.getCalendarContent();
+  this.cargarHorasOcupadas(fecha);
+this.modal = true;
   this.modal = true;
   this.controlHeader();
 }
@@ -394,6 +420,10 @@ seleccionarDia(event: Event) {
   const mesNum = String(this.mes + 1).padStart(2, '0');
   this.datosNuevos['date'] = `${this.year}-${mesNum}-${dia}`;
   this.pruebaFecha.set(`${this.year}-${mesNum}-${dia}T${this.pruebaHora()}`);
+
+  // Añade esto:
+  const fecha = `${this.year}-${mesNum}-${dia}`;
+  this.cargarHorasOcupadas(fecha);
 }
 
   getDiaCita(id: any): any{
@@ -409,7 +439,6 @@ seleccionarDia(event: Event) {
         let diasCalendario = document.querySelectorAll('.calendario button')
 
         for (const diaIndv of diasCalendario) {
-          //console.log(diaIndv.textContent)
           if(this.diaCitaCalendario == diaIndv.textContent){
             diaIndv.classList.add('dia')
           }
@@ -455,9 +484,11 @@ seleccionarDia(event: Event) {
   });
 }
 
-  logout() {
-  this.authService.logout().subscribe(() => {
-    window.location.href = '/login';
+logout() {
+  this.confirmarLogout = false;
+  this.authService.logout().subscribe({
+    next: () => this.router.navigate(['/login']),
+    error: () => this.router.navigate(['/login'])
   });
 }
 }
