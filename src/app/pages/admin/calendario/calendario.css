@@ -1,6 +1,7 @@
 main
 {
   box-sizing: border-box;
+  overflow-x: scroll;
 }
 
 svg

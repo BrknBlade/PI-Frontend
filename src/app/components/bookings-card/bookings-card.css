@@ -68,3 +68,16 @@ main
   }
 
 }
+
+@media (width <=700px)
+{
+  main
+  {
+    height: 115vh;
+  }
+
+  #booking_info
+  {
+    width: 95vw;
+  }
+}
