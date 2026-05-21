@@ -4,7 +4,7 @@ import { loginModel } from '../../models/login-model';
 import { AuthService } from '../../services/auth/auth-service';
 import { Router } from '@angular/router';
 import { NotificationService } from '../../services/notification/notification-service';
-import { HomePage as Header } from '../header/header';
+import { HomePage as Header } from '../../components/header/header';
 
 
 @Component({
