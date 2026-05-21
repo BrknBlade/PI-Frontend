@@ -87,7 +87,7 @@ export class Citas implements OnInit{
       { hora: '18:00', disponible: true },
       { hora: '19:00', disponible: true },
   ];
-  
+
 
   ngOnInit(): void {
     this.pintarCitas()
@@ -174,7 +174,7 @@ export class Citas implements OnInit{
 
     this.modal = true;
   }
-  
+
   showModal(event: Event){
     let boton = event.target as HTMLButtonElement;
     let inputID = boton.parentElement?.firstElementChild as HTMLElement;
@@ -209,7 +209,7 @@ export class Citas implements OnInit{
   }
   closeModal(){
     this.modal = false;
-    
+
     this.controlHeader();
   }
 
@@ -224,7 +224,7 @@ export class Citas implements OnInit{
       let hora = divHijos[3];
       console.log(dia.textContent.match(/,\s*(\d{1,2})/)?.[1]);
       this.pruebaDia.set(dia.textContent.match(/,\s*(\d{1,2})/)?.[1]);
-      
+
       this.pruebaMes = this.getMesNumero((dia.textContent.match(/\d{1,2} de (\w+) de/)?.[1]));
 
       this.mesCondicion = this.pruebaMes;
@@ -244,9 +244,9 @@ export class Citas implements OnInit{
       }
 
       this.pruebaHora.set(hora.textContent)
-      
+
       if(this.pruebaHora().length == 4){
-        this.pruebaHora.set('0' + this.pruebaHora()); 
+        this.pruebaHora.set('0' + this.pruebaHora());
       }
       console.log(this.pruebaDia())
 
@@ -254,7 +254,7 @@ export class Citas implements OnInit{
       this.pruebaFecha.set(`${this.pruebaYear}-0${this.pruebaMes}-${this.pruebaDia()}T${this.pruebaHora()}`);
       console.log(this.pruebaFecha())
 
-    } 
+    }
 
   }
   getMesNumero(mes: any) {
@@ -351,7 +351,7 @@ export class Citas implements OnInit{
     }
       return this.mesElegido;
   }
-  
+
   restarMes(){
     if(this.mes <= 0){
       this.year = this.year-1;
@@ -395,7 +395,7 @@ export class Citas implements OnInit{
 
   seleccionarDia(event: Event){
     let eleccion = event.target as HTMLElement;
-    
+
 
     this.pruebaDia.set(eleccion?.textContent?.trim());
 
@@ -438,7 +438,7 @@ export class Citas implements OnInit{
   async guardarCambios(){
     await firstValueFrom(this.citaService.updateCita(this.idCita, this.datosNuevos));
     this.pintarCitas();
-    
+
     await this.closeAlert()
 
     return this.datosNuevos;

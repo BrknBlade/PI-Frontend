@@ -44,7 +44,7 @@
         </article>
         }
       }
-      
+
     }
 </section>
 @if (modal) {
@@ -73,7 +73,7 @@
         <p>Vie</p>
         <p>Sáb</p>
         <p>Dom</p>
-        
+
         @for(item of contenidoCalendario; track $index){
           @if (year == yearActual) {
             @if(mes == mesActual && year == yearActual){
@@ -108,7 +108,7 @@
                 [style.grid-column]="$index === 0 ? estiloGridPrimerDia() : null">
                 {{item['dia']}}
               </button>
-            } 
+            }
           }@else if (year < yearActual) {
             <button (click)="seleccionarDia($event)" disabled
               [class]="'anterior' + (item['dia'] == pruebaDia() && yearCondicion == year && mesCondicion == mes ? ' dia' : '')"

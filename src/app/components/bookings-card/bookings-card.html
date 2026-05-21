@@ -1,0 +1,39 @@
+<main>
+  <section id="booking_info">
+    <div id="booking_header">
+      <h2>Mostrando informacion de la cita</h2>
+      <button (click)="close()">
+        <svg data-slot="icon" aria-hidden="true" fill="none" stroke-width="3" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6 18 18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </button>
+    </div>
+
+    <div id="booking_body">
+      <div class="booking_data">
+        <span>Genero</span>
+        <p>{{ booking().gender == 'male' ? 'Masculino' : 'Femenino' }}</p>
+      </div>
+      <div class="booking_data">
+        <span>Fecha y hora</span>
+        <p>{{ booking().date.toLocaleString("es-ES") }}</p>
+      </div>
+      <div class="booking_data">
+        <span>Usuario</span>
+        <a href="">{{ booking().user_id }}</a>
+      </div>
+      <div class="booking_data">
+        <span>Corte</span>
+        <a href="">{{ booking().cut_type_id }}</a>
+      </div>
+      <div class="booking_data">
+        <span>Estado</span>
+        <p>{{ booking().status }}</p>
+      </div>
+      <div class="booking_data">
+        <span>Hora de registro</span>
+        <p>{{ booking().created_at }}</p>
+      </div>
+    </div>
+  </section>
+</main>

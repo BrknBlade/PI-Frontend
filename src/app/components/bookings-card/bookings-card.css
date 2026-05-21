@@ -1,0 +1,70 @@
+main
+{
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-color: #0005;
+}
+
+#booking_info
+{
+  width: 40vw;
+  opacity: 1;
+  background-color: #FFF;
+  padding: 1.5rem;
+  border-radius: .5rem;
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+#booking_header
+{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  h2
+  {
+    margin: 0;
+    margin-bottom: 1rem;
+  }
+
+  button
+  {
+    width: 2rem;
+    height: 2rem;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+
+    svg
+    {
+      width: 1rem;
+    }
+  }
+}
+
+#booking_body
+{
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+
+  .booking_data
+  {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+
+    p, a
+    {
+      padding: .5rem;
+      border-radius: .2rem;
+      background-color: #eee;
+      margin: 0;
+    }
+  }
+
+}

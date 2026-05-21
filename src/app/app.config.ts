@@ -18,9 +18,10 @@ export const appConfig: ApplicationConfig = {
     provideZonelessChangeDetection(),
     provideRouter(routes),
     provideHttpClient(
-    withInterceptors([ authInterceptor ])
+    withInterceptors([ authInterceptor ]),
+    withFetch()
     ),
-    { provide: LOCALE_ID, useValue: 'es' }, 
+    { provide: LOCALE_ID, useValue: 'es' },
     // Al arrancar la app, intenta recuperar el usuario de la sesión activa
     provideAppInitializer(() => {
       const authService = inject(AuthService);

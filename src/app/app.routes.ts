@@ -41,6 +41,7 @@ export const routes: Routes = [
   {
     path: 'admin',
     component: NavigationAdmin,
+    canActivate: [ authGuard ],
     children: [
       {
         path: '',

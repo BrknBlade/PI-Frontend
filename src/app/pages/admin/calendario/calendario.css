@@ -1,0 +1,154 @@
+main
+{
+  box-sizing: border-box;
+}
+
+svg
+{
+  width: 1.2rem;
+}
+
+#date_management
+{
+  display: flex;
+  gap: 1rem;
+  padding: .5rem;
+
+  button
+  {
+    background-color: transparent;
+    border: 1px solid #E8E8E8;
+    border-radius: .1rem;
+    padding: .5rem 1rem;
+    border-radius: .5rem;
+    transition: all .2s;
+    cursor: pointer;
+
+    &:hover
+    {
+      background-color: #E8DDF0;
+    }
+  }
+
+  #days_display
+  {
+    background-color: transparent;
+    border: 1px solid #E8E8E8;
+    border-radius: .1rem;
+    padding: .5rem 1rem;
+    border-radius: .5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: all .2s;
+    cursor: default;
+
+    &:hover
+    {
+      background-color: #E8DDF0;
+    }
+  }
+}
+
+#calendar_body
+{
+  display: grid;
+  grid-template-columns: min-content repeat(7, 1fr);
+  background-color: #FFF;
+  border-radius: 1rem;
+  border: 1px solid #E8E8E8;
+  padding: 1rem .5rem .5rem 1rem;
+  cursor: default;
+  min-width: 640px;
+}
+
+#days
+{
+  grid-column: 2/9;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+
+  div
+  {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: .5rem;
+
+    p
+    {
+      margin: 0;
+
+      &:last-child
+      {
+        color: #6B6B6B;
+      }
+    }
+  }
+}
+
+#hours
+{
+  display: grid;
+  grid-template-columns: 1fr;
+  margin-right: 2rem;
+
+  p
+  {
+    color: #6B6B6B;
+  }
+}
+
+#bookings
+{
+  display: grid;
+  grid-column: 2/9;
+  grid-template-columns: repeat(7, 1fr);
+
+  div
+  {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #F5F3F7;
+    border-radius: .2rem;
+    margin: .2rem;
+    padding: 2rem 1rem;
+  }
+}
+
+.booking_indicator
+{
+  position: absolute;
+  box-sizing: border-box;
+  width: 50%;
+  height: 2rem;
+  border-radius: 2rem;
+  background-color: #09F;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .2s;
+
+  &:hover
+  {
+    transform: scale(1.05);
+    cursor: pointer;
+  }
+}
+
+.showing
+{
+  display: inline;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.hidding
+{
+  display: none;
+}

@@ -486,7 +486,7 @@
     border: none;
     border-radius: 25px;
     padding: 0px;
-    display: flex;          
+    display: flex;
     flex-direction: column;
     overflow: hidden;
 }

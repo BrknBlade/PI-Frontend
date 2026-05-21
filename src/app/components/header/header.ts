@@ -7,13 +7,13 @@ import { AuthService } from '../../services/auth/auth-service';
   imports: [RouterLink],
   templateUrl: './header.html',
   styleUrl: './header.css',
-})  
+})
 export class HomePage {
   router = inject(Router);
   authService = inject(AuthService);
   cerrarSesion = signal(false);
   cancelarCita = false;
-  
+
   logout(){
     this.authService.logout().subscribe(() => {
       this.closeCancel()

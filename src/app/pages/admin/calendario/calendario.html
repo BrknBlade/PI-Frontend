@@ -1,1 +1,69 @@
-<p>calendario works!</p>
+<main>
+  <h2>Calendario</h2>
+  <p>Dale un vistazo al redimiento de tu peluqueria</p>
+
+  <section id="calendar_header">
+    <div id="date_management">
+      <button (click)='updateCalendar("-")'>
+        <svg data-slot="icon" aria-hidden="true" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M15.75 19.5 8.25 12l7.5-7.5" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </button>
+      <div id="days_display">
+        <svg data-slot="icon" aria-hidden="true" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+        <span>{{ months[start_date().getMonth()] }} {{ start_date().getDate() }} - {{ months[end_date().getMonth()] }} {{ end_date().getDate() }}, {{ start_date().getFullYear() }}</span>
+      </div>
+      <button (click)='updateCalendar("+")'>
+        <svg data-slot="icon" aria-hidden="true" fill="none" stroke-width="1.5" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="m8.25 4.5 7.5 7.5-7.5 7.5" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+      </button>
+    </div>
+  </section>
+
+  <section id="calendar_body" [style]="{ 'grid-template-rows': `min-content repeat(${rowsForGrid()-2}, 1fr)` }">
+    <div id="days">
+      @for(day of currentWeekDays(); track day)
+      {
+        <div>
+          <p>{{ days[day.day] }}</p>
+          <p>{{ months[day.month] }} {{ day.date }}</p>
+        </div>
+      }
+    </div>
+
+    <div id="hours" [style]="{ 'grid-row': `2/${rowsForGrid()}`, 'grid-template-rows': `${rowsForGrid()-1}` }">
+      @for(hour of hours(); track hour)
+      {
+        <p>{{ hour }}:00</p>
+      }
+    </div>
+
+    <div id="bookings" [style]="{ 'grid-row': `2/${rowsForGrid()}`, 'grid-template-rows': `repeat(${rowsForGrid()}, 1fr)` }">
+      @for(info of gridSize(); track info)
+      {
+        <div>
+          @for(monthBooking of monthBookings(); track monthBooking.id)
+          {
+            @if(monthBooking.date.getHours() == info.hour && monthBooking.date.getDay() == info.day_of_week)
+            {
+              <span class="booking_indicator" (click)="renderBookingsInfo(monthBooking)">
+                <p>1</p>
+              </span>
+            }
+          }
+        </div>
+      }
+    </div>
+  </section>
+  @if(selectedBooking())
+  {
+    <app-bookings-card
+      (closeAction)="renderBookingsInfo(null)"
+      class="{{ showBookingInfo() }}"
+      [booking]="selectedBooking()"
+    />
+  }
+</main>

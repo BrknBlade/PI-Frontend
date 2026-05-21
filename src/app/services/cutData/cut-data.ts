@@ -22,4 +22,9 @@ export class CutData {
       })
     )
   }
+
+  getTotalServices()
+  {
+    return this.http.get<any>(`${environment.BASE_URL}/api/cut_types/total_services`);
+  }
 }
