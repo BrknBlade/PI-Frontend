@@ -9,24 +9,25 @@
       <p>Elige el servicio que deseas reservar</p>
     </header>
     <ul class="services_grid">
-      <li class="service_card" *ngFor="let service of services">
-        <a (click)="selectService(service)">
-          <article>
-            <div class="image_card">
-              <img [src]="service.image" alt="foto_peluqueria" />
-              
-            </div>
-            <div class="content_card">
-              <h3>{{ service.name }}</h3>
-              <p class="description">{{ service.description }}</p>
-              <div class="footer_card">
-                <p class="time">{{ service.time }}</p>
-                <p class="price">{{ service.price }}</p>
+      @for (service of services(); track service.id) {
+        <li class="service_card">
+          <a (click)="selectService(service)">
+            <article>
+              <div class="image_card">
+                <img [src]="'https://picsum.photos/seed/' + service.id + '/400/400'" alt="foto_peluqueria" />
               </div>
-            </div>
-          </article>
-        </a>
-      </li>
+              <div class="content_card">
+                <h3>{{ service.name }}</h3>
+                <p class="description">{{ service.description }}</p>
+                <div class="footer_card">
+                  <p class="time">{{ service.duration }} min</p>
+                  <p class="price">{{ service.price }}€</p>
+                </div>
+              </div>
+            </article>
+          </a>
+        </li>
+      }
     </ul>
   </div>
 </section>

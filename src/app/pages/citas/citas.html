@@ -1,52 +1,204 @@
-<section class="citas" [class.blur]="modal || cambiarCita || cancelarCita">
-  <h1>¡Bienvenido, <span>{{user()?.name}}</span>!</h1>
+<section class="citas" [class.blur]="modal || cambiarCita || cancelarCita || confirmarLogout">
+  <h1>
+    ¡Bienvenido, <span>{{ user()?.name }}</span
+    >!
+  </h1>
   <p>Gestiona tus citas y tu perfil</p>
-  <div class="citas-acciones">
-    <a href="#" class="activo">Próximas citas</a>
-    <a href="#">Historial</a>
-    <a href="#">Perfil</a>
+
+  <div class="citas-header">
+    <div class="citas-acciones">
+      <a (click)="tabActiva.set('citas')" [class.activo]="tabActiva() === 'citas'"
+        >Próximas citas</a
+      >
+      <a (click)="tabActiva.set('historial')" [class.activo]="tabActiva() === 'historial'"
+        >Historial</a
+      >
+      <a (click)="tabActiva.set('perfil')" [class.activo]="tabActiva() === 'perfil'">Perfil</a>
+    </div>
+    <a routerLink="/appointment" class="btn-nueva-cita">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <line x1="12" y1="5" x2="12" y2="19"></line>
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+      </svg>
+      Nueva cita
+    </a>
   </div>
-    @if(citas()?.length < 1){
+
+  @if (tabActiva() === 'citas') {
+    @if (citas()?.length < 1) {
       <article class="citas-panel">
-        <svg xmlns="http://www.w3.org/2000/svg" height="78px" viewBox="0 -960 960 960" width="78px" fill="#585857">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          height="78px"
+          viewBox="0 -960 960 960"
+          width="78px"
+          fill="#585857"
+        >
           <path
-            d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Z" />
+            d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Z"
+          />
         </svg>
         <h2>No tienes citas pendientes</h2>
         <p>Aún no tienes ninguna cita programada.</p>
         <a href="/appointment">Reserva tu primera cita</a>
       </article>
-    }@else {
+    } @else {
       @if (cargando()) {
         <p>Cargando...</p>
       } @else {
         @for (cita of citas(); track $index) {
           <article class="cita-reservada">
-          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#70536b">
-            <path
-              d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Z" />
-          </svg>
-          <div class="cita-info">
-            <h2>{{citaVars()[cita.cut_type_id]}}</h2>
-            <p><svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="22px" fill="#585857"><path d="M367-527q-47-47-47-113t47-113q47-47 113-47t113 47q47 47 47 113t-47 113q-47 47-113 47t-113-47ZM160-160v-112q0-34 17.5-62.5T224-378q62-31 126-46.5T480-440q66 0 130 15.5T736-378q29 15 46.5 43.5T800-272v112H160Zm80-80h480v-32q0-11-5.5-20T700-306q-54-27-109-40.5T480-360q-56 0-111 13.5T260-306q-9 5-14.5 14t-5.5 20v32Zm296.5-343.5Q560-607 560-640t-23.5-56.5Q513-720 480-720t-56.5 23.5Q400-673 400-640t23.5 56.5Q447-560 480-560t56.5-23.5ZM480-640Zm0 400Z"/></svg>Nombre peluquero</p>
-            <p><svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="22px" fill="#585857">
-            <path
-              d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Z" />
-          </svg>{{ cita.date | date:'EEEE, d \'de\' MMMM \'de\' y' : '' : 'es' }}.</p>
-            <p><svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="22px" fill="#585857"><path d="m612-292 56-56-148-148v-184h-80v216l172 172ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-400Zm0 320q133 0 226.5-93.5T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 133 93.5 226.5T480-160Z"/></svg>{{(cita.date+ 'T' + cita.hour)  | date: 'shortTime'}}</p>
-            <input type="hidden" value="{{cita.date}}">
-            <div class="cita-acciones">
-              <input type="hidden" value="{{cita.id}} {{cita.hour}}">
-              <button class="modificar" (click)="showModal($event)">Modificar</button>
-              <button class="cancelar" (click)="openCancelCita($event)">Cancelar</button>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="24px"
+              viewBox="0 -960 960 960"
+              width="24px"
+              fill="#70536b"
+            >
+              <path
+                d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Z"
+              />
+            </svg>
+            <div
+              class="cita-info"
+              [attr.data-date]="cita.date"
+              [attr.data-hour]="cita.hour"
+              [attr.data-id]="cita.id"
+            >
+              <h2>{{ citaVars()[cita.cut_type_id]?.name }}</h2>
+              <p>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="22px"
+                  viewBox="0 -960 960 960"
+                  width="22px"
+                  fill="#585857"
+                >
+                  <path
+                    d="M367-527q-47-47-47-113t47-113q47-47 113-47t113 47q47 47 47 113t-47 113q-47 47-113 47t-113-47ZM160-160v-112q0-34 17.5-62.5T224-378q62-31 126-46.5T480-440q66 0 130 15.5T736-378q29 15 46.5 43.5T800-272v112H160Z"
+                  />
+                </svg>
+                {{ empleadoVars()[cita.employee_id] ?? 'Sin asignar' }}
+              </p>
+              <p>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="22px"
+                  viewBox="0 -960 960 960"
+                  width="22px"
+                  fill="#585857"
+                >
+                  <path
+                    d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Z"
+                  />
+                </svg>
+                {{ cita.date | date: "EEEE, d 'de' MMMM 'de' y" : '' : 'es' }}.
+              </p>
+              <p>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="22px"
+                  viewBox="0 -960 960 960"
+                  width="22px"
+                  fill="#585857"
+                >
+                  <path
+                    d="m612-292 56-56-148-148v-184h-80v216l172 172ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-400Zm0 320q133 0 226.5-93.5T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 133 93.5 226.5T480-160Z"
+                  />
+                </svg>
+                {{ cita.date + 'T' + cita.hour | date: 'shortTime' }}
+              </p>
+              @if (citaVars()[cita.cut_type_id]?.price) {
+                <p>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="22px"
+                    viewBox="0 -960 960 960"
+                    width="22px"
+                    fill="#585857"
+                  >
+                    <path
+                      d="M560-440q-50 0-85-35t-35-85q0-50 35-85t85-35q50 0 85 35t35 85q0 50-35 85t-85 35ZM240-320q-33 0-56.5-23.5T160-400v-320q0-33 23.5-56.5T240-800h640q33 0 56.5 23.5T960-720v320q0 33-23.5 56.5T880-320H240Zm80-80h480q0-33 23.5-56.5T880-480v-160q-33 0-56.5-23.5T800-720H320q0 33-23.5 56.5T240-640v160q33 0 56.5 23.5T320-400ZM880-160H80q-33 0-56.5-23.5T0-240v-440h80v440h800v80ZM240-400v-320 320Z"
+                    />
+                  </svg>
+                  {{ citaVars()[cita.cut_type_id]?.price }}
+                </p>
+              }
+              @if (citaVars()[cita.cut_type_id]?.duration) {
+                <p>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="22px"
+                    viewBox="0 -960 960 960"
+                    width="22px"
+                    fill="#585857"
+                  >
+                    <path
+                      d="M360-840v-80h240v80H360Zm80 440h80V400h-80v200Zm40 320q-74 0-139.5-28.5T226-186q-49-49-77.5-114.5T120-440q0-74 28.5-139.5T226-694q49-49 114.5-77.5T480-800q62 0 119 20t107 58l56-56 56 56-56 56q38 50 58 107t20 119q0 74-28.5 139.5T734-186q-49 49-114.5 77.5T480-80Zm0-80q116 0 198-82t82-198q0-116-82-198t-198-82q-116 0-198 82t-82 198q0 116 82 198t198 82Zm0-280Z"
+                    />
+                  </svg>
+                  {{ citaVars()[cita.cut_type_id]?.duration }}
+                </p>
+              }
+              <div class="cita-acciones">
+                <button class="modificar" (click)="showModal($event)">Modificar</button>
+                <button class="cancelar" (click)="openCancelCita($event)">Cancelar</button>
+              </div>
             </div>
-          </div>
-        </article>
+          </article>
         }
       }
-
     }
+  }
+
+  @if (tabActiva() === 'historial') {
+    <article class="citas-panel">
+      <h2>Historial</h2>
+      <p>Próximamente.</p>
+    </article>
+  }
+
+  @if (tabActiva() === 'perfil') {
+    <article class="citas-panel perfil-panel">
+      <div class="perfil-avatar">
+        {{ user()?.name?.charAt(0)?.toUpperCase() }}
+      </div>
+      <h2 class="perfil-nombre">{{ user()?.name }}</h2>
+      <p class="perfil-email">{{ user()?.email }}</p>
+      <div class="perfil-divider"></div>
+      <button class="perfil-logout" (click)="confirmarLogout = true">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+          <polyline points="16 17 21 12 16 7"></polyline>
+          <line x1="21" x2="9" y1="12" y2="12"></line>
+        </svg>
+        Cerrar sesión
+      </button>
+    </article>
+  }
 </section>
+
+<!-- MODAL 1: Calendario para elegir fecha y hora -->
 @if (modal) {
   <dialog class="modal">
     <header>
@@ -55,94 +207,197 @@
         <p>Corte y peinado</p>
       </div>
       <button (click)="closeModal()">
-        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x w-5 h-5 md:w-6 md:h-6" style="color: rgb(102, 102, 102);"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          style="color: rgb(102, 102, 102)"
+        >
+          <path d="M18 6 6 18"></path>
+          <path d="m6 6 12 12"></path>
+        </svg>
       </button>
     </header>
     <article class="articulo-calendario">
-    <section class="container-calendario">
-      <div class="acciones-calendario">
-        <button (click)="restarMes()"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left w-5 h-5" style="color: rgb(102, 102, 102);"><path d="m15 18-6-6 6-6"></path></svg></button>
-        <h3>{{getMes()}} {{year}}</h3>
-        <button (click)="sumarMes()"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right w-5 h-5" style="color: rgb(102, 102, 102);"><path d="m9 18 6-6-6-6"></path></svg></button>
-      </div>
-      <div class="calendario">
-        <p>Lun</p>
-        <p>Mar</p>
-        <p>Mié</p>
-        <p>Jue</p>
-        <p>Vie</p>
-        <p>Sáb</p>
-        <p>Dom</p>
-
-        @for(item of contenidoCalendario; track $index){
-          @if (year == yearActual) {
-            @if(mes == mesActual && year == yearActual){
-              @if(item['dia'] < diaActual){
-                <button (click)="seleccionarDia($event)" disabled
-                  [class]="'anterior' + (item['dia'] == pruebaDia() && yearCondicion == year && mesCondicion == mes ? ' dia' : '')"
-                  [style.grid-column]="$index === 0 ? estiloGridPrimerDia() : null">
-                  {{item['dia']}}
+      <section class="container-calendario">
+        <div class="acciones-calendario">
+          <button (click)="restarMes()">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              style="color: rgb(102, 102, 102)"
+            >
+              <path d="m15 18-6-6 6-6"></path>
+            </svg>
+          </button>
+          <h3>{{ getMes() }} {{ year }}</h3>
+          <button (click)="sumarMes()">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              style="color: rgb(102, 102, 102)"
+            >
+              <path d="m9 18 6-6-6-6"></path>
+            </svg>
+          </button>
+        </div>
+        <div class="calendario">
+          <p>Lun</p>
+          <p>Mar</p>
+          <p>Mié</p>
+          <p>Jue</p>
+          <p>Vie</p>
+          <p>Sáb</p>
+          <p>Dom</p>
+          @for (item of contenidoCalendario; track $index) {
+            @if (year == yearActual) {
+              @if (mes == mesActual && year == yearActual) {
+                @if (item['dia'] < diaActual) {
+                  <button
+                    (click)="seleccionarDia($event)"
+                    disabled
+                    [class]="
+                      'anterior' +
+                      (item['dia'] == pruebaDia() && yearCondicion == year && mesCondicion == mes
+                        ? ' dia'
+                        : '')
+                    "
+                    [style.grid-column]="$index === 0 ? estiloGridPrimerDia() : null"
+                  >
+                    {{ item['dia'] }}
+                  </button>
+                } @else if (item['dia'] > diaActual) {
+                  <button
+                    (click)="seleccionarDia($event)"
+                    [class]="
+                      'posterior' +
+                      (item['dia'] == pruebaDia() && yearCondicion == year && mesCondicion == mes
+                        ? ' dia'
+                        : '')
+                    "
+                    [style.grid-column]="$index === 0 ? estiloGridPrimerDia() : null"
+                  >
+                    {{ item['dia'] }}
+                  </button>
+                } @else {
+                  <button
+                    (click)="seleccionarDia($event)"
+                    [class]="
+                      'actual' +
+                      (item['dia'] == pruebaDia() && yearCondicion == year && mesCondicion == mes
+                        ? ' dia'
+                        : '')
+                    "
+                    [style.grid-column]="$index === 0 ? estiloGridPrimerDia() : null"
+                  >
+                    {{ item['dia'] }}
+                  </button>
+                }
+              } @else if (mes > mesActual) {
+                <button
+                  (click)="seleccionarDia($event)"
+                  [class]="
+                    'posterior' +
+                    (item['dia'] == pruebaDia() && yearCondicion == year && mesCondicion == mes
+                      ? ' dia'
+                      : '')
+                  "
+                  [style.grid-column]="$index === 0 ? estiloGridPrimerDia() : null"
+                >
+                  {{ item['dia'] }}
                 </button>
-              }@else if (item['dia'] > diaActual) {
-                <button (click)="seleccionarDia($event)"
-                  [class]="'posterior' + (item['dia'] == pruebaDia() && yearCondicion == year && mesCondicion == mes ? ' dia' : '')"
-                  [style.grid-column]="$index === 0 ? estiloGridPrimerDia() : null">
-                  {{item['dia']}}
-                </button>
-              }@else {
-                <button (click)="seleccionarDia($event)"
-                  [class]="'actual' + (item['dia'] == pruebaDia() && yearCondicion == year && mesCondicion == mes ? ' dia' : '')"
-                  [style.grid-column]="$index === 0 ? estiloGridPrimerDia() : null">
-                  {{item['dia']}}
+              } @else if (mes < mesActual) {
+                <button
+                  (click)="seleccionarDia($event)"
+                  disabled
+                  [class]="
+                    'anterior' +
+                    (item['dia'] == pruebaDia() && yearCondicion == year && mesCondicion == mes
+                      ? ' dia'
+                      : '')
+                  "
+                  [style.grid-column]="$index === 0 ? estiloGridPrimerDia() : null"
+                >
+                  {{ item['dia'] }}
                 </button>
               }
-            }@else if (mes > mesActual) {
-              <button (click)="seleccionarDia($event)"
-                [class]="'posterior' + (item['dia'] == pruebaDia() && yearCondicion == year && mesCondicion == mes ? ' dia' : '')"
-                [style.grid-column]="$index === 0 ? estiloGridPrimerDia() : null">
-                {{item['dia']}}
+            } @else if (year < yearActual) {
+              <button
+                (click)="seleccionarDia($event)"
+                disabled
+                [class]="
+                  'anterior' +
+                  (item['dia'] == pruebaDia() && yearCondicion == year && mesCondicion == mes
+                    ? ' dia'
+                    : '')
+                "
+                [style.grid-column]="$index === 0 ? estiloGridPrimerDia() : null"
+              >
+                {{ item['dia'] }}
               </button>
-            }@else if (mes < mesActual) {
-              <button (click)="seleccionarDia($event)" disabled
-                [class]="'anterior' + (item['dia'] == pruebaDia() && yearCondicion == year && mesCondicion == mes ? ' dia' : '')"
-                [style.grid-column]="$index === 0 ? estiloGridPrimerDia() : null">
-                {{item['dia']}}
+            } @else if (year > yearActual) {
+              <button
+                (click)="seleccionarDia($event)"
+                [class]="
+                  'posterior' +
+                  (item['dia'] == pruebaDia() && yearCondicion == year && mesCondicion == mes
+                    ? ' dia'
+                    : '')
+                "
+                [style.grid-column]="$index === 0 ? estiloGridPrimerDia() : null"
+              >
+                {{ item['dia'] }}
               </button>
             }
-          }@else if (year < yearActual) {
-            <button (click)="seleccionarDia($event)" disabled
-              [class]="'anterior' + (item['dia'] == pruebaDia() && yearCondicion == year && mesCondicion == mes ? ' dia' : '')"
-              [style.grid-column]="$index === 0 ? estiloGridPrimerDia() : null">
-              {{item['dia']}}
-            </button>
-          }@else if (year > yearActual) {
-            <button (click)="seleccionarDia($event)"
-              [class]="'posterior' + (item['dia'] == pruebaDia() && yearCondicion == year && mesCondicion == mes ? ' dia' : '')"
-              [style.grid-column]="$index === 0 ? estiloGridPrimerDia() : null">
-              {{item['dia']}}
-            </button>
           }
+        </div>
+      </section>
+      <section>
+  <h3 class="calendario-txt">Selecciona una hora:</h3>
+  <div class="horas">
+    @if (!horasCargadas) {
+      <p class="cargando">Cargando disponibilidad...</p>
+    } @else {
+      @for (hora of horas; track $index) {
+        @if (!hora.disponible) {
+          <button class="hora ocupada" disabled>{{hora.hora}}</button>
+        } @else if (hora.hora == pruebaHora()) {
+          <button (click)="seleccionarHora($event)" class="hora eleccion" value="{{hora.hora}}">{{hora.hora}}</button>
+        } @else {
+          <button (click)="seleccionarHora($event)" class="hora" value="{{hora.hora}}">{{hora.hora}}</button>
         }
-      </div>
-    </section>
-    <section>
-      <h3 class="calendario-txt">Selecciona una hora:</h3>
-      <div class="horas">
-        @for (hora of horas; track $index) {
-          @if(hora.hora == pruebaHora()){
-            <button (click)="seleccionarHora($event)" class="hora eleccion" value="{{hora.hora}}">{{hora.hora}}</button>
-          }@else {
-            <button (click)="seleccionarHora($event)" class="hora" value="{{hora.hora}}">{{hora.hora}}</button>
-          }
-        }
-
-        <input type="hidden" value="{{horaCitaCalendario}}">
-      </div>
-      <div class="nueva-cita">
-        <h4>Nueva cita:</h4>
-        <p>{{ pruebaFecha() | date:'EEEE, d \'de\' MMMM \'de\' y' : '' : 'es' }} a las {{ pruebaHora() }}</p>
-      </div>
-    </section>
+      }
+    }
+    <input type="hidden" value="{{horaCitaCalendario}}" />
+  </div>
+  <div class="nueva-cita">
+    <h4>Nueva cita:</h4>
+    <p>
+      {{ pruebaFecha() | date: "EEEE, d 'de' MMMM 'de' y" : '' : 'es' }} a las
+      {{ pruebaHora() }}
+    </p>
+  </div>
+</section>
     </article>
     <footer>
       <button class="cancelar-calendario" (click)="closeModal()">Cancelar</button>
@@ -151,37 +406,91 @@
   </dialog>
   <div class="backdrop"></div>
 }
+
+<!-- MODAL 2: Confirmación con fecha antigua y nueva -->
 @if (cambiarCita) {
   <dialog class="modal modal-peque">
-    <header  class="header-mod">
+    <header class="header-mod">
       <div>
         <h2>Confirmar cambios</h2>
         <p>Corte y peinado</p>
       </div>
       <button (click)="closeAlert()">
-        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x w-5 h-5 md:w-6 md:h-6" style="color: rgb(102, 102, 102);"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          style="color: rgb(102, 102, 102)"
+        >
+          <path d="M18 6 6 18"></path>
+          <path d="m6 6 12 12"></path>
+        </svg>
       </button>
     </header>
     <article class="articulo-calendario">
-    <section class="container-fechas">
-      <div class="fecha-antigua">
-        <h3>Fecha actual:</h3>
-        <p> {{fechaAntigua | date:'EEEE, d \'de\' MMMM \'de\' y' : '' : 'es' }} a las {{ horaAntigua }}</p>
-      </div>
-      <svg fill="#70536b" width="60px" height="60px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m11.293 17.293 1.414 1.414L19.414 12l-6.707-6.707-1.414 1.414L15.586 11H6v2h9.586z"/></svg>
-      <div class="fecha-nueva">
-        <h3>Fecha actualizada:</h3>
-        <p> {{pruebaFecha() | date:'EEEE, d \'de\' MMMM \'de\' y' : '' : 'es' }} a las {{ pruebaHora() }}</p>
-      </div>
-    </section>
+      <section class="container-fechas">
+        <div class="fecha-antigua">
+          <h3>Fecha actual:</h3>
+          <p>
+            {{ fechaAntigua | date: "EEEE, d 'de' MMMM 'de' y" : '' : 'es' }} a las
+            {{ horaAntigua }}
+          </p>
+        </div>
+        <svg
+          fill="#70536b"
+          width="60px"
+          height="60px"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="m11.293 17.293 1.414 1.414L19.414 12l-6.707-6.707-1.414 1.414L15.586 11H6v2h9.586z"
+          />
+        </svg>
+        <div class="fecha-nueva">
+          <h3>Fecha actualizada:</h3>
+          <p>
+            {{ pruebaFecha() | date: "EEEE, d 'de' MMMM 'de' y" : '' : 'es' }} a las
+            {{ pruebaHora() }}
+          </p>
+        </div>
+      </section>
     </article>
     <footer>
       <button class="cancelar-calendario" (click)="cancelAlert()">Cancelar</button>
-      <button class="confirmar-calendario" (click)="guardarCambios()">Confirmar</button>
+      <button class="confirmar-calendario" (click)="guardarCambios()" [disabled]="guardando()">
+        @if (guardando()) {
+          <svg
+            viewBox="0 0 16 16"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            stroke="#ffffff"
+            class="carga"
+          >
+            <path
+              d="M7.706 0.290 C 7.484 0.362,7.356 0.490,7.294 0.699 C 7.259 0.816,7.253 1.088,7.253 2.508 C 7.253 4.389,7.251 4.365,7.443 4.557 C 7.700 4.813,8.300 4.813,8.557 4.557 C 8.749 4.365,8.747 4.389,8.747 2.508 C 8.747 0.688,8.744 0.656,8.596 0.480 C 8.472 0.333,8.339 0.284,8.040 0.276 C 7.893 0.272,7.743 0.278,7.706 0.290 M2.753 2.266 C 2.595 2.338,2.362 2.566,2.281 2.728 C 2.197 2.897,2.193 3.085,2.269 3.253 C 2.343 3.418,4.667 5.750,4.850 5.843 C 5.109 5.976,5.375 5.911,5.643 5.649 C 5.907 5.391,5.977 5.111,5.843 4.850 C 5.750 4.667,3.418 2.343,3.253 2.269 C 3.101 2.200,2.901 2.199,2.753 2.266 M12.853 2.282 C 12.730 2.339,12.520 2.536,11.518 3.541 C 10.597 4.464,10.316 4.762,10.271 4.860 C 10.195 5.025,10.196 5.216,10.272 5.378 C 10.342 5.528,10.572 5.764,10.727 5.845 C 10.884 5.927,11.117 5.926,11.280 5.843 C 11.447 5.757,13.757 3.447,13.843 3.280 C 13.926 3.118,13.927 2.884,13.846 2.729 C 13.764 2.572,13.552 2.364,13.392 2.283 C 13.213 2.192,13.048 2.192,12.853 2.282 M0.699 7.292 C 0.404 7.385,0.258 7.620,0.258 7.999 C 0.259 8.386,0.403 8.618,0.698 8.706 C 0.816 8.741,1.079 8.747,2.508 8.747 C 3.997 8.747,4.196 8.742,4.318 8.702 C 4.498 8.644,4.644 8.498,4.702 8.318 C 4.788 8.053,4.745 7.677,4.608 7.491 C 4.578 7.451,4.492 7.384,4.417 7.343 L 4.280 7.267 2.547 7.261 C 1.152 7.257,0.791 7.263,0.699 7.292 M11.745 7.278 C 11.622 7.308,11.452 7.411,11.392 7.492 C 11.255 7.677,11.212 8.053,11.298 8.318 C 11.356 8.498,11.502 8.644,11.682 8.702 C 11.804 8.742,12.003 8.747,13.492 8.747 C 14.921 8.747,15.184 8.741,15.302 8.706 C 15.597 8.618,15.741 8.386,15.742 7.999 C 15.742 7.614,15.595 7.383,15.290 7.291 C 15.187 7.260,14.864 7.254,13.496 7.256 C 12.578 7.258,11.790 7.268,11.745 7.278 M4.853 10.282 C 4.730 10.339,4.520 10.536,3.518 11.541 C 2.597 12.464,2.316 12.762,2.271 12.860 C 2.195 13.025,2.196 13.216,2.272 13.378 C 2.342 13.528,2.572 13.764,2.727 13.845 C 2.884 13.927,3.117 13.926,3.280 13.843 C 3.447 13.757,5.757 11.447,5.843 11.280 C 5.926 11.118,5.927 10.884,5.846 10.729 C 5.764 10.572,5.552 10.364,5.392 10.283 C 5.213 10.192,5.048 10.192,4.853 10.282 M10.753 10.266 C 10.595 10.338,10.362 10.566,10.281 10.728 C 10.197 10.897,10.193 11.085,10.269 11.253 C 10.343 11.418,12.667 13.750,12.850 13.843 C 13.109 13.976,13.375 13.911,13.643 13.649 C 13.907 13.391,13.977 13.111,13.843 12.850 C 13.750 12.667,11.418 10.343,11.253 10.269 C 11.101 10.200,10.901 10.199,10.753 10.266 M7.745 11.277 C 7.620 11.309,7.451 11.412,7.392 11.492 C 7.254 11.678,7.253 11.691,7.253 13.489 C 7.253 14.921,7.259 15.184,7.294 15.302 C 7.382 15.597,7.615 15.741,8.000 15.741 C 8.385 15.741,8.618 15.597,8.706 15.302 C 8.768 15.090,8.767 11.875,8.704 11.690 C 8.644 11.514,8.575 11.430,8.420 11.346 C 8.310 11.286,8.246 11.271,8.057 11.264 C 7.930 11.259,7.790 11.265,7.745 11.277 "
+              stroke="none"
+              fill-rule="evenodd"
+              fill="#fff"
+            ></path>
+          </svg>
+          Guardando...
+        } @else {
+          Confirmar
+        }
+      </button>
     </footer>
   </dialog>
   <div class="backdrop"></div>
 }
+
+<!-- MODAL 3: Cancelar cita -->
 @if (cancelarCita) {
   <dialog class="modal modal-cancelar">
     <header class="header-mod">
@@ -189,15 +498,87 @@
         <h2>¿Cancelar cita?</h2>
       </div>
       <button (click)="closeCancel()">
-        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x w-5 h-5 md:w-6 md:h-6" style="color: rgb(102, 102, 102);"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          style="color: rgb(102, 102, 102)"
+        >
+          <path d="M18 6 6 18"></path>
+          <path d="m6 6 12 12"></path>
+        </svg>
       </button>
     </header>
     <article class="articulo-calendario">
-      <p> Estás a punto de cancelar tu cita de <strong>{{ nombreCorte }}</strong></p>
+      <p>
+        Estás a punto de cancelar tu cita de <strong>{{ nombreCorte }}</strong>
+      </p>
     </article>
     <footer>
       <button class="cancelar-calendario" (click)="closeCancel()">Volver</button>
-      <button class="eliminar" (click)="deleteCita()">Sí, cancelar</button>
+      <button class="eliminar" (click)="deleteCita()" [disabled]="eliminando()">
+        @if (eliminando()) {
+          <svg
+            viewBox="0 0 16 16"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            stroke="#ffffff"
+            class="carga"
+          >
+            <path
+              d="M7.706 0.290 C 7.484 0.362,7.356 0.490,7.294 0.699 C 7.259 0.816,7.253 1.088,7.253 2.508 C 7.253 4.389,7.251 4.365,7.443 4.557 C 7.700 4.813,8.300 4.813,8.557 4.557 C 8.749 4.365,8.747 4.389,8.747 2.508 C 8.747 0.688,8.744 0.656,8.596 0.480 C 8.472 0.333,8.339 0.284,8.040 0.276 C 7.893 0.272,7.743 0.278,7.706 0.290 M2.753 2.266 C 2.595 2.338,2.362 2.566,2.281 2.728 C 2.197 2.897,2.193 3.085,2.269 3.253 C 2.343 3.418,4.667 5.750,4.850 5.843 C 5.109 5.976,5.375 5.911,5.643 5.649 C 5.907 5.391,5.977 5.111,5.843 4.850 C 5.750 4.667,3.418 2.343,3.253 2.269 C 3.101 2.200,2.901 2.199,2.753 2.266 M12.853 2.282 C 12.730 2.339,12.520 2.536,11.518 3.541 C 10.597 4.464,10.316 4.762,10.271 4.860 C 10.195 5.025,10.196 5.216,10.272 5.378 C 10.342 5.528,10.572 5.764,10.727 5.845 C 10.884 5.927,11.117 5.926,11.280 5.843 C 11.447 5.757,13.757 3.447,13.843 3.280 C 13.926 3.118,13.927 2.884,13.846 2.729 C 13.764 2.572,13.552 2.364,13.392 2.283 C 13.213 2.192,13.048 2.192,12.853 2.282 M0.699 7.292 C 0.404 7.385,0.258 7.620,0.258 7.999 C 0.259 8.386,0.403 8.618,0.698 8.706 C 0.816 8.741,1.079 8.747,2.508 8.747 C 3.997 8.747,4.196 8.742,4.318 8.702 C 4.498 8.644,4.644 8.498,4.702 8.318 C 4.788 8.053,4.745 7.677,4.608 7.491 C 4.578 7.451,4.492 7.384,4.417 7.343 L 4.280 7.267 2.547 7.261 C 1.152 7.257,0.791 7.263,0.699 7.292 M11.745 7.278 C 11.622 7.308,11.452 7.411,11.392 7.492 C 11.255 7.677,11.212 8.053,11.298 8.318 C 11.356 8.498,11.502 8.644,11.682 8.702 C 11.804 8.742,12.003 8.747,13.492 8.747 C 14.921 8.747,15.184 8.741,15.302 8.706 C 15.597 8.618,15.741 8.386,15.742 7.999 C 15.742 7.614,15.595 7.383,15.290 7.291 C 15.187 7.260,14.864 7.254,13.496 7.256 C 12.578 7.258,11.790 7.268,11.745 7.278 M4.853 10.282 C 4.730 10.339,4.520 10.536,3.518 11.541 C 2.597 12.464,2.316 12.762,2.271 12.860 C 2.195 13.025,2.196 13.216,2.272 13.378 C 2.342 13.528,2.572 13.764,2.727 13.845 C 2.884 13.927,3.117 13.926,3.280 13.843 C 3.447 13.757,5.757 11.447,5.843 11.280 C 5.926 11.118,5.927 10.884,5.846 10.729 C 5.764 10.572,5.552 10.364,5.392 10.283 C 5.213 10.192,5.048 10.192,4.853 10.282 M10.753 10.266 C 10.595 10.338,10.362 10.566,10.281 10.728 C 10.197 10.897,10.193 11.085,10.269 11.253 C 10.343 11.418,12.667 13.750,12.850 13.843 C 13.109 13.976,13.375 13.911,13.643 13.649 C 13.907 13.391,13.977 13.111,13.843 12.850 C 13.750 12.667,11.418 10.343,11.253 10.269 C 11.101 10.200,10.901 10.199,10.753 10.266 M7.745 11.277 C 7.620 11.309,7.451 11.412,7.392 11.492 C 7.254 11.678,7.253 11.691,7.253 13.489 C 7.253 14.921,7.259 15.184,7.294 15.302 C 7.382 15.597,7.615 15.741,8.000 15.741 C 8.385 15.741,8.618 15.597,8.706 15.302 C 8.768 15.090,8.767 11.875,8.704 11.690 C 8.644 11.514,8.575 11.430,8.420 11.346 C 8.310 11.286,8.246 11.271,8.057 11.264 C 7.930 11.259,7.790 11.265,7.745 11.277 "
+              stroke="none"
+              fill-rule="evenodd"
+              fill="#fff"
+            ></path>
+          </svg>
+          Cancelando...
+        } @else {
+          Sí, cancelar
+        }
+      </button>
+    </footer>
+  </dialog>
+  <div class="backdrop"></div>
+
+}
+
+@if (confirmarLogout) {
+  <dialog class="modal modal-cancelar">
+    <header class="header-mod">
+      <div>
+        <h2>¿Cerrar sesión?</h2>
+      </div>
+      <button (click)="confirmarLogout = false">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="32"
+          height="32"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          style="color: rgb(102, 102, 102)"
+        >
+          <path d="M18 6 6 18"></path>
+          <path d="m6 6 12 12"></path>
+        </svg>
+      </button>
+    </header>
+    <article class="articulo-calendario">
+      <p>¿Seguro que quieres cerrar la sesión?</p>
+    </article>
+    <footer>
+      <button class="cancelar-calendario" (click)="confirmarLogout = false">Cancelar</button>
+      <button class="eliminar" (click)="logout()">Sí, cerrar sesión</button>
     </footer>
   </dialog>
   <div class="backdrop"></div>

@@ -86,16 +86,28 @@ app-login{
     height: 89vh;
     text-align: center;
 }
-app-citas{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    height: 89vh;
+app-citas {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: center;
+  min-height: calc(100vh - 70px);
+  padding: 20px 0;
 }
 .header-off{
     display: none;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+app-first-appointment,
+app-second-appointment,
+app-third-appointment,
+app-fourth-appointment {
+  display: block;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
 }

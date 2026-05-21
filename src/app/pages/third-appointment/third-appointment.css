@@ -23,6 +23,12 @@
   color: var(--primario);
 }
 
+.hora.ocupada {
+  opacity: 0.4;
+  cursor: not-allowed;
+  text-decoration: line-through; /* opcional */
+}
+
 .select {
   text-align: center;
 }

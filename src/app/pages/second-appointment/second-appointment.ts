@@ -1,46 +1,36 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { AppointmentService } from '../../models/appointment-model';
 import { AppointmentStylist } from '../../models/secondAppointment-model';
 import { Stylist } from '../../models/secondAppointment-model';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { CheckShared } from "../../shared/check-shared/check-shared";
+import { CheckShared } from '../../shared/check-shared/check-shared';
+import { CitaService } from '../../services/citas/cita-service';
+
 @Component({
   selector: 'app-second-appointment',
   imports: [RouterModule, CommonModule, CheckShared],
   templateUrl: './second-appointment.html',
   styleUrl: './second-appointment.css',
 })
-export class SecondAppointment {
+export class SecondAppointment implements OnInit {
   appointmentService = inject(AppointmentService);
-
   private secondAppointment = inject(AppointmentStylist);
   private router = inject(Router);
+  private citaService = inject(CitaService);
 
-  services: Stylist[] = [
-    {
-      name: 'Don Paquito',
-      specialty: 'Especialista en cortes de pelo',
-      description: 'Corte y peinado',
-      image: 'DonPaquito.webp'
-    },
-    {
-      name: 'Doña Lupelta',
-      specialty: 'Especialista en coloración de pelo',
-      description: 'Coloración y mechas',
-      image: 'donsexo.jpg'
-    },
-    {
-      name: 'Destructor de Multiversos Gomez',
-      specialty: 'Vendedor de tacos y enanos albinos',
-      description: 'Todos los servicios',
-      image: 'Garfield.jpg'
-    }
-  ]
+employees = signal<any[]>([]);
 
-  selectStylist(stylist: Stylist){
-    this.secondAppointment.selectedService.set(stylist);
-    this.router.navigate(['/appointment/third']);
-  }
+ngOnInit() {
+  this.citaService.getEmployees().subscribe({
+    next: (res) => this.employees.set(res.data ?? res),
+    error: (err) => console.error(err)
+  });
+}
+
+  selectStylist(employee: any) {
+  this.secondAppointment.setStylist(employee);
+  this.router.navigate(['/appointment/fecha-y-hora']);
+}
 }

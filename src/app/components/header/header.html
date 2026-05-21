@@ -4,104 +4,87 @@
     @switch (router.url) {
       @case ('/login') {
         <div class="header_content_main">
-          <a [routerLink]="['/home']">
+          <a [routerLink]="['/']">
             <img src="logo_peluqueria-color.webp" alt="logo_peluqueria" />
           </a>
           <h2>Salón Elegancia</h2>
         </div>
-        <nav class="main_nav">
-          <a [routerLink]="['/home/appointment']">Reservar Cita</a>
-        </nav>
       }
-      @case ('/admin/clientes') {
+      @case ('/') {
         <div class="header_content_main">
-          <a [routerLink]="['/home']">
+          <a [routerLink]="['/']">
             <img src="logo_peluqueria-color.webp" alt="logo_peluqueria" />
           </a>
           <h2>Salón Elegancia</h2>
         </div>
         <nav class="main_nav">
-          <a [routerLink]="['/appointment']">Reservar Cita</a>
-          <a class="logout" (click)="mostrarAviso()">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-out w-4 h-4 mr-2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" x2="9" y1="12" y2="12"></line></svg>
-            <span>Cerrar sesión</span>
-          </a>
-        </nav>
+  @if (authService.userID()) {
+    <a [routerLink]="['/citas']">Ir al perfil</a>
+  } @else {
+    <a class="nav-login" [routerLink]="['/login']">Ir al Login</a>
+    <a [routerLink]="['/appointment']">Reservar Cita</a>
+  }
+</nav>
       }
-      @case ('/admin/ajustes') {
+      @case ('/appointment/servicio') {
         <div class="header_content_main">
-          <a [routerLink]="['/home']">
+          <a [routerLink]="['/']">
             <img src="logo_peluqueria-color.webp" alt="logo_peluqueria" />
           </a>
           <h2>Salón Elegancia</h2>
         </div>
         <nav class="main_nav">
-          <a [routerLink]="['/appointment']">Reservar Cita</a>
-          <a class="logout" (click)="mostrarAviso()">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-out w-4 h-4 mr-2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" x2="9" y1="12" y2="12"></line></svg>
-            <span>Cerrar sesión</span>
+          <a [routerLink]="['/citas']">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+            Mis citas
           </a>
         </nav>
       }
-      @case ('/home') {
+      @case ('/appointment/peluquero') {
         <div class="header_content_main">
-          <a [routerLink]="['/home']">
+          <a [routerLink]="['/']">
             <img src="logo_peluqueria-color.webp" alt="logo_peluqueria" />
           </a>
           <h2>Salón Elegancia</h2>
         </div>
         <nav class="main_nav">
-          <a class="nav-login" [routerLink]="['/login']">Ir al Login</a>
-          <a [routerLink]="['/home/appointment']">Reservar Cita</a>
+          <a [routerLink]="['/citas']">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+            Mis citas
+          </a>
         </nav>
       }
-      @case ('/appointment/first') {
+      @case ('/appointment/fecha-y-hora') {
         <div class="header_content_main">
-          <a [routerLink]="['/home']">
+          <a [routerLink]="['/']">
             <img src="logo_peluqueria-color.webp" alt="logo_peluqueria" />
           </a>
           <h2>Salón Elegancia</h2>
         </div>
         <nav class="main_nav">
-          <a class="nav-login" [routerLink]="['/login']">Ir al Login</a>
+          <a [routerLink]="['/citas']">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+            Mis citas
+          </a>
         </nav>
       }
-      @case ('/appointment/second') {
+      @case ('/appointment/confirmacion') {
         <div class="header_content_main">
-          <a [routerLink]="['/home']">
+          <a [routerLink]="['/']">
             <img src="logo_peluqueria-color.webp" alt="logo_peluqueria" />
           </a>
           <h2>Salón Elegancia</h2>
         </div>
         <nav class="main_nav">
-          <a class="nav-login" [routerLink]="['/login']">Ir al Login</a>
-        </nav>
-      }
-      @case ('/appointment/third') {
-        <div class="header_content_main">
-          <a [routerLink]="['/home']">
-            <img src="logo_peluqueria-color.webp" alt="logo_peluqueria" />
+          <a [routerLink]="['/citas']">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+            Mis citas
           </a>
-          <h2>Salón Elegancia</h2>
-        </div>
-        <nav class="main_nav">
-          <a class="nav-login" [routerLink]="['/login']">Ir al Login</a>
-        </nav>
-      }
-      @case ('/appointment/fourth') {
-        <div class="header_content_main">
-          <a [routerLink]="['/home']">
-            <img src="logo_peluqueria-color.webp" alt="logo_peluqueria" />
-          </a>
-          <h2>Salón Elegancia</h2>
-        </div>
-        <nav class="main_nav">
-          <a class="nav-login" [routerLink]="['/login']">Ir al Login</a>
         </nav>
       }
       @case ('/citas') {
         <div class="header_content_main">
-          <a [routerLink]="['/home']">
+          <a [routerLink]="['/']">
             <img src="logo_peluqueria-color.webp" alt="logo_peluqueria" />
           </a>
           <h2>Salón Elegancia</h2>
@@ -109,7 +92,7 @@
         <nav class="main_nav">
           <a [routerLink]="['/appointment']">Reservar Cita</a>
           <a class="logout" (click)="mostrarAviso()">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-out w-4 h-4 mr-2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" x2="9" y1="12" y2="12"></line></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" x2="9" y1="12" y2="12"></line></svg>
             <span>Cerrar sesión</span>
           </a>
         </nav>
@@ -117,6 +100,7 @@
     }
   </div>
 </header>
+
 @if(cerrarSesion()) {
   <dialog class="modal modal-cancelar">
     <header class="header-mod">
@@ -125,11 +109,11 @@
       </div>
     </header>
     <article class="articulo-calendario">
-      <p> Estás a punto de cerrar sesión.</p>
+      <p>Estás a punto de cerrar sesión.</p>
     </article>
     <footer>
-      <button class="cancelar-calendario" (click)="closeCancel()">Volver</button>
-      <button class="eliminar" (click)="logout()">Sí, cancelar</button>
+      <button class="cancelar-calendario" (click)="closeCancel()">Cancelar</button>
+      <button class="eliminar" (click)="logout()">Sí, salir</button>
     </footer>
   </dialog>
   <div class="backdrop"></div>

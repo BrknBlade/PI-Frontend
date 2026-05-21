@@ -5,7 +5,7 @@
 <section class="back">
   <div class="back_div">
     <nav class="back_nav">
-      <a [routerLink]="['/appointment/second']">
+      <a [routerLink]="['/appointment/peluquero']">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"
@@ -26,18 +26,17 @@
       <div class="div_info">
         <h3>Servicio elegido</h3>
         <p><strong>Servicio seleccionado:</strong> {{ service.name }}</p>
-        <p><strong>Duración:</strong> {{ service.time }}</p>
+        <p><strong>Duración:</strong> {{ service.duration }}</p>
         <!-- <p><strong>Precio:</strong> {{ service.price }}</p>
         <p><strong>Descripción:</strong> {{ service.description }}</p> -->
       </div>
     }
     @if (appointmentStylist.selectedService(); as stylist) {
-      <div class="div_info">
-        <h3>Peluquero elegido</h3>
-        <p><strong>Peluquero seleccionado:</strong> {{ stylist.name }}</p>
-        <p><strong>Especialidad:</strong> {{ stylist.description }}</p>
-      </div>
-    }
+  <div class="div_info">
+    <h3>Peluquero elegido</h3>
+    <p><strong>Peluquero seleccionado:</strong> {{ stylist.name }}</p>
+  </div>
+}
   </div>
 </section>
 <section class="container-calendario">
@@ -109,26 +108,27 @@
 <section class="section_hours">
   <h3 class="calendario-txt">Selecciona una hora</h3>
   <div class="horas">
-    @for (hora of horas; track $index) {
-      @if (hora.hora == pruebaHora()) {
-        <button (click)="seleccionarHora($event)" class="hora eleccion" value="{{hora.hora}}">{{hora.hora}}</button>
-      } @else {
-        <button (click)="seleccionarHora($event)" class="hora" value="{{hora.hora}}">{{hora.hora}}</button>
+    @if (!horasCargadas) {
+      <p class="cargando">Cargando disponibilidad...</p>
+    } @else {
+      @for (hora of horas; track $index) {
+        @if (!hora.disponible) {
+          <button class="hora ocupada" disabled>{{hora.hora}}</button>
+        } @else if (hora.hora == pruebaHora()) {
+          <button (click)="seleccionarHora($event)" class="hora eleccion" value="{{hora.hora}}">{{hora.hora}}</button>
+        } @else {
+          <button (click)="seleccionarHora($event)" class="hora" value="{{hora.hora}}">{{hora.hora}}</button>
+        }
       }
     }
-    <!-- <input type="hidden" value="{{horaCitaCalendario}}"> -->
   </div>
-  <!-- <div class="nueva-cita">
-    <h4>Nueva cita:</h4>
-    <p>{{ pruebaFecha() | date:"EEEE, d 'de' MMMM 'de' y" : '' : 'es' }} a las {{ pruebaHora() }}</p>
-  </div> -->
 </section>
 <section class="section_confirm">
-  <button 
-  class="confirm" 
-  [routerLink]="pruebaDia() && pruebaHora() ? ['/appointment/fourth'] : null"
-  [disabled]="!pruebaDia() || !pruebaHora()"
-  (click)="confirmarCita()">
-  Confirmar cita
-</button>
+  <button
+    class="confirm"
+    [disabled]="!pruebaDia() || !pruebaHora()"
+    (click)="confirmarCita()">
+    Siguiente
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+  </button>
 </section>

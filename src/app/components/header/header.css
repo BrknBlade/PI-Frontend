@@ -54,8 +54,11 @@
     align-items: center;
 }
 .main_nav a {
-    text-decoration: none;
-    transition: all .3s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  transition: all .3s ease;
 }
 
 .main_nav a:first-child {
@@ -637,5 +640,28 @@
     }
     .modal footer{
         flex-direction: column-reverse;
+    }
+}
+
+@media (max-width: 376px) {
+    .main_nav {
+        gap: 8px;
+    }
+
+    .main_nav a:first-child,
+    .main_nav a:last-child {
+        padding: 10px;
+        font-size: 1rem;
+        border-radius: 10px;
+    }
+
+    .logout span {
+        display: none;
+    }
+
+    .logout svg {
+        width: 20px;
+        height: 20px;
+        margin: 0;
     }
 }
