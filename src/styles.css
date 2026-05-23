@@ -9,6 +9,8 @@
   --texto-secundario: #585857;
   --texto-secundario-uwu: #727272;
 
+  --borde-admin: #dfdfdf;
+
   --borde: #e8e8e8;
   --error: #ef4444;
   --error-hover: #8f0606;
@@ -79,6 +81,21 @@ body{
     font-family: Inter Medium, sans-serif;
     margin: 0;
 }
+app-navigation-admin {
+    display: block;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+@media (max-width: 1024px) {
+  app-navigation-admin {
+    max-width: 800px;
+  }
+}
+@media (max-width: 768px) {
+  app-navigation-admin {
+    max-width: 700px;
+  }
+}
 app-login{
     display: flex;
     justify-content: center;
@@ -93,6 +110,12 @@ app-citas {
   text-align: center;
   min-height: calc(100vh - 70px);
   padding: 20px 0;
+}
+app-clients-component{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    height: 89vh;
 }
 .header-off{
     display: none;

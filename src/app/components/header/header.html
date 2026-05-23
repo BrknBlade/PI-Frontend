@@ -10,6 +10,26 @@
           <h2>Salón Elegancia</h2>
         </div>
       }
+      @case ('/admin/clientes') {
+        <div class="header_content_main">
+          <a [routerLink]="['/']">
+            <img src="logo_peluqueria-color.webp" alt="logo_peluqueria" />
+          </a>
+          <h2>Salón Elegancia - Admin</h2>
+        </div>
+        <a class="cerrarSesion" (click)="logout()" [routerLink]="['/admin/clientes']">Cerrar Sesión</a>
+
+      }
+      @case ('/admin/ajustes') {
+        <div class="header_content_main">
+          <a [routerLink]="['/']">
+            <img src="logo_peluqueria-color.webp" alt="logo_peluqueria" />
+          </a>
+          <h2>Salón Elegancia - Admin</h2>
+        </div>
+        <a class="cerrarSesion" (click)="logout()" [routerLink]="['/admin/clientes']">Cerrar Sesión</a>
+
+      }
       @case ('/') {
         <div class="header_content_main">
           <a [routerLink]="['/']">

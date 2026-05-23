@@ -53,6 +53,12 @@ export const routes: Routes = [
       {
         path: 'calendario',
         component: Calendario
+        path: 'clientes',
+        component: ClientsComponent,
+      },
+      {
+        path: 'ajustes',
+        component: SettingsComponent,
       },
     ],
   },
