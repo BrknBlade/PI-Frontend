@@ -40,6 +40,9 @@ section *{
     stroke: var(--primario-hover);
     color: var(--primario-hover);
 }
+.card-header .calendar{
+    fill: var(--primario-hover);
+}
 .card-options{
     display: grid;
     gap: 10px;
@@ -102,6 +105,16 @@ section *{
     transition: all .2s ease-in-out;
     background: var(--fondo-paneles);
 }
+
+.row.campos.email  .toogle{
+    margin-left: auto;
+    margin-right: 0;
+}
+
+.row.campos.email {
+    border-bottom: 1px solid var(--borde-admin);
+}
+
 .row.campos .horas {
     display: flex;
     align-items: center;
@@ -143,6 +156,10 @@ section *{
         display: grid;
         gap: 10px;
         grid-template-columns: repeat(1, 1fr);
+    }
+
+    .card-options.horario .row.campos{
+        flex-direction: column;
     }
 }
 

@@ -34,7 +34,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock w-5 h-5 text-primary"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
             <h2>Horario Laboral</h2>
         </header>
-        <div class="card-options">
+        <div class="card-options horario">
             <div class="row campos">
                 <div class="toogle">
                     <label class="switch">
@@ -50,7 +50,7 @@
                 </div>
             </div>
         </div>
-        <div class="card-options">
+        <div class="card-options horario">
             <div class="row campos">
                 <div class="toogle">
                     <label class="switch">
@@ -66,7 +66,7 @@
                 </div>
             </div>
         </div>
-        <div class="card-options">
+        <div class="card-options horario">
             <div class="row campos">
                 <div class="toogle">
                     <label class="switch">
@@ -82,7 +82,7 @@
                 </div>
             </div>
         </div>
-        <div class="card-options">
+        <div class="card-options horario">
             <div class="row campos">
                 <div class="toogle">
                     <label class="switch">
@@ -98,7 +98,7 @@
                 </div>
             </div>
         </div>
-        <div class="card-options">
+        <div class="card-options horario">
             <div class="row campos">
                 <div class="toogle">
                     <label class="switch">
@@ -114,7 +114,7 @@
                 </div>
             </div>
         </div>
-        <div class="card-options">
+        <div class="card-options horario">
             <div class="row campos">
                 <div class="toogle">
                     <label class="switch">
@@ -130,7 +130,7 @@
                 </div>
             </div>
         </div>
-        <div class="card-options">
+        <div class="card-options horario">
             <div class="row campos">
                 <div class="toogle">
                     <label class="switch">
@@ -157,21 +157,79 @@
         <div class="card-options notification">
             <div class="row campos email">
                 <div class="option">
-                    <input class="inicioDia" type="time" value="09:00">
                     <h3>Confirmación al email</h3>
                     <p>Envia un email de confirmacion a tus clientes</p>
-                    <input class="finDia" type="time" value="17:00">
                 </div>
                 <div class="toogle">
                     <label class="switch">
                         <input type="checkbox">
                         <span class="slider round"></span>
                     </label>
-                    <span>Martes</span>
+                </div>
+            </div>
+            <div class="row campos email">
+                <div class="option">
+                    <h3>Recordatorio SMS</h3>
+                    <p>Avisa con un SMS antes de las citas</p>
+                </div>
+                <div class="toogle">
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="row campos email">
+                <div class="option">
+                    <h3>Notificar al cancelar</h3>
+                    <p>Notifica a tus empleados cuando se cancelen citas</p>
+                </div>
+                <div class="toogle">
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+            <div class="row campos email">
+                <div class="option">
+                    <h3>Resumen diario</h3>
+                    <p>Recibe un resumen diario sobre tu tienda</p>
+                </div>
+                <div class="toogle">
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
                 </div>
             </div>
         </div>
-        <button class="card-button">Guardar Horario</button>
+        <button class="card-button">Guardar Notificaciones</button>
+    </article>
+
+    <article class="card">
+        <header class="card-header">
+            <svg class="calendar" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="none">
+                <path d="M200-80q-33 0-56.5-23.5T120-160v-560q0-33 23.5-56.5T200-800h40v-80h80v80h320v-80h80v80h40q33 0 56.5 23.5T840-720v560q0 33-23.5 56.5T760-80H200Zm0-80h560v-400H200v400Zm0-480h560v-80H200v80Zm0 0v-80 80Z" />
+            </svg>
+            <h2>Ajuste de citas</h2>
+        </header>
+        
+        <div class="card-options">
+            <label class="campos">
+                Máximo para pedir una cita (días)
+                <input type="number" placeholder="14" min="0">
+            </label>
+            <label class="campos">
+                Mínimo para avisar una cita (horas)
+                <input type="number" placeholder="2" min="1" max="24">
+            </label>
+            <label class="campos">
+                Avisar de una cancelación (horas)
+                <input type="number" placeholder="24" min="1" max="48">
+            </label>
+        </div>
+        <button class="card-button">Guardar Notificaciones</button>
     </article>
 
 </section>
