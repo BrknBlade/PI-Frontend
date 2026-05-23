@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 
 @Component({
   selector: 'app-settings-component',
@@ -8,5 +8,5 @@ import { Component } from '@angular/core';
 })
 export class SettingsComponent {
 
-
+  resolucionWidth = signal(window.innerWidth);
 }

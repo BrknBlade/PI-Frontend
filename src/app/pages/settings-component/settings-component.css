@@ -85,15 +85,16 @@ section *{
 }
 .row{
     display: flex;
-    gap: 10px;
+    gap: 5px;
     justify-content: center;
     align-items: center;
+    margin-bottom: 10px;
 }
 
-.row.campos input{
+.row.campos   input{
     display: inline-block;
     margin-top: 0;
-    padding: 10px;
+    padding: 5px 0;
     border-radius: 10px;
     border: 1px var(--fondo-paneles) solid;
     outline: 3px var(--fondo-paneles) solid;
@@ -101,7 +102,36 @@ section *{
     transition: all .2s ease-in-out;
     background: var(--fondo-paneles);
 }
+.row.campos .horas {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.toogle {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-right: auto;
+    font-size: 15px;
+}
+
+.toogle label:focus-visible, .toogle span:focus-visible{
+    border: none;
+    background-color: transparent;
+}
+
+.card-options.notification{
+    grid-template-columns: repeat(1, 1fr);
+}
+
+
+
 @media (max-width: 486px) {
+    .toogle{
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
     .contenedor {
         text-align: start;
         max-width: 1200px;
@@ -121,7 +151,7 @@ section *{
   position: relative;
   display: inline-block;
   width: 55px;
-  height: 28px;
+  height: 30px;
 }
 
 /* Hide default HTML checkbox */
@@ -150,7 +180,7 @@ section *{
   height: 22px;
   width: 22px;
   left: 5px;
-  bottom: 2.5px;
+  bottom: 4px;
   background-color: white;
   -webkit-transition: .4s;
   transition: .4s;

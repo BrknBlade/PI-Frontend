@@ -7,6 +7,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail w-5 h-5 text-primary"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
             <h2>Datos de la tienda</h2>
         </header>
+
         <div class="card-options">
             <label class="campos">
                 Nombre de la tienda
@@ -40,13 +41,137 @@
                         <input type="checkbox">
                         <span class="slider round"></span>
                     </label>
+                    <span>Lunes</span>
                 </div>
-                <span>Lunes</span>
-                <input class="inicioDia" type="text" value="09:00">
-                <span>/</span>
-                <input class="finDia" type="text" value="17:00">
+                <div class="horas">
+                    <input class="inicioDia" type="time" value="09:00">
+                    <span>/</span>
+                    <input class="finDia" type="time" value="17:00">
+                </div>
             </div>
         </div>
-        <button class="card-button">Guardar Información</button>
+        <div class="card-options">
+            <div class="row campos">
+                <div class="toogle">
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                    <span>Martes</span>
+                </div>
+                <div class="horas">
+                    <input class="inicioDia" type="time" value="09:00">
+                    <span>/</span>
+                    <input class="finDia" type="time" value="17:00">
+                </div>
+            </div>
+        </div>
+        <div class="card-options">
+            <div class="row campos">
+                <div class="toogle">
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                    <span>Miércoles</span>
+                </div>
+                <div class="horas">
+                    <input class="inicioDia" type="time" value="09:00">
+                    <span>/</span>
+                    <input class="finDia" type="time" value="17:00">
+                </div>
+            </div>
+        </div>
+        <div class="card-options">
+            <div class="row campos">
+                <div class="toogle">
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                    <span>Jueves</span>
+                </div>
+                <div class="horas">
+                    <input class="inicioDia" type="time" value="09:00">
+                    <span>/</span>
+                    <input class="finDia" type="time" value="17:00">
+                </div>
+            </div>
+        </div>
+        <div class="card-options">
+            <div class="row campos">
+                <div class="toogle">
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                    <span>Viernes</span>
+                </div>
+                <div class="horas">
+                    <input class="inicioDia" type="time" value="09:00">
+                    <span>/</span>
+                    <input class="finDia" type="time" value="17:00">
+                </div>
+            </div>
+        </div>
+        <div class="card-options">
+            <div class="row campos">
+                <div class="toogle">
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                    <span>Sábado</span>
+                </div>
+                <div class="horas">
+                    <input class="inicioDia" type="time" value="09:00">
+                    <span>/</span>
+                    <input class="finDia" type="time" value="17:00">
+                </div>
+            </div>
+        </div>
+        <div class="card-options">
+            <div class="row campos">
+                <div class="toogle">
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                    <span>Domingo</span>
+                </div>
+                <div class="horas">
+                    <input class="inicioDia" type="time" value="09:00">
+                    <span>/</span>
+                    <input class="finDia" type="time" value="17:00">
+                </div>
+            </div>
+        </div>
+        <button class="card-button">Guardar Horario</button>
     </article>
+
+    <article class="card">
+        <header class="card-header">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bell w-5 h-5 text-primary" data-fg-dq4g57="2.69:466.955:/src/app/components/admin-settings-view.tsx:168:13:6535:41:e:Bell::::::CiHR" data-fgid-dq4g57=":r91:"><path d="M10.268 21a2 2 0 0 0 3.464 0"></path><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"></path></svg>
+            <h2>Notificaciones</h2>
+        </header>
+        <div class="card-options notification">
+            <div class="row campos email">
+                <div class="option">
+                    <input class="inicioDia" type="time" value="09:00">
+                    <h3>Confirmación al email</h3>
+                    <p>Envia un email de confirmacion a tus clientes</p>
+                    <input class="finDia" type="time" value="17:00">
+                </div>
+                <div class="toogle">
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                    <span>Martes</span>
+                </div>
+            </div>
+        </div>
+        <button class="card-button">Guardar Horario</button>
+    </article>
+
 </section>
