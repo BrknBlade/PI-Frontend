@@ -59,6 +59,14 @@ export const routes: Routes = [
         component: Calendario
       },
       {
+        path: 'servicios',
+        component: Servicios
+      },
+      {
+        path: 'empleados',
+        component: Empleados
+      },
+      {
         path: 'clientes',
         component: ClientsComponent,
       },

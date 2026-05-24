@@ -1,3 +1,18 @@
+.services {
+    width: 85%;
+}
+
+h1 {
+  font-family: Inter Bold, sans-serif;
+  margin-bottom: 0;
+}
+
+h1 + p {
+  font-family: Inter, sans-serif;
+  font-size: 18px;
+  color: var(--texto-secundario);
+}
+
 .services_div {
     display: flex;
     flex-direction: row;
@@ -311,6 +326,10 @@ tbody td p {
 }
 
 @media (max-width: 768px) {
+
+    .services {
+        margin-left: 8%;
+    }
 
     .add_service {
         width: auto;
