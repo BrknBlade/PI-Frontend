@@ -1,0 +1,126 @@
+<section class="employees">
+  <div class="employees_div">
+    <div class="employees_div_text">
+      <h2>Gestión de empleados</h2>
+      <p>Gestiona el personal de tu salón y sus horarios</p>
+    </div>
+    <button class="add_employee" (click)="openPanel()">
+      <div class="button_info">
+        <span>+</span>
+        <p>Añadir Empleado</p>
+      </div>
+    </button>
+  </div>
+
+  @if (panelOpen) {
+    <div class="new_service">
+      <div class="new_service_div">
+        <div class="new_service_header">
+          <header>
+            <h2>{{ isEdition ? 'Editar empleado' : 'Añadir nuevo empleado' }}</h2>
+            <p>
+              {{
+                isEdition
+                  ? 'Actualizar informacion del empleado'
+                  : 'Añade a un nuevo miembro en tu salón'
+              }}
+            </p>
+          </header>
+          <button class="close" (click)="closePanel()">X</button>
+        </div>
+        <form [formGroup]="formService" (ngSubmit)="save()" class="form_service">
+          <div class="campo">
+            <label>Nombre completo</label>
+            <input
+              type="text"
+              formControlName="name"
+              placeholder="Introduce el nombre del empleado"
+            />
+            @if (formService.get('name')?.invalid && formService.get('name')?.touched) {
+              <span class="error">El nombre es obligatorio</span>
+            }
+          </div>
+          <div class="campo">
+            <label>Rol del empleado</label>
+            <input formControlName="role" placeholder="ej., Estilista..." />
+            @if (formService.get('role')?.invalid && formService.get('role')?.touched) {
+              <span class="error">El rol es obligatorio</span>
+            }
+          </div>
+          <div class="campo">
+            <label>Especialidad</label>
+            <input type="text" formControlName="specialty" placeholder="ej., Cortes y estilismo" />
+            @if (formService.get('specialty')?.invalid && formService.get('specialty')?.touched) {
+              <span class="error">La duración es obligatorio</span>
+            }
+          </div>
+
+          <div class="campo_footer">
+            <button type="button" class="button_cancel" (click)="closePanel()">Cancelar</button>
+            <button type="submit" class="button_create" [disabled]="formService.invalid">
+              {{ isEdition ? 'Actualizar empleado' : 'Añadir empleado' }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  }
+
+  <div class="employees_content">
+    <ul class="employees_grid">
+      <li class="employee_card">
+        @for (employee of employeesData(); track employee.id) {
+          <article>
+            <div class="image_card">
+              <img [src]="employee.image_url" alt="foto_peluqueria" />
+            </div>
+            <div class="content_card">
+              <h3>{{ employee.name }}</h3>
+              <p class="category">{{ employee.role }}</p>
+              <p class="description">{{ employee.specialty }}</p>
+              <div class="options">
+                <button class="button_edit" (click)="openPanel(employee)">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-pencil-square"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
+                    />
+                    <path
+                      fill-rule="evenodd"
+                      d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"
+                    />
+                  </svg>
+                  <span>Editar</span>
+                </button>
+                <button class="button_delete" (click)="delete(employee.id!)">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-trash"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"
+                    />
+                    <path
+                      d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"
+                    />
+                  </svg>
+                  <span>Borrar</span>
+                </button>
+              </div>
+            </div>
+          </article>
+        }
+      </li>
+    </ul>
+  </div>
+</section>

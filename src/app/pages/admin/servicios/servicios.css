@@ -1,0 +1,378 @@
+.services_div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+.services_div_text h2 {
+    color: var(--texto-principal);
+}
+
+.services_div_text p {
+    color: var(--texto-secundario);
+}
+
+.add_service {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primario-hover);
+    border: none;
+    border-radius: 12px;
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: all .2s ease;
+    flex-shrink: 0;
+    width: fit-content;
+}
+
+.add_service:hover {
+    opacity: 0.85;
+}
+
+.button_info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.button_info span {
+    color: var(--color-blanco);
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+.button_info p {
+    color: var(--color-blanco);
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+.new_service {
+    position: fixed;
+    /*Se queda fijo y no se mueve aunque hagas scroll*/
+    inset: 0;
+    /*Esto seria igual a poner, top, right, left y button a 0*/
+    background-color: rgba(0, 0, 0, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.new_service_div {
+    background-color: var(--fondo-principal);
+    border-radius: 16px;
+    padding: 32px;
+    width: 560px;
+    max-width: 95vw;
+    max-height: 90vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.new_service_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.new_service_header h2 {
+    margin: 0 0 4px 0;
+    color: var(--texto-principal);
+}
+
+.new_service_header p {
+    color: var(--texto-secundario);
+}
+
+.close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    transition: color .2s;
+}
+
+.close:hover {
+    color: var(--texto-principal);
+}
+
+.form_service {
+    display: flex;
+    flex-direction: column;
+}
+
+.campo {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5px;
+}
+
+.campo label {
+    color: var(--texto-principal);
+    margin-bottom: 2px;
+}
+
+.campo input,
+.campo textarea {
+    background-color: var(--color-blanco);
+    border: 1px solid transparent;
+    border-radius: 10px;
+    padding: 12px 14px;
+    color: var(--texto-principal);
+    outline: none;
+    transition: border-color .2s;
+}
+
+.campo input:focus,
+.campo textarea:focus {
+    border-color: var(--color-primario);
+}
+
+.campo textarea {
+    resize: none;
+    height: 90px;
+    font-family: Inter, sans-serif;
+}
+
+.campo_row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.campo_footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.button_cancel {
+    background-color: none;
+    border: 1px solid var(--color-blanco-info);
+    border-radius: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    color: var(--texto-principal);
+    transition: background-color .2s;
+}
+
+.button_cancel:hover {
+    background-color: var(--color-primario);
+}
+
+.button_create {
+    background-color: var(--primario-hover);
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    color: var(--color-blanco);
+    transition: opacity .2s;
+}
+
+.button_create:hover {
+    opacity: 0.85s;
+}
+
+.error {
+    color: var(--error);
+}
+
+.button_create:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.services_table_main {
+    width: 100%;
+    border: 1px solid #e5e0ed;
+    background-color: var(--fondo-paneles);
+    overflow-x: auto;
+
+    border-radius: 14px;
+}
+
+.services_table {
+    width: 100%;
+    border: 1px solid #e5e0ed;
+    background-color: var(--fondo-paneles);
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 560px;
+}
+
+thead th {
+    text-align: left;
+    padding: 16px 20px;
+    color: var(--texto-principal);
+    border-bottom: 1px solid #e5e0ed;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+tbody tr {
+    border-bottom: 1px solid #e5e0ed;
+    transition: background-color .15s ease;
+}
+
+tbody tr:last-child {
+    border-bottom: none;
+}
+
+tbody tr:hover {
+    background-color: var(--color-blanco-info);
+}
+
+tbody td {
+    padding: 16px 20px;
+    color: var(--texto-principal);
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+tbody td:first-child {
+    white-space: normal;
+    min-width: 160px;
+    max-width: 240px;
+}
+
+tbody td strong {
+    display: block;
+}
+
+tbody td p {
+    margin: 2px 0 0 0;
+    color: var(--texto-secundario);
+}
+
+.category {
+    background-color: var(--fondo-secundario);
+    color: var(--primario-hover);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.time {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.time svg {
+    flex-shrink: 0;
+    display: block;
+}
+
+.price span {
+    color: var(--primario-hover);
+}
+
+.button_edit,
+.button_delete {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button_delete {
+    color: red;
+}
+
+.button_edit:hover,
+.button_delete:hover {
+    background-color: var(--fondo-secundario);
+    border-radius: 10px;
+}
+
+.button_edit:hover {
+    color: var(--primario-hover);
+}
+
+@media (max-width: 768px) {
+
+    .add_service {
+        width: auto;
+        justify-content: center;
+    }
+
+    .new_service_div {
+        padding: 24px 20px;
+        gap: 18px;
+    }
+
+    .campo_row {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .campo_footer {
+        justify-content: stretch;
+    }
+
+    .button_cancel,
+    .button_create {
+        flex: 1;
+        text-align: center;
+    }
+
+}
+
+@media (max-width: 480px) {
+    .services_div {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 20px;
+    }
+
+    .services_div_text h2 {
+        font-size: 1.2rem;
+    }
+
+    .new_service_div {
+        padding: 20px 16px;
+        border-radius: 12px;
+        max-height: 95vh;
+    }
+
+    .new_service_header h2 {
+        font-size: 1.1rem;
+    }
+
+    .campo_row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    tbody td {
+        padding: 12px 14px;
+    }
+
+    thead th {
+        padding: 12px 14px;
+    }
+
+    .actions {
+        gap: 8px;
+    }
+}

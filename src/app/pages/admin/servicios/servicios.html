@@ -1,0 +1,172 @@
+<section class="services">
+  <div class="services_div">
+    <div class="services_div_text">
+      <h2>Servicio de administración</h2>
+      <p>Gestiona la oferta de servicios de tus salones</p>
+    </div>
+    <button class="add_service" (click)="openPanel()">
+      <div class="button_info">
+        <span>+</span>
+        <p>Añadir servicio</p>
+      </div>
+    </button>
+  </div>
+
+  @if (panelOpen) {
+    <div class="new_service">
+      <div class="new_service_div">
+        <div class="new_service_header">
+          <header>
+            <h2>{{ isEdition ? 'Editar servicio' : 'Añadir un servicio nuevo' }}</h2>
+            <p>{{ isEdition ? 'Editando los datos del servicio' : 'Creando un nuevo servicio' }}</p>
+          </header>
+          <button class="close" (click)="closePanel()">X</button>
+        </div>
+        <form [formGroup]="formService" (ngSubmit)="save()" class="form_service">
+          <div class="campo">
+            <label>Nombre del servicio</label>
+            <input type="text" formControlName="name" placeholder="ej., Corte y peinado" />
+            @if (formService.get('name')?.invalid && formService.get('name')?.touched) {
+              <span class="error">El nombre es obligatorio</span>
+            }
+          </div>
+          <div class="campo">
+            <label>Descripción</label>
+            <textarea
+              formControlName="description"
+              placeholder="Descripcion breve del servicio"
+            ></textarea>
+            @if (
+              formService.get('description')?.invalid && formService.get('description')?.touched
+            ) {
+              <span class="error">La descripción es obligatorio</span>
+            }
+          </div>
+          <div class="campo_row">
+            <div class="campo">
+              <label>Duración (minutos)</label>
+              <input type="number" formControlName="duration" placeholder="60 min" />
+              @if (formService.get('duration')?.invalid && formService.get('duration')?.touched) {
+                <span class="error">La duración es obligatorio</span>
+              }
+            </div>
+            <div class="campo">
+              <label>Precio</label>
+              <input type="number" formControlName="price" placeholder="45€" />
+              @if (formService.get('price')?.invalid && formService.get('price')?.touched) {
+                <span class="error">La precio es obligatorio</span>
+              }
+            </div>
+            <div class="campo">
+              <label>Categoria</label>
+              <input type="text" formControlName="name" placeholder="ej., corte, coloración" />
+              @if (formService.get('name')?.invalid && formService.get('name')?.touched) {
+                <span class="error">La categoria es obligatorio</span>
+              }
+            </div>
+          </div>
+          <div class="campo_footer">
+            <button type="button" class="button_cancel" (click)="closePanel()">Cancelar</button>
+            <button type="submit" class="button_create" [disabled]="formService.invalid">
+              {{ isEdition ? 'Guardar cambios' : 'Crear servicio' }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  }
+
+  <div class="services_table_main">
+    <table>
+      <thead>
+        <tr>
+          <th>Nombre del servicio</th>
+          <th>Categoria</th>
+          <th>Duración</th>
+          <th>Precio</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (cut of cuts(); track cut.id) {
+          <tr>
+            <td>
+              <strong>{{ cut.name }}</strong>
+              <p>{{ cut.description }}</p>
+            </td>
+            <td>
+              <span class="category">{{ cut.name }}</span>
+            </td>
+            <td>
+              <div class="time">
+                <span
+                  ><svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-clock"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z"
+                    />
+                    <path
+                      d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0"
+                    /></svg
+                ></span>
+                {{ cut.duration }} min
+              </div>
+            </td>
+            <td class="price">
+              <span>{{ cut.price }}€</span>
+            </td>
+            <td>
+              <div class="actions">
+                <button class="button_edit" (click)="openPanel(cut)">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-pencil-square"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
+                    />
+                    <path
+                      fill-rule="evenodd"
+                      d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"
+                    />
+                  </svg>
+                </button>
+                <button class="button_delete" (click)="deleteCut(cut.id)">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    class="bi bi-trash"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"
+                    />
+                    <path
+                      d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td colspan="5" style="text-align: center">No hay servicios disponibles</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</section>

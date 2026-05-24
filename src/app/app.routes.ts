@@ -17,6 +17,8 @@ import { Calendario } from './pages/admin/calendario/calendario';
 import { ClientsComponent } from './pages/admin/clients-component/clients-component';
 import { SettingsComponent } from './pages/admin/settings-component/settings-component';
 import { NotFound } from './pages/not-found/not-found';
+import { Servicios } from './pages/admin/servicios/servicios';
+import { Empleados } from './pages/admin/empleados/empleados';
 
 export const routes: Routes = [
   {
