@@ -2,6 +2,20 @@ main
 {
   box-sizing: border-box;
   overflow-x: scroll;
+  width: 85%;
+
+  h1
+  {
+    font-family: Inter Bold, sans-serif;
+    margin-bottom: 0;
+  }
+
+  h1 + p
+  {
+    font-family: Inter, sans-serif;
+    font-size: 18px;
+    color: var(--texto-secundario);
+  }
 }
 
 svg
@@ -124,11 +138,10 @@ svg
 {
   position: absolute;
   box-sizing: border-box;
-  width: 50%;
+  width: 90%;
   height: 2rem;
-  border-radius: 2rem;
-  background-color: #09F;
-  color: white;
+  border-radius: .2rem;
+  background-color: var(--fondo-secundario);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -152,4 +165,12 @@ svg
 .hidding
 {
   display: none;
+}
+
+@media (width <= 770px)
+{
+  main
+  {
+    margin-left: 8%;
+  }
 }

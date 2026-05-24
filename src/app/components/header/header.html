@@ -1,5 +1,4 @@
 <header class="header_content" [class.blur]="cerrarSesion() || cancelarCita">
-  <a routerLink='/admin'>Admin</a>
   <div class="hedaer_content_div">
     @switch (router.url) {
       @case ('/login') {
@@ -10,16 +9,9 @@
           <h2>Salón Elegancia</h2>
         </div>
       }
-      @case ('/admin/clientes') {
-        <div class="header_content_main">
-          <a [routerLink]="['/']">
-            <img src="logo_peluqueria-color.webp" alt="logo_peluqueria" />
-          </a>
-          <h2>Salón Elegancia - Admin</h2>
-        </div>
-        <a class="cerrarSesion" (click)="logout()" [routerLink]="['/admin/clientes']">Cerrar Sesión</a>
-
-      }
+      @case ('/admin/panel')
+      @case ('/admin/calendario')
+      @case ('/admin/clientes')
       @case ('/admin/ajustes') {
         <div class="header_content_main">
           <a [routerLink]="['/']">

@@ -1,7 +1,7 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { CitaService } from '../../../services/citas/cita-service';
 import { BusinessService } from '../../../services/business/business-service';
-import { BusinessInfo } from '../../../models/business-model';
+import { BusinessInfo } from '../../../models/business-models';
 import { CutData } from '../../../services/cutData/cut-data';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment.development';

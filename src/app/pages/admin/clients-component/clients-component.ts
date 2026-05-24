@@ -1,6 +1,6 @@
 import { Component, DoCheck, inject, signal } from '@angular/core';
-import { UserData } from '../../services/userData/user-data';
-import { CutData } from '../../services/cutData/cut-data';
+import { UserData } from '../../../services/userData/user-data';
+import { CutData } from '../../../services/cutData/cut-data';
 
 
 @Component({
@@ -16,7 +16,7 @@ export class ClientsComponent implements DoCheck{
 
   arrInfo = signal<any[]>([]);
   arrBusqueda = signal<any[]>([]);
-  busqueda:any = ''; 
+  busqueda:any = '';
   resolucionWidth = signal(window.innerWidth);
 
   cargando = signal(true);
@@ -24,7 +24,7 @@ export class ClientsComponent implements DoCheck{
   timestampActual = Date.now() - 60 * 60 * 24 * 7 * 1000;// el por mil es pq es en milisegundos lo q delvuelve now()
   constructor(){
     this.infoBusinness();
-    
+
     console.log(this.resolucionWidth);
   }
 
@@ -59,7 +59,7 @@ export class ClientsComponent implements DoCheck{
     let clientesCompletados = 0;
 
     for (const element of clientes) {
-      this.userService.getCitasEachClient(element.id).subscribe(e => {
+      this.userService.getCitasEachClient(element.id).subscribe(async e => {
         const citas = e.data.filter((cita: any) => cita.user_id == element.id);
         let citasCompletadas = 0;
         let precioTotal = 0;
@@ -102,12 +102,12 @@ export class ClientsComponent implements DoCheck{
 }
 
   getClientsNameContact(){
-    this.userService.getAll().subscribe(users =>{
+    this.userService.getAll().subscribe(async users =>{
       for (const user in users) {
         let usuario = users[user];
         for (const data in usuario) {
           const info: any = usuario[data];
-          if(info.role == 3){//deberia de ser role == 4 pero uso 3 por tener un par de resultados
+          if(info.role == 4){//deberia de ser role == 4 pero uso 3 por tener un par de resultados
             info.created_at = new Date(info.created_at).getTime();
             this.arrInfo.update(val => {
               return [...val, info];

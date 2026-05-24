@@ -81,6 +81,7 @@ section *{
     border: none;
     font-family: Inter Bold, sans-serif;
     transition: all .1s ease-in-out;
+    width: fit-content;
     &:hover{
         cursor: pointer;
         background-color: var(--primario-hover);
@@ -120,6 +121,15 @@ section *{
     align-items: center;
     gap: 5px;
 }
+
+.horas .inicioDia:focus {
+    outline: 3px solid #0003;
+}
+
+.horas .finDia:focus {
+    outline: 3px solid #0003;
+}
+
 .toogle {
     display: flex;
     gap: 10px;

@@ -1,5 +1,5 @@
 <main>
-  <h2>Calendario</h2>
+  <h1>Calendario</h1>
   <p>Dale un vistazo al redimiento de tu peluqueria</p>
 
   <section id="calendar_header">
@@ -50,7 +50,7 @@
             @if(monthBooking.date.getHours() == info.hour && monthBooking.date.getDay() == info.day_of_week)
             {
               <span class="booking_indicator" (click)="renderBookingsInfo(monthBooking)">
-                <p>1</p>
+                {{ info.hour }}:00
               </span>
             }
           }

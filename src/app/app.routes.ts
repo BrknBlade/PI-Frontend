@@ -14,6 +14,8 @@ import { FourthAppointment } from './pages/fourth-appointment/fourth-appointment
 import { NavigationAdmin } from './components/navigation-admin/navigation-admin';
 import { Dashboard } from './pages/admin/dashboard/dashboard';
 import { Calendario } from './pages/admin/calendario/calendario';
+import { ClientsComponent } from './pages/admin/clients-component/clients-component';
+import { SettingsComponent } from './pages/admin/settings-component/settings-component';
 import { NotFound } from './pages/not-found/not-found';
 
 export const routes: Routes = [
@@ -53,6 +55,8 @@ export const routes: Routes = [
       {
         path: 'calendario',
         component: Calendario
+      },
+      {
         path: 'clientes',
         component: ClientsComponent,
       },

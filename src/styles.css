@@ -81,6 +81,7 @@ body{
     font-family: Inter Medium, sans-serif;
     margin: 0;
 }
+
 app-navigation-admin {
     display: block;
     max-width: 1200px;
@@ -96,6 +97,7 @@ app-navigation-admin {
     max-width: 700px;
   }
 }
+
 app-login{
     display: flex;
     justify-content: center;

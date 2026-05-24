@@ -1,3 +1,22 @@
+main
+{
+  width: 90%;
+
+  h1
+  {
+    font-family: Inter Bold, sans-serif;
+    margin-bottom: 0;
+  }
+
+  h1 + p
+  {
+    font-family: Inter, sans-serif;
+    font-size: 18px;
+    color: var(--texto-secundario);
+  }
+}
+
+
 #parent {
   display: grid;
   grid-template-columns: 1fr;
@@ -304,6 +323,12 @@
 
 @media (width <= 764px)
 {
+  main
+  {
+    width: 85%;
+    margin-left: 8%;
+  }
+
   #parent
   {
     grid-template-rows: repeat(17, 8rem);
