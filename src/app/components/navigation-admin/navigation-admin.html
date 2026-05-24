@@ -1,0 +1,13 @@
+<nav class="admin-acciones">
+    <a routerLinkActive="activo" [routerLink]="['/home']">Panel</a>
+    <a routerLinkActive="activo" href="#">Calendario</a>
+    <!-- jose -->
+    <a routerLinkActive="activo" [routerLink]="['/admin/servicios']">Servicios</a>
+    <a routerLinkActive="activo" [routerLink]="['/admin/empleados']">Empleados</a>
+    <!-- -->
+    <a routerLinkActive="activo" [routerLink]="['/admin/clientes']">Clientes</a>
+    <a routerLinkActive="activo" [routerLink]="['/admin/ajustes']">Ajustes</a>
+</nav>
+<main>
+   <router-outlet></router-outlet> 
+</main>

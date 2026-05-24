@@ -11,6 +11,9 @@ import { FirstAppointment } from './pages/first-appointment/first-appointment';
 import { SecondAppointment } from './pages/second-appointment/second-appointment';
 import { ThirdAppointment } from './pages/third-appointment/third-appointment';
 import { FourthAppointment } from './pages/fourth-appointment/fourth-appointment';
+import { NavigationAdmin } from './components/navigation-admin/navigation-admin';
+import { Servicios } from './pages/admin/servicios/servicios';
+import { Empleados } from './pages/admin/empleados/empleados';
 
 export const routes: Routes = [
   {
@@ -62,4 +65,23 @@ export const routes: Routes = [
       },
     ],
   },
+  {
+    path:'admin',
+    component: NavigationAdmin,
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'servicios'
+      },
+      {
+        path: 'servicios',
+        component: Servicios
+      },
+      {
+        path: 'empleados',
+        component: Empleados
+      }
+    ]
+  }
 ];
