@@ -6,7 +6,6 @@ import { Router } from '@angular/router';
 import { NotificationService } from '../../services/notification/notification-service';
 import { HomePage as Header } from '../../components/header/header';
 
-
 @Component({
   selector: 'app-login',
   imports: [FormField, Header],
@@ -22,72 +21,70 @@ export class Login {
   error = signal(false);
   verPswd = signal(false);
 
+  constructor(private router: Router) {}
 
-  constructor(private router: Router){}
-
-  addColorRojo(){
+  addColorRojo() {
     let inputs = document.querySelectorAll('input.error');
-    inputs.forEach((i) =>{
-        i.classList.remove('error-fix');
+    inputs.forEach((i) => {
+      i.classList.remove('error-fix');
     });
   }
 
-  cambiarPswd(){
-    if(this.verPswd()){
-      this.verPswd.set(false)
-    }else{
-      this.verPswd.set(true)
+  cambiarPswd() {
+    if (this.verPswd()) {
+      this.verPswd.set(false);
+    } else {
+      this.verPswd.set(true);
     }
     //this.verPswd() ? this.verPswd.set(true) : this.verPswd.set(false);
   }
 
-  addFix(){
+  addFix() {
     let inputs = document.querySelectorAll('input.error');
-    inputs.forEach((i) =>{
+    inputs.forEach((i) => {
       i.classList.add('error-fix');
     });
   }
 
-  login(e:Event) {
+  login(e: Event) {
     e.preventDefault();
     let button = e.target as HTMLButtonElement;
     let notificacion = document.querySelector('.login-notificacion') as HTMLElement;
 
     this.cargando.set(true);
-    if(this.cargando()){
-      button.lastElementChild?.classList.add('carga-disabled')
-
+    if (this.cargando()) {
+      button.lastElementChild?.classList.add('carga-disabled');
     }
 
     const credentials: Object = {
-      email : this.loginForm.email().value(),
-      password : this.loginForm.password().value()
-    }
+      email: this.loginForm.email().value(),
+      password: this.loginForm.password().value(),
+    };
     this.authService.login(credentials).subscribe({
-      next: () =>{
+      next: () => {
         this.tipoNotificacion.set(true);
         this.addFix();
-        console.log('ya se ha resuleto')
+        console.log('ya se ha resuleto');
         this.notificacionService.displayNotif(notificacion, this.cargando());
         this.cargando.set(false);
-        button.lastElementChild?.classList.remove('carga-disabled')
+        button.lastElementChild?.classList.remove('carga-disabled');
         setTimeout(() => {
           this.notificacionService.hideNotif(notificacion, this.cargando());
-          this.router.navigate(['/citas'])
+          const role = this.authService.user()?.role;
+          this.router.navigate([role === 1 ? '/admin/panel' : '/citas']);
         }, 2500);
       },
-      error: () =>{
-        this.error.set(true)
+      error: () => {
+        this.error.set(true);
         this.addColorRojo();
         this.tipoNotificacion.set(false);
         this.notificacionService.displayNotif(notificacion, this.cargando());
         this.cargando.set(false);
-        button.lastElementChild?.classList.remove('carga-disabled')
+        button.lastElementChild?.classList.remove('carga-disabled');
         setTimeout(() => {
           this.notificacionService.hideNotif(notificacion, this.cargando());
-
         }, 3000);
-          notificacion.classList.remove('salida');
+        notificacion.classList.remove('salida');
       },
     });
   }
