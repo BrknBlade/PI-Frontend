@@ -32,12 +32,15 @@
           <h2>Salón Elegancia</h2>
         </div>
         <nav class="main_nav">
-  @if (authService.userID()) {
-    <a [routerLink]="['/citas']">Ir al perfil</a>
-  } @else {
-    <a class="nav-login" [routerLink]="['/login']">Ir al Login</a>
-    <a [routerLink]="['/appointment']">Reservar Cita</a>
+@if (authService.userID()) {
+  @if (isAdmin()) {
+    <a [routerLink]="['/admin/panel']">Panel de administración</a>
   }
+  <a [routerLink]="['/citas']">Ir al perfil</a>
+} @else {
+  <a class="nav-login" [routerLink]="['/login']">Ir al Login</a>
+  <a [routerLink]="['/appointment']">Reservar Cita</a>
+}
 </nav>
       }
       @case ('/appointment/servicio') {

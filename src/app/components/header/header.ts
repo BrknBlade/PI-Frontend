@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { Router, RouterLink } from "@angular/router";
 import { AuthService } from '../../services/auth/auth-service';
 
@@ -13,6 +13,7 @@ export class HomePage {
   authService = inject(AuthService);
   cerrarSesion = signal(false);
   cancelarCita = false;
+  isAdmin = computed(() => this.authService.user()?.role === 1);
 
   logout(){
     this.authService.logout().subscribe(() => {
