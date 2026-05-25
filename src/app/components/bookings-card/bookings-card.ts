@@ -1,8 +1,9 @@
-import { Component, input, OnInit, output, signal } from '@angular/core';
+import { Component, input, output } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-bookings-card',
-  imports: [],
+  imports: [ RouterLink ],
   templateUrl: './bookings-card.html',
   styleUrl: './bookings-card.css',
 })
