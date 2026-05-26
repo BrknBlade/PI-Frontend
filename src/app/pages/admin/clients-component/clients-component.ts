@@ -104,7 +104,7 @@ getClientsNameContact(){
   this.userService.getAll().subscribe((response: any) => {
     const users = response.data ?? response;
 
-    const clientes = users.filter((user: any) => user.role == 3);
+    const clientes = users.filter((user: any) => user.role == 4);
 
     clientes.forEach((user: any) => {
       user.created_at = new Date(user.created_at).getTime();
