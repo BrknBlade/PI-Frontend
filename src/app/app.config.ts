@@ -3,7 +3,7 @@ import { withInMemoryScrolling } from '@angular/router';
 import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZonelessChangeDetection, provideAppInitializer, inject, LOCALE_ID  } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
-import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
+import { provideHttpClient, withFetch, withInterceptors, withXsrfConfiguration } from '@angular/common/http';
 import { authInterceptor } from './interceptors/auth-interceptor';
 import { firstValueFrom } from 'rxjs';
 import { AuthService } from './services/auth/auth-service';
@@ -18,7 +18,7 @@ export const appConfig: ApplicationConfig = {
     provideZonelessChangeDetection(),
     provideRouter(routes),
     provideHttpClient(
-    withInterceptors([ authInterceptor ]),
+      withInterceptors([ authInterceptor ]),
     withFetch()
     ),
     { provide: LOCALE_ID, useValue: 'es' },

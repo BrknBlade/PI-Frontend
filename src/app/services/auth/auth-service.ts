@@ -26,7 +26,7 @@ export class AuthService {
           throw new Error(response?.message ?? 'Login fallido');
         }
       }),
-      switchMap(() => this.loadCurrentUser()) 
+      switchMap(() => this.loadCurrentUser())
     );
   }
 

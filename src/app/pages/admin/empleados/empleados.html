@@ -68,8 +68,8 @@
 
   <div class="employees_content">
     <ul class="employees_grid">
-      <li class="employee_card">
-        @for (employee of employeesData(); track employee.id) {
+      @for (employee of employeesData(); track employee.id) {
+        <li class="employee_card">
           <article>
             <div class="image_card">
               <img [src]="employee.image_url" alt="foto_peluqueria" />
@@ -119,8 +119,8 @@
               </div>
             </div>
           </article>
-        }
-      </li>
+        </li>
+      }
     </ul>
   </div>
 </section>

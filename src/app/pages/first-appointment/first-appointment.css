@@ -100,7 +100,7 @@
     overflow: hidden;
     box-shadow: 0 10px 25px var(--sombra-card);
     transition: transform .2s ease, box-shadow .2s ease;
-
+    height: 100%;
     &:hover {
         transform: translateY(-4px);
         box-shadow: 0 14px 35px var(--sombra-card-hover);
