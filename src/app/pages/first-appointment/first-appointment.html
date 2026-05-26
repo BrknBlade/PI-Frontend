@@ -14,7 +14,7 @@
           <a (click)="selectService(service)">
             <article>
               <div class="image_card">
-                <img [src]="'https://picsum.photos/seed/' + service.id + '/400/400'" alt="foto_peluqueria" />
+                <img [src]="'https://source.unsplash.com/400x400/?haircut&sig=' + service.id" alt="foto_peluqueria" />
               </div>
               <div class="content_card">
                 <h3>{{ service.name }}</h3>
