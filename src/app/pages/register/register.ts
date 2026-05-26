@@ -1,19 +1,19 @@
 import { Component, inject, signal } from '@angular/core';
 import { form, FormField } from '@angular/forms/signals';
-import { loginModel } from '../../models/login-model';
 import { AuthService } from '../../services/auth/auth-service';
 import { Router, RouterLink } from '@angular/router';
 import { NotificationService } from '../../services/notification/notification-service';
 import { HomePage as Header } from '../../components/header/header';
+import { registerModel } from '../../models/register-model';
 
 @Component({
-  selector: 'app-login',
-  imports: [FormField, Header, RouterLink],
-  templateUrl: './login.html',
-  styleUrl: './login.css',
+  selector: 'app-register',
+  imports: [ FormField, Header, RouterLink ],
+  templateUrl: './register.html',
+  styleUrl: './register.css',
 })
-export class Login {
-  loginForm = form(loginModel);
+export class Register {
+  registerForm = form(registerModel);
   private authService = inject(AuthService);
   cargando = signal(false);
   private notificacionService = inject(NotificationService);
@@ -46,21 +46,32 @@ export class Login {
     });
   }
 
-  login(e: Event) {
+  register(e: Event)
+  {
     e.preventDefault();
-    let button = e.target as HTMLButtonElement;
+
+    if(this.registerForm.name().value() == '' || this.registerForm.email().value() == '' || this.registerForm.password().value() == '')
+    {
+      this.error.set(true);
+      this.addColorRojo();
+      return
+    }
+
     let notificacion = document.querySelector('.login-notificacion') as HTMLElement;
+    let button = e.target as HTMLButtonElement;
 
     this.cargando.set(true);
     if (this.cargando()) {
       button.lastElementChild?.classList.add('carga-disabled');
     }
 
-    const credentials: Object = {
-      email: this.loginForm.email().value(),
-      password: this.loginForm.password().value(),
-    };
-    this.authService.login(credentials).subscribe({
+    let credentials: Object = {
+      'name': this.registerForm.name().value(),
+      'email': this.registerForm.email().value(),
+      'password': this.registerForm.password().value(),
+    }
+
+    this.authService.register(credentials).subscribe({
       next: () => {
         this.tipoNotificacion.set(true);
         this.addFix();
@@ -70,8 +81,7 @@ export class Login {
         button.lastElementChild?.classList.remove('carga-disabled');
         setTimeout(() => {
           this.notificacionService.hideNotif(notificacion, this.cargando());
-          const role = this.authService.user()?.role;
-          this.router.navigate([role === 1 ? '/admin/panel' : '/citas']);
+          this.router.navigate(['/login']);
         }, 2500);
       },
       error: () => {
@@ -85,7 +95,7 @@ export class Login {
           this.notificacionService.hideNotif(notificacion, this.cargando());
         }, 3000);
         notificacion.classList.remove('salida');
-      },
+      }
     });
   }
 }

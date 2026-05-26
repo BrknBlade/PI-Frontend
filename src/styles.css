@@ -98,7 +98,7 @@ app-navigation-admin {
   }
 }
 
-app-login{
+app-login, app-register {
     display: flex;
     justify-content: center;
     align-items: center;

@@ -2,10 +2,24 @@
   <h1>Portal del Cliente</h1>
   <p>Inicia sesión para gestionar tus citas y tu perfil</p>
   <div class="login-acciones">
-    <a href="#" class="activo">Iniciar Sesión</a>
-    <a routerLink="/register">Registrarse</a>
+    <a routerLink="/login">Iniciar Sesión</a>
+    <a routerLink="/register" class="activo">Registrarse</a>
   </div>
-  <form class="login-form" (submit)="login($event)">
+  <form class="login-form" (submit)="register($event)">
+    <label>
+      Nombre:
+      @if (error()) {
+        <input
+          (change)="addFix()"
+          class="error"
+          type="text"
+          placeholder="John Doe"
+          [formField]="registerForm.name"
+        />
+      } @else {
+        <input type="text" placeholder="John Doe" [formField]="registerForm.name" />
+      }
+    </label>
     <label>
       Correo electrónico:
       @if (error()) {
@@ -14,13 +28,13 @@
           class="error"
           type="email"
           placeholder="micorreo@email.com"
-          [formField]="loginForm.email"
+          [formField]="registerForm.email"
         />
       } @else {
-        <input type="email" placeholder="micorreo@email.com" [formField]="loginForm.email" />
+        <input type="email" placeholder="micorreo@email.com" [formField]="registerForm.email" />
       }
     </label>
-    <label>
+    <label class="password_label">
       Contraseña:
       @if (error()) {
         <input
@@ -28,13 +42,13 @@
           class="error"
           [type]="verPswd() ? 'text' : 'password'"
           [placeholder]="verPswd() ? 'contraseña' : '●●●●●●'"
-          [formField]="loginForm.password"
+          [formField]="registerForm.password"
         />
       } @else {
         <input
           [type]="verPswd() ? 'text' : 'password'"
           [placeholder]="verPswd() ? 'contraseña' : '●●●●●●'"
-          [formField]="loginForm.password"
+          [formField]="registerForm.password"
         />
       }
       <button type="button" class="eye" (click)="cambiarPswd()">
@@ -65,7 +79,6 @@
         }
       </button>
     </label>
-    <a href="#">¿Olvidaste tu contraseña?</a>
     <button type="submit">
       @if (cargando()) {
         <span>Cargando</span
@@ -95,7 +108,7 @@
           </g>
         </svg>
       } @else {
-        <span>Iniciar sesión</span>
+        <span>Registrarce</span>
       }
     </button>
   </form>
@@ -143,7 +156,7 @@
           stroke-linejoin="round"
         />
       </svg>
-      <p>¡Sesión iniciada correctamente!</p>
+      <p>¡Sesión ha registrado el usuario correctamente!</p>
     } @else {
       <svg
         width="40px"
@@ -172,7 +185,7 @@
           stroke-linejoin="round"
         />
       </svg>
-      <p>Credenciales incorrectas, vuelva a intentarlo</p>
+      <p>Este correo electronico ya ha sido registrado</p>
     }
   </div>
 </section>

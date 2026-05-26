@@ -1,6 +1,7 @@
 <header class="header_content" [class.blur]="cerrarSesion() || cancelarCita">
   <div class="hedaer_content_div">
     @switch (router.url) {
+      @case ('/register')
       @case ('/login') {
         <div class="header_content_main">
           <a [routerLink]="['/']">

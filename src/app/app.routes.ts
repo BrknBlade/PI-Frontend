@@ -19,6 +19,7 @@ import { SettingsComponent } from './pages/admin/settings-component/settings-com
 import { NotFound } from './pages/not-found/not-found';
 import { Servicios } from './pages/admin/servicios/servicios';
 import { Empleados } from './pages/admin/empleados/empleados';
+import { Register } from './pages/register/register';
 
 export const routes: Routes = [
   {
@@ -31,6 +32,11 @@ export const routes: Routes = [
     path: 'login',
     component: Login,
     canActivate: [guestGuard], // Si ya está logueado, lo manda a /
+  },
+  {
+    path: 'register',
+    component: Register,
+    canActivate: [ guestGuard ]
   },
   {
     path: 'citas',

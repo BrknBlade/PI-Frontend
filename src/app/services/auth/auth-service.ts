@@ -29,6 +29,14 @@ export class AuthService {
     );
   }
 
+  register(credentials: Object) {
+    return this.http.get<any>(`${environment.BASE_URL}/sanctum/csrf-cookie`).pipe(
+      switchMap(() => {
+        return this.http.post<any>(`${environment.BASE_URL}/api/register`, credentials)
+      })
+    );
+  }
+
   loadCurrentUser() {
     return this.http.get<any>(`${environment.BASE_URL}/api/user`).pipe(
       tap((user) => {
