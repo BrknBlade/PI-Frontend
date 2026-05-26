@@ -43,7 +43,7 @@
           <a (click)="selectStylist(employee)">
             <article>
               <div class="image_card">
-                <img [src]="'https://picsum.photos/seed/' + employee.id + '/400/300'" alt="foto_peluquero" />
+                <img [src]="employee.image_url" alt="foto_peluquero" />
               </div>
               <div class="content_card">
                 <h3>{{ employee.name }}</h3>
