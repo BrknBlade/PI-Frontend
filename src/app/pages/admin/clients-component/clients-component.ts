@@ -100,7 +100,22 @@ export class ClientsComponent implements DoCheck{
   });
 }
 
-  getClientsNameContact(){
+getClientsNameContact(){
+  this.userService.getAll().subscribe((response: any) => {
+    const users = response.data ?? response;
+
+    const clientes = users.filter((user: any) => user.role == 3);
+
+    clientes.forEach((user: any) => {
+      user.created_at = new Date(user.created_at).getTime();
+    });
+
+    this.arrInfo.set(clientes);
+    this.getClientsCitas();
+  });
+}
+
+  /*getClientsNameContact(){
     this.userService.getAll().subscribe(async users =>{
       for (const user in users) {
         let usuario = users[user];
@@ -120,6 +135,6 @@ export class ClientsComponent implements DoCheck{
       }
       this.getClientsCitas();
     });
-  }
+  }*/
 
 }
