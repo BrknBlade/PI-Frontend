@@ -36,7 +36,6 @@ export class ClientsComponent implements DoCheck{
 
   infoBusinness(){
     this.getClientsNameContact();
-    this.getClientsCitas();
   }
 
   buscador(){
@@ -107,14 +106,19 @@ export class ClientsComponent implements DoCheck{
         let usuario = users[user];
         for (const data in usuario) {
           const info: any = usuario[data];
+          console.log(this.arrInfo())
+          console.log(info)
+
           if(info.role == 4){//deberia de ser role == 4 pero uso 3 por tener un par de resultados
             info.created_at = new Date(info.created_at).getTime();
             this.arrInfo.update(val => {
+
               return [...val, info];
             });
           }
         }
       }
+      this.getClientsCitas();
     });
   }
 
