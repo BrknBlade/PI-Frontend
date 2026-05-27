@@ -40,7 +40,7 @@ hairPhotos = [
   'https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=400&h=400&fit=crop',
   'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=400&h=400&fit=crop',
   'https://images.unsplash.com/photo-1600948836101-f9ffda59d250?w=400&h=400&fit=crop',
-  'https://images.unsplash.com/photo-1582095133179-bfd08e2fb6b9?w=400&h=400&fit=crop',
+  'https://images.unsplash.com/photo-1470259078422-826894b933aa?w=400&h=400&fit=crop',
 ];
 
 getPhoto(index: number): string {
